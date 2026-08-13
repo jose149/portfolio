@@ -1,0 +1,9 @@
+/*
+global.scss
+*/
+
+@forward "./abstracts/breakpoints";
+@forward "./base/colors";
+@forward "./base/typography";
+@forward "./base/spacing";
+@forward "./base/layout";

@@ -1,0 +1,32 @@
+---
+import ActionLink from "../ActionLink/ActionLink.astro";
+import DetailNote from "../DetailNote/DetailNote.astro";
+
+interface Props {}
+---
+
+<section class="hero">
+  <div class="hero__main-content">
+    <h1 class="hero__title">
+      <span class="hero__title-name"> JOSE CRESPÍ </span>
+      <span class="hero__title-job"> SOFTWARE ENGINEER </span>
+    </h1>
+
+    <DetailNote text="Building with purpose" />
+
+    <div class="hero__main-navigation">
+      <ActionLink href="#contact" variant="primary" fluid>
+        Contact me
+      </ActionLink>
+
+      <ActionLink href="#projects" variant="secondary" fluid>
+        View my work
+      </ActionLink>
+    </div>
+  </div>
+  <div class="hero__skills-demo"></div>
+</section>
+
+<style lang="scss">
+  @use "./Hero.scss";
+</style>

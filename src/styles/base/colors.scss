@@ -1,0 +1,67 @@
+// ======================================================
+// COLOR PALETTE
+// ======================================================
+
+// ------------------------------------------------------
+// PRIMARY — Copper / warm brown
+// ------------------------------------------------------
+
+$primary-1: #f7f6f2;
+$primary-2: #f5eee9;
+$primary-3: #eaded3;
+$primary-4: #d6c2af;
+$primary-5: #b99a7d;
+$primary-6: #a17f5e;
+$primary-7: #8d6c4f;
+$primary-8: #765940;
+$primary-9: #604835;
+$primary-10: #4d3a2c;
+
+$black: #292a2b;
+
+// ------------------------------------------------------
+// NAVY — Deep navy
+// ------------------------------------------------------
+
+$navy-1: #f3f6f8;
+$navy-2: #e5ebef;
+$navy-3: #cbd6dd;
+$navy-4: #a7bac5;
+$navy-5: #7996a6;
+$navy-6: #577788;
+$navy-7: #435f70;
+$navy-8: #344b59;
+$navy-9: #14212b;
+$navy-10: #0f1a24;
+
+// ------------------------------------------------------
+// CSS CUSTOM PROPERTIES
+// ------------------------------------------------------
+
+:root {
+  // Primary
+  --primary-1: #{$primary-1};
+  --primary-2: #{$primary-2};
+  --primary-3: #{$primary-3};
+  --primary-4: #{$primary-4};
+  --primary-5: #{$primary-5};
+  --primary-6: #{$primary-6};
+  --primary-7: #{$primary-7};
+  --primary-8: #{$primary-8};
+  --primary-9: #{$primary-9};
+  --primary-10: #{$primary-10};
+
+  --black: #{$black};
+
+  // Navy
+  --navy-1: #{$navy-1};
+  --navy-2: #{$navy-2};
+  --navy-3: #{$navy-3};
+  --navy-4: #{$navy-4};
+  --navy-5: #{$navy-5};
+  --navy-6: #{$navy-6};
+  --navy-7: #{$navy-7};
+  --navy-8: #{$navy-8};
+  --navy-9: #{$navy-9};
+  --navy-10: #{$navy-10};
+}

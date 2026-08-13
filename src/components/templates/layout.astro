@@ -1,0 +1,27 @@
+---
+import Hero from "../../components/Hero/Hero.astro";
+import Counter from "./react/Counter.tsx";
+
+import "../../styles/global.scss";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Jose Crespí | Portfolio</title>
+  </head>
+
+  <body>
+    <main class="home">
+      <Counter client:load initialValue={0} />
+    </main>
+  </body>
+</html>
+
+<style lang="scss">
+  @use "./HomeLayout.scss";
+</style>

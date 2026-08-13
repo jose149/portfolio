@@ -1,0 +1,37 @@
+---
+import "./ActionLink.scss";
+
+interface Props {
+  href: string;
+  variant?: "primary" | "secondary";
+  fluid?: boolean;
+  target?: "_self" | "_blank";
+  ariaLabel?: string;
+}
+
+const {
+  href,
+  variant = "primary",
+  fluid = false,
+  target = "_self",
+  ariaLabel,
+} = Astro.props;
+---
+
+<a
+  href={href}
+  target={target}
+  aria-label={ariaLabel}
+  rel={target === "_blank" ? "noopener noreferrer" : undefined}
+  class:list={[
+    "action-link",
+    `action-link--${variant}`,
+    {
+      "action-link--fluid": fluid,
+    },
+  ]}
+>
+  <span class="action-link__label">
+    <slot />
+  </span>
+</a>
