@@ -1,15 +1,17 @@
 ---
 import type { ProjectType } from "../../../../layouts/Projects/Projects.data";
-import "./ProjectMeta.scss";
 import ActionLink from "../../../ActionLink/ActionLink.astro";
+
+import "./ProjectMeta.scss";
 
 interface Props {
   number: number;
   total?: number;
   project: ProjectType;
+  caseStudyId: string;
 }
 
-const { project } = Astro.props;
+const { project, caseStudyId } = Astro.props;
 
 const {
   title,
@@ -22,10 +24,7 @@ const {
   stack,
   liveHref,
   liveLabel = "View live site",
-  metrics,
 } = project;
-
-const featuredMetric = metrics?.[0];
 ---
 
 <div class="project-meta">
@@ -34,8 +33,10 @@ const featuredMetric = metrics?.[0];
       <h3 class="project-meta__title">
         {title}
       </h3>
+
       <div class="project-meta__highlights">
         {role && <span class="project-meta__category">{role}</span>}
+
         {
           webCategory && (
             <span class="project-meta__category">{webCategory}</span>
@@ -95,5 +96,17 @@ const featuredMetric = metrics?.[0];
         </div>
       )
     }
+
+    <!-- <button
+      type="button"
+      class="project-meta__case-study-link"
+      data-project-toggle
+      aria-controls={caseStudyId}
+      aria-expanded="false"
+    >
+      <span data-project-toggle-label> View case study </span>
+
+      <span class="project-meta__case-study-icon" aria-hidden="true"> ↓ </span>
+    </button> -->
   </div>
 </div>

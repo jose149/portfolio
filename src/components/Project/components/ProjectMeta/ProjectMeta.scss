@@ -161,7 +161,6 @@
     font-size: var(--font-size-sm);
     line-height: 1.65;
   }
-
   // ======================================================
   // ACTIONS
   // ======================================================
@@ -180,8 +179,6 @@
     width: 100%;
   }
 
-  // Secondary action intentionally has much less
-  // visual weight than the primary CTA.
   &__case-study-link {
     display: inline-flex;
     align-items: center;
@@ -190,7 +187,7 @@
 
     align-self: flex-start;
 
-    padding: 0.35rem 0;
+    padding: 0.4rem 0;
 
     border: 0;
     border-bottom: 1px solid transparent;
@@ -211,6 +208,7 @@
 
     &:hover {
       color: var(--primary-7);
+
       border-bottom-color: currentColor;
 
       .project-meta__case-study-icon {
@@ -220,8 +218,22 @@
 
     &:focus-visible {
       outline: 2px solid var(--primary-6);
+
       outline-offset: 0.35rem;
+
       border-radius: 0.15rem;
+    }
+
+    &[aria-expanded="true"] {
+      .project-meta__case-study-icon {
+        transform: rotate(180deg);
+      }
+
+      &:hover {
+        .project-meta__case-study-icon {
+          transform: rotate(180deg) translateY(0.15rem);
+        }
+      }
     }
   }
 
@@ -230,99 +242,6 @@
 
     font-size: 0.9em;
 
-    transition: transform 180ms ease;
-  }
-}
-
-// ======================================================
-// TABLET
-// ======================================================
-
-@media (min-width: 48rem) {
-  .project-meta {
-    &__summary {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-
-      gap: 2rem;
-    }
-
-    &__actions {
-      flex-direction: row;
-      align-items: center;
-
-      gap: 1.5rem;
-    }
-
-    &__primary-action {
-      width: auto;
-      min-width: 12rem;
-    }
-  }
-}
-
-// ======================================================
-// DESKTOP
-// ======================================================
-
-@media (min-width: 64rem) {
-  .project-meta {
-    &__info {
-      gap: 2rem;
-      align-items: start;
-    }
-  }
-}
-
-// ======================================================
-// DARK THEME
-// ======================================================
-
-:global([data-theme="dark"]) {
-  .project-meta {
-    &__title {
-      color: var(--primary-1);
-    }
-
-    &__description,
-    &__summary-text,
-    &__stack-item,
-    &__case-study-link {
-      color: var(--primary-3);
-    }
-
-    &__info {
-      border-top-color: var(--navy-8);
-    }
-
-    &__stack-item,
-    &__category {
-      border-color: var(--navy-8);
-
-      background-color: color-mix(in srgb, var(--navy-9) 92%, black);
-    }
-
-    &__info-label,
-    &__category {
-      color: var(--primary-5);
-    }
-
-    &__case-study-link {
-      &:hover {
-        color: var(--primary-5);
-      }
-    }
-  }
-}
-
-// ======================================================
-// REDUCED MOTION
-// ======================================================
-
-@media (prefers-reduced-motion: reduce) {
-  .project-meta {
-    &__case-study-link,
-    &__case-study-icon {
-      transition: none;
-    }
+    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 }

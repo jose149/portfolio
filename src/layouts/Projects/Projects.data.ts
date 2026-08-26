@@ -194,72 +194,72 @@ export const projects: ProjectType[] = [
     ],
   },
 
-  {
-    id: 1,
-    title: "CodeAtlas",
-    subtitle: "Developer tooling & code intelligence",
+  // {
+  //   id: 1,
+  //   title: "CodeAtlas",
+  //   subtitle: "Developer tooling & code intelligence",
 
-    description:
-      "A developer-focused tool designed to make complex repositories easier to explore, understand and work with.",
+  //   description:
+  //     "A developer-focused tool designed to make complex repositories easier to explore, understand and work with.",
 
-    purpose:
-      "Help developers understand and navigate complex codebases by presenting relevant structural information in a clear and accessible way.",
+  //   purpose:
+  //     "Help developers understand and navigate complex codebases by presenting relevant structural information in a clear and accessible way.",
 
-    contributionSummary:
-      "Designed and implemented the core experience with a focus on reusable components, information hierarchy and an extensible frontend architecture.",
+  //   contributionSummary:
+  //     "Designed and implemented the core experience with a focus on reusable components, information hierarchy and an extensible frontend architecture.",
 
-    role: "Software Engineer",
+  //   role: "Software Engineer",
 
-    stack: ["React", "TypeScript", "Node.js", "REST APIs", "SCSS"],
+  //   stack: ["React", "TypeScript", "Node.js", "REST APIs", "SCSS"],
 
-    liveHref: "https://example.com",
+  //   liveHref: "https://example.com",
 
-    previewImageSrc: "/images/projects/codeatlas/preview.webp",
-    previewImageAlt: "CodeAtlas application preview",
+  //   previewImageSrc: "/images/projects/codeatlas/preview.webp",
+  //   previewImageAlt: "CodeAtlas application preview",
 
-    caseStudyDesktopImageSrc: "/images/projects/codeatlas/desktop.webp",
-    caseStudyDesktopImageAlt: "CodeAtlas desktop interface",
+  //   caseStudyDesktopImageSrc: "/images/projects/codeatlas/desktop.webp",
+  //   caseStudyDesktopImageAlt: "CodeAtlas desktop interface",
 
-    context:
-      "Large codebases quickly become difficult to navigate. The project explores ways of exposing useful structural information without overwhelming developers with even more visual noise.",
+  //   context:
+  //     "Large codebases quickly become difficult to navigate. The project explores ways of exposing useful structural information without overwhelming developers with even more visual noise.",
 
-    myRole:
-      "I worked on the architecture and implementation of the experience, with particular attention to reusable components, information hierarchy and maintainability.",
+  //   myRole:
+  //     "I worked on the architecture and implementation of the experience, with particular attention to reusable components, information hierarchy and maintainability.",
 
-    challenges: [
-      "Presenting large quantities of technical information without creating visual overload.",
-      "Creating reusable components for several related developer workflows.",
-      "Keeping interactions predictable and fast.",
-      "Designing the architecture so additional tools could be incorporated later.",
-    ],
+  //   challenges: [
+  //     "Presenting large quantities of technical information without creating visual overload.",
+  //     "Creating reusable components for several related developer workflows.",
+  //     "Keeping interactions predictable and fast.",
+  //     "Designing the architecture so additional tools could be incorporated later.",
+  //   ],
 
-    outcomeText:
-      "The result is an interface focused on clarity and progressive disclosure, allowing developers to access additional information only when it becomes useful.",
+  //   outcomeText:
+  //     "The result is an interface focused on clarity and progressive disclosure, allowing developers to access additional information only when it becomes useful.",
 
-    techHighlights: [
-      "Component-driven architecture",
-      "Reusable React patterns",
-      "Progressive disclosure",
-      "Strong TypeScript boundaries",
-    ],
+  //   techHighlights: [
+  //     "Component-driven architecture",
+  //     "Reusable React patterns",
+  //     "Progressive disclosure",
+  //     "Strong TypeScript boundaries",
+  //   ],
 
-    metrics: [
-      {
-        value: "React",
-        label: "Interactive UI",
-      },
-      {
-        value: "TS",
-        label: "Type-safe architecture",
-      },
-      {
-        value: "DX",
-        label: "Developer focused",
-      },
-      {
-        value: "Modular",
-        label: "Extensible structure",
-      },
-    ],
-  },
+  //   metrics: [
+  //     {
+  //       value: "React",
+  //       label: "Interactive UI",
+  //     },
+  //     {
+  //       value: "TS",
+  //       label: "Type-safe architecture",
+  //     },
+  //     {
+  //       value: "DX",
+  //       label: "Developer focused",
+  //     },
+  //     {
+  //       value: "Modular",
+  //       label: "Extensible structure",
+  //     },
+  //   ],
+  // },
 ];

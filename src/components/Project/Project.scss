@@ -1,159 +1,112 @@
 .project {
-  padding-block: clamp(4rem, 8vw, 7rem);
-  border-top: 1px solid var(--primary-3);
+  width: 100%;
+  overflow: hidden;
+
+  border: 1px solid var(--primary-3);
+  border-radius: 1rem;
+
   background-color: var(--primary-1);
+
+  transition:
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+
+  // ======================================================
+  // SUMMARY
+  // ======================================================
 
   &__hero {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
-    align-items: start;
+    align-items: center;
+
+    padding: clamp(2rem, 4vw, 4rem);
   }
 
-  &__media,
-  &__case-study {
-    width: 100%;
-    margin-inline: auto;
+  &__meta {
+    min-width: 0;
   }
 
   &__media {
-    margin-top: 2rem;
+    width: 100%;
     overflow: hidden;
+
     border: 1px solid var(--primary-3);
     border-radius: 1rem;
+
     background-color: var(--primary-2);
+
     box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 0.04);
   }
 
   &__preview-image {
     display: block;
+
     width: 100%;
     height: auto;
   }
 
-  &__case-study {
-    margin-top: 1.5rem;
-    border: 1px solid var(--primary-3);
-    border-radius: 0.75rem;
-    background-color: color-mix(in srgb, var(--primary-1) 92%, white);
+  // ======================================================
+  // EXPANDABLE AREA
+  // ======================================================
+
+  &__expandable {
+    display: grid;
+
+    grid-template-rows: 0fr;
+
+    opacity: 0;
+
+    transition:
+      grid-template-rows 520ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 300ms ease;
+  }
+
+  &__expandable-inner {
+    min-height: 0;
+
     overflow: hidden;
-
-    &[open] {
-      .project__case-study-cta-icon {
-        transform: rotate(180deg);
-      }
-    }
   }
 
-  &__case-study-summary {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    align-items: center;
-    padding: 1.25rem 1.5rem;
-    list-style: none;
-    cursor: pointer;
-
-    &::-webkit-details-marker {
-      display: none;
-    }
-  }
-
-  &__outline-intro {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  &__outline-icon {
-    position: relative;
-    width: 1.5rem;
-    height: 1.25rem;
-    border: 1px solid var(--primary-5);
-    border-radius: 0.2rem;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0.1rem;
-      bottom: 0.1rem;
-      left: 50%;
-      width: 1px;
-      background-color: var(--primary-5);
-      transform: translateX(-50%);
-    }
-  }
-
-  &__outline-label {
-    color: var(--primary-6);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  &__outline-steps {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-  }
-
-  &__outline-step {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    padding-left: 0.75rem;
-    border-left: 1px solid var(--primary-3);
-  }
-
-  &__outline-step-number {
-    color: var(--primary-8);
-    font-size: 0.75rem;
-    font-weight: 600;
-  }
-
-  &__outline-step-title {
-    color: var(--navy-8);
-    font-size: 0.95rem;
-  }
-
-  &__case-study-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    justify-self: start;
-    color: var(--primary-7);
-    font-size: 0.95rem;
-    font-weight: 500;
-  }
-
-  &__case-study-cta-icon {
-    transition: transform 200ms ease;
-  }
+  // ======================================================
+  // CASE STUDY
+  // ======================================================
 
   &__case-study-panel {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 0 1.5rem 1.5rem;
+    gap: 3rem;
+
+    padding: clamp(2rem, 4vw, 4rem);
+
     border-top: 1px solid var(--primary-3);
   }
 
+  // ======================================================
+  // CASE STUDY MEDIA
+  // ======================================================
+
   &__case-study-media {
     position: relative;
-    padding-top: 1.5rem;
+
+    padding-bottom: 1.5rem;
   }
 
   &__case-study-desktop-frame {
     overflow: hidden;
+
     border: 1px solid var(--primary-3);
     border-radius: 0.75rem;
+
     background-color: var(--primary-2);
+
     box-shadow: 0 1rem 2rem rgb(0 0 0 / 0.04);
   }
 
   &__case-study-desktop-image {
     display: block;
+
     width: 100%;
     height: auto;
   }
@@ -162,49 +115,78 @@
     display: none;
   }
 
+  // ======================================================
+  // CASE STUDY CONTENT
+  // ======================================================
+
   &__case-study-content {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
-    padding-top: 1.5rem;
+    gap: 2.5rem;
   }
 
   &__case-study-column {
     display: grid;
-    gap: 1.5rem;
+    gap: 2rem;
   }
 
   &__case-study-block {
     padding-bottom: 1.5rem;
+
     border-bottom: 1px solid var(--primary-3);
 
     &:last-child {
       padding-bottom: 0;
+
       border-bottom: 0;
     }
 
     p {
       margin: 0;
+
       color: var(--navy-8);
+
       font-size: 1rem;
       line-height: 1.7;
     }
   }
 
+  &__case-study-index {
+    display: inline-block;
+
+    margin-bottom: 0.4rem;
+
+    color: var(--primary-6);
+
+    font-size: 0.7rem;
+    font-weight: 600;
+
+    letter-spacing: 0.12em;
+  }
+
   &__case-study-title {
     margin: 0 0 0.75rem;
+
     color: var(--navy-10);
+
     font-family: var(--font-secondary, "Cormorant Garamond", serif);
+
     font-size: 2rem;
     font-weight: 500;
     line-height: 1.1;
   }
 
+  // ======================================================
+  // LISTS
+  // ======================================================
+
   &__list {
     display: grid;
     gap: 0.6rem;
+
     margin: 0;
     padding-left: 1.2rem;
+
     color: var(--navy-8);
 
     li {
@@ -213,32 +195,47 @@
 
     &--highlights {
       padding-left: 0;
+
       list-style: none;
 
       li {
         position: relative;
+
         padding-left: 1.25rem;
 
         &::before {
           content: "";
+
           position: absolute;
+
           top: 0.55rem;
           left: 0;
+
           width: 0.45rem;
           height: 0.45rem;
+
           border-radius: 50%;
+
           background-color: var(--primary-6);
         }
       }
     }
   }
 
+  // ======================================================
+  // METRICS
+  // ======================================================
+
   &__metrics {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+
     gap: 0;
+
     border: 1px solid var(--primary-3);
+
     border-radius: 0.75rem;
+
     overflow: hidden;
   }
 
@@ -246,9 +243,13 @@
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
+
     padding: 1.25rem;
+
     border-right: 1px solid var(--primary-3);
+
     border-bottom: 1px solid var(--primary-3);
+
     background-color: color-mix(in srgb, var(--primary-1) 94%, white);
 
     &:nth-child(2n) {
@@ -262,149 +263,193 @@
 
   &__metric-value {
     color: var(--primary-6);
+
     font-family: var(--font-secondary, "Cormorant Garamond", serif);
+
     font-size: 2.4rem;
     line-height: 1;
   }
 
   &__metric-label {
     color: var(--navy-8);
+
     font-size: 0.95rem;
     line-height: 1.4;
   }
+
+  // ======================================================
+  // EXPANDED STATE
+  // ======================================================
+
+  &--expanded {
+    border-color: var(--primary-4);
+
+    box-shadow: 0 2rem 5rem rgb(0 0 0 / 0.06);
+
+    .project__expandable {
+      grid-template-rows: 1fr;
+
+      opacity: 1;
+    }
+  }
 }
+
+// ======================================================
+// DESKTOP
+// ======================================================
 
 @media (min-width: 64rem) {
   .project {
-    min-height: 100svh;
-
     &__hero {
-      grid-template-columns: 0.95fr 1.5fr;
+      grid-template-columns:
+        minmax(0, 0.95fr)
+        minmax(0, 1.5fr);
+
       gap: clamp(2rem, 4vw, 4rem);
-      min-height: 72svh;
-    }
-
-    &__media,
-    &__case-study {
-      width: 100%;
-    }
-
-    &__media {
-      margin-left: 0;
-    }
-
-    &__case-study-summary {
-      grid-template-columns: auto 1fr auto;
-      gap: 2rem;
-    }
-
-    &__outline-steps {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    &__case-study-cta {
-      justify-self: end;
     }
 
     &__case-study-panel {
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      grid-template-columns:
+        minmax(0, 1.05fr)
+        minmax(0, 1fr);
+
+      gap: clamp(2rem, 4vw, 4rem);
+    }
+
+    &__case-study-content {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+
       gap: 2rem;
     }
 
     &__case-study-mobile-frame {
       position: absolute;
+
       right: -1rem;
-      bottom: -1rem;
+      bottom: 0;
+
       display: block;
+
       width: min(14rem, 28%);
+
       overflow: hidden;
+
       border: 1px solid var(--primary-3);
+
       border-radius: 1rem;
+
       background-color: var(--primary-1);
+
       box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 0.08);
     }
 
     &__case-study-mobile-image {
       display: block;
+
       width: 100%;
       height: auto;
     }
 
-    &__case-study-content {
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+    &__metrics {
+      grid-column: 1 / -1;
+
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    &__metric {
+      border-bottom: 0;
+
+      &:nth-child(2n) {
+        border-right: 1px solid var(--primary-3);
+      }
+
+      &:last-child {
+        border-right: 0;
+      }
     }
   }
 
+  // ======================================================
+  // ALTERNATE PROJECT
+  // ======================================================
+
   .project--reverse {
     .project__hero {
-      grid-template-columns: 1.25fr 0.95fr;
+      grid-template-columns:
+        minmax(0, 1.5fr)
+        minmax(0, 0.95fr);
     }
 
     .project__media {
       order: 1;
-      margin-right: 0;
+    }
+
+    .project__meta {
+      order: 2;
     }
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .project {
-    &__live-link,
-    &__case-study-cta-icon {
-      transition: none;
-    }
-  }
-}
+// ======================================================
+// DARK THEME
+// ======================================================
 
 [data-theme="dark"] {
   .project {
+    border-color: var(--navy-8);
+
     background-color: var(--navy-10);
-    border-top-color: var(--navy-8);
-
-    &__title,
-    &__case-study-title {
-      color: var(--primary-1);
-    }
-
-    &__description,
-    &__info-value,
-    &__stack-item,
-    &__case-study-block p,
-    &__list,
-    &__metric-label,
-    &__outline-step-title {
-      color: var(--primary-3);
-    }
 
     &__media,
-    &__case-study,
     &__case-study-desktop-frame,
     &__case-study-mobile-frame,
     &__metrics {
       border-color: var(--navy-8);
+
       background-color: var(--navy-9);
     }
 
-    &__stack-item,
-    &__metric,
-    &__case-study {
-      background-color: color-mix(in srgb, var(--navy-9) 92%, black);
-    }
-
-    &__outline-step,
     &__case-study-panel,
     &__case-study-block,
     &__metric {
       border-color: var(--navy-8);
     }
 
-    &__live-link,
-    &__case-study-cta,
-    &__outline-label,
-    &__eyebrow,
-    &__info-label {
+    &__case-study-title {
+      color: var(--primary-1);
+    }
+
+    &__case-study-block p,
+    &__list,
+    &__metric-label {
+      color: var(--primary-3);
+    }
+
+    &__case-study-index,
+    &__metric-value {
       color: var(--primary-5);
+    }
+
+    &__metric {
+      background-color: color-mix(in srgb, var(--navy-9) 92%, black);
+    }
+
+    &--expanded {
+      border-color: var(--primary-6);
+    }
+  }
+}
+
+// ======================================================
+// REDUCED MOTION
+// ======================================================
+
+@media (prefers-reduced-motion: reduce) {
+  .project {
+    transition: none;
+
+    &__expandable {
+      transition: none;
     }
   }
 }

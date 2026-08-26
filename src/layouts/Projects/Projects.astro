@@ -30,7 +30,7 @@ const { archiveHref = "/projects" } = Astro.props;
           number={index + 1}
           total={projects.length}
           project={project}
-          reverse={!(index % 2)}
+          reverse={!!(index % 2)}
         />
       ))
     }
