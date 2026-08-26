@@ -1,0 +1,38 @@
+---
+import "./Projects.scss";
+
+import Project from "../../components/Project/Project.astro";
+
+import { projects } from "./Projects.data.ts";
+
+interface Props {
+  archiveHref?: string;
+}
+
+const { archiveHref = "/projects" } = Astro.props;
+---
+
+<section id="projects" class="projects" aria-labelledby="projects-title">
+  <header class="projects__header">
+    <h2 id="projects-title" class="projects__title">PROJECTS</h2>
+
+    <a href={archiveHref} class="projects__archive">
+      <span>ALL PROJECTS</span>
+
+      <span class="projects__archive-icon" aria-hidden="true"> ↗ </span>
+    </a>
+  </header>
+
+  <div class="projects__content">
+    {
+      projects.map((project, index) => (
+        <Project
+          number={index + 1}
+          total={projects.length}
+          project={project}
+          reverse={!(index % 2)}
+        />
+      ))
+    }
+  </div>
+</section>

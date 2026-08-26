@@ -1,0 +1,137 @@
+---
+import type { ProjectType } from "../../layouts/Projects/Projects.data";
+import "./Project.scss";
+import ProjectMeta from "./components/ProjectMeta/ProjectMeta.astro";
+
+interface Props {
+  number: number;
+  total?: number;
+  project: ProjectType;
+  reverse?: boolean;
+}
+
+const { number, total, project, reverse = false } = Astro.props;
+
+const {
+  previewImageSrc,
+  previewImageAlt,
+  caseStudyDesktopImageSrc,
+  caseStudyDesktopImageAlt,
+  caseStudyMobileImageSrc,
+  caseStudyMobileImageAlt,
+  context,
+  myRole,
+  challenges,
+  outcomeText,
+  metrics,
+  techHighlights,
+} = project;
+---
+
+<section class:list={["project", reverse && "project--reverse"]}>
+  <div class="project__hero">
+    <ProjectMeta number={number} total={total} project={project} />
+
+    <div class="project__media">
+      <img
+        src={previewImageSrc}
+        alt={previewImageAlt}
+        class="project__preview-image"
+        loading="lazy"
+      />
+    </div>
+  </div>
+
+  <details class="project__case-study">
+    <summary class="project__case-study-summary">
+      <span class="project__case-study-cta">
+        <span class="project__case-study-cta-label"> Read case study </span>
+
+        <span class="project__case-study-cta-icon" aria-hidden="true"> ↓ </span>
+      </span>
+    </summary>
+
+    <div class="project__case-study-panel">
+      <div class="project__case-study-media">
+        <div class="project__case-study-desktop-frame">
+          <img
+            src={caseStudyDesktopImageSrc}
+            alt={caseStudyDesktopImageAlt}
+            class="project__case-study-desktop-image"
+            loading="lazy"
+          />
+        </div>
+
+        {
+          caseStudyMobileImageSrc && (
+            <div class="project__case-study-mobile-frame">
+              <img
+                src={caseStudyMobileImageSrc}
+                alt={caseStudyMobileImageAlt ?? ""}
+                class="project__case-study-mobile-image"
+                loading="lazy"
+              />
+            </div>
+          )
+        }
+      </div>
+
+      <div class="project__case-study-content">
+        <div class="project__case-study-column">
+          <div class="project__case-study-block">
+            <h4 class="project__case-study-title">Context</h4>
+            <p>{context}</p>
+          </div>
+
+          <div class="project__case-study-block">
+            <h4 class="project__case-study-title">My role</h4>
+            <p>{myRole}</p>
+          </div>
+
+          <div class="project__case-study-block">
+            <h4 class="project__case-study-title">Key challenges</h4>
+
+            <ul class="project__list">
+              {challenges.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        </div>
+
+        <div class="project__case-study-column">
+          <div class="project__case-study-block">
+            <h4 class="project__case-study-title">Outcome</h4>
+            <p>{outcomeText}</p>
+          </div>
+
+          {
+            metrics.length > 0 && (
+              <div class="project__metrics">
+                {metrics.map((metric) => (
+                  <div class="project__metric">
+                    <span class="project__metric-value">{metric.value}</span>
+
+                    <span class="project__metric-label">{metric.label}</span>
+                  </div>
+                ))}
+              </div>
+            )
+          }
+
+          {
+            techHighlights.length > 0 && (
+              <div class="project__case-study-block">
+                <h4 class="project__case-study-title">Tech highlights</h4>
+
+                <ul class="project__list project__list--highlights">
+                  {techHighlights.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </details>
+</section>
