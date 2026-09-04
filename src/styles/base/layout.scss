@@ -1,20 +1,14 @@
 :root {
-    --container-width: 75rem; // 1200px
+  --container-width: 75rem; // 1200px
 
-    --page-padding:
-        clamp(1.25rem,
-            4vw,
-            4rem);
+  --page-padding: clamp(1.25rem, 4vw, 4rem);
 
-    --section-spacing:
-        clamp(5rem,
-            10vw,
-            10rem);
+  --section-spacing: clamp(5rem, 10vw, 10rem);
 
-    --header-height: 5rem;
+  --header-height: 5rem;
 
-    --radius-sm: 0.25rem;
-    --radius-md: 0.5rem;
-    --radius-lg: 1rem;
-    --radius-full: 9999px;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
 }

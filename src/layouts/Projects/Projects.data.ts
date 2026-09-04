@@ -40,15 +40,15 @@ export type ProjectType = {
   }[];
 };
 
-interface OutlineItem {
-  number: string;
-  title: string;
-}
+// interface OutlineItem {
+//   number: string;
+//   title: string;
+// }
 
-interface Metric {
-  value: string;
-  label: string;
-}
+// interface Metric {
+//   value: string;
+//   label: string;
+// }
 
 /**
  * What the website/product fundamentally is.
