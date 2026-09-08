@@ -1,0 +1,36 @@
+---
+import "./SectionHeading.scss";
+
+interface Props {
+  id?: string;
+  title: string;
+  href?: string;
+  linkLabel?: string;
+  external?: boolean;
+}
+
+const { id, title, href, linkLabel, external = false } = Astro.props;
+---
+
+<header class="section-heading">
+  <h2 id={id} class="section-heading__title">
+    {title}
+  </h2>
+
+  {
+    href && linkLabel && (
+      <a
+        href={href}
+        class="section-heading__link"
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener noreferrer" : undefined}
+      >
+        <span>{linkLabel}</span>
+
+        <span class="section-heading__link-icon" aria-hidden="true">
+          ↗
+        </span>
+      </a>
+    )
+  }
+</header>

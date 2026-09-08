@@ -1,132 +1,31 @@
 .projects {
-  --projects-container-width: 96rem;
   --projects-page-padding: clamp(1.5rem, 5vw, 5rem);
+
   box-sizing: border-box;
+
   width: 100%;
+
   padding: var(--spacing-64) var(--projects-page-padding);
 
   background-color: var(--primary-1);
-
-  // ====================================================
-  // HEADER
-  // ====================================================
-
-  &__header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 2rem;
-
-    padding: var(--spacing-28) var(--spacing-28);
-
-    border-bottom: 1px solid var(--primary-3);
-  }
-
-  &__title {
-    margin: 0;
-
-    color: var(--navy-10);
-
-    font-family: var(--font-display);
-    font-weight: var(--font-weight-light);
-    font-size: var(--font-size-xl);
-
-    font-weight: 400;
-    line-height: 0.9;
-
-    letter-spacing: -0.035em;
-  }
-
-  // ====================================================
-  // ARCHIVE
-  // ====================================================
-
-  &__archive {
-    position: relative;
-
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-
-    padding-block: 0.4rem;
-
-    color: var(--primary-7);
-
-    font-size: 0.75rem;
-    font-weight: 600;
-
-    letter-spacing: 0.12em;
-    text-decoration: none;
-    text-transform: uppercase;
-
-    &::after {
-      content: "";
-
-      position: absolute;
-
-      right: 0;
-      bottom: 0;
-      left: 0;
-
-      height: 1px;
-
-      background-color: var(--primary-6);
-
-      transform: scaleX(0);
-      transform-origin: right center;
-
-      transition: transform 240ms ease;
-    }
-
-    &:hover {
-      &::after {
-        transform: scaleX(1);
-        transform-origin: left center;
-      }
-    }
-  }
-
-  &__archive-icon {
-    font-size: 1rem;
-
-    transition: transform 240ms ease;
-  }
-
-  &__archive:hover &__archive-icon {
-    transform: translate(0.15rem, -0.15rem);
-  }
 
   // ====================================================
   // PROJECT LIST
   // ====================================================
 
   &__content {
-    width: 100%;
     display: flex;
     flex-direction: column;
     gap: var(--spacing-64);
+
+    width: 100%;
+
     margin-top: var(--spacing-64);
   }
 
-  // Slight tonal alternation.
-  //
-  // It should be almost imperceptible.
-  // The position change remains the main distinction.
-
+  // Slight tonal alternation between projects.
   &__content > :nth-child(even) {
     background-color: var(--primary-2);
-  }
-}
-
-// ======================================================
-// TABLET
-// ======================================================
-
-@media (max-width: 63.999rem) {
-  .projects {
-    &__title {
-      font-size: clamp(3.5rem, 12vw, 5.5rem);
-    }
   }
 }
 
@@ -137,24 +36,6 @@
 @media (max-width: 40rem) {
   .projects {
     --projects-page-padding: 1.25rem;
-
-    &__header {
-      align-items: flex-end;
-
-      padding-top: 3.5rem;
-      padding-bottom: 1.25rem;
-    }
-
-    &__title {
-      font-size: clamp(3rem, 17vw, 4.5rem);
-    }
-
-    &__archive {
-      gap: 0.35rem;
-
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-    }
   }
 }
 
@@ -166,42 +47,8 @@
   .projects {
     background-color: var(--navy-10);
 
-    &__header {
-      border-bottom-color: var(--navy-8);
-    }
-
-    &__title {
-      color: var(--primary-1);
-    }
-
-    &__archive {
-      color: var(--primary-5);
-
-      &::after {
-        background-color: var(--primary-5);
-      }
-    }
-
     &__content > :nth-child(even) {
       background-color: var(--navy-9);
-    }
-  }
-}
-
-// ======================================================
-// REDUCED MOTION
-// ======================================================
-
-@media (prefers-reduced-motion: reduce) {
-  .projects {
-    &__archive {
-      &::after {
-        transition: none;
-      }
-    }
-
-    &__archive-icon {
-      transition: none;
     }
   }
 }

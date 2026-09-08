@@ -1,0 +1,152 @@
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2rem;
+
+  width: 100%;
+
+  padding: var(--spacing-16) var(--spacing-28);
+
+  border-bottom: 1px solid var(--primary-3);
+
+  &__title {
+    margin: 0;
+
+    color: var(--navy-10);
+
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-light);
+    font-size: var(--font-size-xl);
+
+    line-height: 0.9;
+
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  &__link {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding-block: 0.4rem;
+
+    color: var(--primary-7);
+
+    font-size: 0.75rem;
+    font-weight: 600;
+
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    &::after {
+      content: "";
+
+      position: absolute;
+
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      height: 1px;
+
+      background-color: var(--primary-6);
+
+      transform: scaleX(0);
+      transform-origin: right center;
+
+      transition: transform 220ms ease;
+    }
+
+    &:hover {
+      &::after {
+        transform: scaleX(1);
+        transform-origin: left center;
+      }
+
+      .section-heading__link-icon {
+        transform: translate(0.15rem, -0.15rem);
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--primary-6);
+      outline-offset: 0.3rem;
+    }
+  }
+
+  &__link-icon {
+    font-size: 1rem;
+
+    transition: transform 220ms ease;
+  }
+}
+
+// ======================================================
+// MOBILE
+// ======================================================
+
+@media (max-width: 40rem) {
+  .section-heading {
+    width: 100%;
+    box-sizing: border-box;
+    align-items: flex-end;
+
+    padding-bottom: 1.25rem;
+
+    &__title {
+      font-size: var(--font-size-xl);
+    }
+
+    &__link {
+      gap: 0.35rem;
+
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+    }
+  }
+}
+
+// ======================================================
+// DARK THEME
+// ======================================================
+
+:global([data-theme="dark"]) {
+  .section-heading {
+    border-bottom-color: var(--navy-8);
+
+    &__title {
+      color: var(--primary-1);
+    }
+
+    &__link {
+      color: var(--primary-5);
+
+      &::after {
+        background-color: var(--primary-5);
+      }
+    }
+  }
+}
+
+// ======================================================
+// REDUCED MOTION
+// ======================================================
+
+@media (prefers-reduced-motion: reduce) {
+  .section-heading {
+    &__link {
+      &::after {
+        transition: none;
+      }
+    }
+
+    &__link-icon {
+      transition: none;
+    }
+  }
+}

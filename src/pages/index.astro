@@ -31,22 +31,24 @@ import Projects from "../layouts/Projects/Projects.astro";
 
 <style lang="scss">
   @use "../styles/global.scss" as *;
-  html,
-  body {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    * {
-      box-sizing: border-box;
-    }
-  }
-
   html {
+    box-sizing: border-box;
     font-size: 16px;
 
     @media (max-width: $breakpoint-md) {
       font-size: 14px;
     }
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
   }
 </style>

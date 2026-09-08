@@ -4,6 +4,7 @@ import "./Projects.scss";
 import Project from "../../components/Project/Project.astro";
 
 import { projects } from "./Projects.data.ts";
+import SectionHeading from "../../components/SectionHeading/SectionHeading.astro";
 
 interface Props {
   archiveHref?: string;
@@ -13,15 +14,12 @@ const { archiveHref = "/projects" } = Astro.props;
 ---
 
 <section id="projects" class="projects" aria-labelledby="projects-title">
-  <header class="projects__header">
-    <h2 id="projects-title" class="projects__title">PROJECTS</h2>
-
-    <a href={archiveHref} class="projects__archive">
-      <span>ALL PROJECTS</span>
-
-      <span class="projects__archive-icon" aria-hidden="true"> ↗ </span>
-    </a>
-  </header>
+  <SectionHeading
+    id="projects-title"
+    title="Projects"
+    href={archiveHref}
+    linkLabel="All projects"
+  />
 
   <div class="projects__content">
     {
