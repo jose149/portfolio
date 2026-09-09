@@ -5,6 +5,7 @@ import AboutMe from "../layouts/AboutMe/AboutMe.astro";
 import Experience from "../layouts/Experience/Experience.astro";
 import Contact from "../layouts/Contact/Contact.astro";
 import Footer from "../layouts/Footer/Footer.astro";
+import Navbar from "../layouts/Navbar/Navbar.astro";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -28,6 +29,7 @@ import Footer from "../layouts/Footer/Footer.astro";
     />
   </head>
   <body>
+    <Navbar />
     <Hero />
     <Projects />
     <AboutMe />
@@ -58,5 +60,6 @@ import Footer from "../layouts/Footer/Footer.astro";
     margin: 0;
     padding: 0;
     width: 100%;
+    background-color: var(--primary-2);
   }
 </style>

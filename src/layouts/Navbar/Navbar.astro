@@ -1,0 +1,402 @@
+---
+import "./Navbar.scss";
+
+const navigationItems = [
+  {
+    label: "Home",
+    href: "#top",
+    section: "top",
+  },
+  {
+    label: "Projects",
+    href: "#projects",
+    section: "projects",
+  },
+  {
+    label: "About",
+    href: "#about",
+    section: "about",
+  },
+  {
+    label: "Experience",
+    href: "#experience",
+    section: "experience",
+  },
+  {
+    label: "Contact",
+    href: "#contact",
+    section: "contact",
+  },
+];
+---
+
+<header class="navbar" data-navbar>
+  <div class="navbar__inner">
+    <!-- ==================================================
+         BRAND
+    =================================================== -->
+
+    <a
+      href="#top"
+      class="navbar__brand"
+      data-scroll-link
+      aria-label="José Crespí — Back to home"
+    >
+      <span class="navbar__monogram"> JC </span>
+
+      <span class="navbar__name"> José Crespí </span>
+    </a>
+
+    <!-- ==================================================
+         DESKTOP NAVIGATION
+    =================================================== -->
+
+    <nav class="navbar__navigation" aria-label="Main navigation">
+      <ul class="navbar__list">
+        {
+          navigationItems.map((item, index) => (
+            <li>
+              <a
+                href={item.href}
+                class:list={[
+                  "navbar__link",
+                  index === 0 && "navbar__link--active",
+                ]}
+                data-scroll-link
+                data-nav-section={item.section}
+                aria-current={index === 0 ? "page" : undefined}
+              >
+                <span>{item.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <!-- ==================================================
+         ACTIONS
+    =================================================== -->
+
+    <div class="navbar__actions">
+      <button
+        type="button"
+        class="navbar__language"
+        aria-label="Change language"
+      >
+        <span> EN </span>
+
+        <span class="navbar__language-arrow" aria-hidden="true"> ↓ </span>
+      </button>
+
+      <a href="#contact" class="navbar__cta" data-scroll-link>
+        <span> Let's connect </span>
+
+        <span class="navbar__cta-arrow" aria-hidden="true"> → </span>
+      </a>
+    </div>
+
+    <!-- ==================================================
+         MOBILE BUTTON
+    =================================================== -->
+
+    <button
+      type="button"
+      class="navbar__menu-button"
+      data-menu-button
+      aria-label="Open navigation"
+      aria-expanded="false"
+      aria-controls="mobile-navigation"
+    >
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- ==================================================
+       MOBILE MENU
+  =================================================== -->
+
+  <div
+    id="mobile-navigation"
+    class="navbar__mobile-menu"
+    data-mobile-menu
+    aria-hidden="true"
+  >
+    <nav aria-label="Mobile navigation">
+      <ul>
+        {
+          navigationItems.map((item, index) => (
+            <li>
+              <a
+                href={item.href}
+                class:list={[
+                  "navbar__mobile-link",
+                  index === 0 && "navbar__mobile-link--active",
+                ]}
+                data-scroll-link
+                data-nav-section={item.section}
+                aria-current={index === 0 ? "page" : undefined}
+              >
+                <span>{item.label}</span>
+
+                <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const navbar = document.querySelector<HTMLElement>("[data-navbar]");
+
+  if (navbar) {
+    const scrollLinks = [
+      ...navbar.querySelectorAll<HTMLAnchorElement>("[data-scroll-link]"),
+    ];
+
+    const sectionLinks = [
+      ...navbar.querySelectorAll<HTMLAnchorElement>("[data-nav-section]"),
+    ];
+
+    const menuButton =
+      navbar.querySelector<HTMLButtonElement>("[data-menu-button]");
+
+    const mobileMenu = navbar.querySelector<HTMLElement>("[data-mobile-menu]");
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    let ticking = false;
+
+    // ==================================================
+    // MOBILE MENU
+    // ==================================================
+
+    const closeMobileMenu = () => {
+      if (!menuButton || !mobileMenu) {
+        return;
+      }
+
+      navbar.classList.remove("navbar--menu-open");
+
+      menuButton.setAttribute("aria-expanded", "false");
+
+      menuButton.setAttribute("aria-label", "Open navigation");
+
+      mobileMenu.setAttribute("aria-hidden", "true");
+    };
+
+    const openMobileMenu = () => {
+      if (!menuButton || !mobileMenu) {
+        return;
+      }
+
+      navbar.classList.add("navbar--menu-open");
+
+      menuButton.setAttribute("aria-expanded", "true");
+
+      menuButton.setAttribute("aria-label", "Close navigation");
+
+      mobileMenu.setAttribute("aria-hidden", "false");
+    };
+
+    menuButton?.addEventListener("click", () => {
+      const isOpen = navbar.classList.contains("navbar--menu-open");
+
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    });
+
+    // ==================================================
+    // SCROLLED STATE
+    // ==================================================
+
+    const updateScrolledState = () => {
+      navbar.classList.toggle("navbar--scrolled", window.scrollY > 16);
+    };
+
+    // ==================================================
+    // ACTIVE SECTION
+    // ==================================================
+
+    const setActiveSection = (sectionId: string) => {
+      sectionLinks.forEach((link) => {
+        const active = link.dataset.navSection === sectionId;
+
+        link.classList.toggle("navbar__link--active", active);
+
+        link.classList.toggle("navbar__mobile-link--active", active);
+
+        if (active) {
+          link.setAttribute("aria-current", "page");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    };
+
+    const updateActiveSection = () => {
+      /*
+       * At the very top we always
+       * consider Home active.
+       */
+      if (window.scrollY < 80) {
+        setActiveSection("top");
+
+        return;
+      }
+
+      const activationPoint = navbar.offsetHeight + 120;
+
+      const sectionIds = ["projects", "about", "experience", "contact"];
+
+      let currentSection = "top";
+
+      sectionIds.forEach((sectionId) => {
+        const section = document.getElementById(sectionId);
+
+        if (!section) return;
+
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top <= activationPoint && rect.bottom > activationPoint) {
+          currentSection = sectionId;
+        }
+      });
+
+      /*
+       * At the bottom of the document,
+       * Contact should remain active.
+       */
+      const isAtBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 4;
+
+      if (isAtBottom) {
+        currentSection = "contact";
+      }
+
+      setActiveSection(currentSection);
+    };
+
+    // ==================================================
+    // SCROLL UPDATE
+    // ==================================================
+
+    const updateNavbar = () => {
+      updateScrolledState();
+      updateActiveSection();
+
+      ticking = false;
+    };
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (ticking) return;
+
+        ticking = true;
+
+        requestAnimationFrame(updateNavbar);
+      },
+      {
+        passive: true,
+      },
+    );
+
+    // ==================================================
+    // SMOOTH NAVIGATION
+    // ==================================================
+
+    scrollLinks.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const href = link.getAttribute("href");
+
+        if (!href || !href.startsWith("#")) {
+          return;
+        }
+
+        /*
+         * Important:
+         * prevent native anchor jump
+         * BEFORE searching for target.
+         */
+        event.preventDefault();
+
+        // ==============================================
+        // HOME
+        // ==============================================
+
+        if (href === "#top") {
+          window.scrollTo({
+            top: 0,
+
+            behavior: reducedMotion.matches ? "auto" : "smooth",
+          });
+
+          history.replaceState(null, "", href);
+
+          closeMobileMenu();
+
+          return;
+        }
+
+        // ==============================================
+        // OTHER SECTIONS
+        // ==============================================
+
+        const target = document.querySelector<HTMLElement>(href);
+
+        if (!target) return;
+
+        const navbarHeight = navbar.offsetHeight;
+
+        /*
+         * Small visual breathing room
+         * below the floating navbar.
+         */
+        const offset = 24;
+
+        const targetPosition =
+          target.getBoundingClientRect().top +
+          window.scrollY -
+          navbarHeight -
+          offset;
+
+        window.scrollTo({
+          top: Math.max(targetPosition, 0),
+
+          behavior: reducedMotion.matches ? "auto" : "smooth",
+        });
+
+        history.replaceState(null, "", href);
+
+        closeMobileMenu();
+      });
+    });
+
+    // ==================================================
+    // RESIZE
+    // ==================================================
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 768) {
+        closeMobileMenu();
+      }
+
+      updateActiveSection();
+    });
+
+    // ==================================================
+    // INITIAL STATE
+    // ==================================================
+
+    updateNavbar();
+  }
+</script>
