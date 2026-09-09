@@ -1,0 +1,146 @@
+---
+import SectionHeading from "../../components/SectionHeading/SectionHeading.astro";
+import "./AboutMe.scss";
+
+interface Props {
+  imageSrc?: string;
+  imageAlt?: string;
+}
+
+const {
+  imageSrc = "/images/portrait.jpg",
+  imageAlt = "Portrait of Jose Crespí",
+} = Astro.props;
+
+const aboutItems = [
+  {
+    number: "01",
+    title: "Problems I enjoy solving",
+    text: "Complex products. Clear experiences.",
+  },
+  {
+    number: "02",
+    title: "How I work",
+    text: "Close to Product, Design and Engineering.",
+  },
+  {
+    number: "03",
+    title: "Beyond frontend",
+    text: "Product thinking, APIs and systems.",
+  },
+  {
+    number: "04",
+    title: "What I care about",
+    text: "Quality, simplicity and real impact.",
+  },
+];
+
+const principles = [
+  {
+    title: "Clarity",
+    text: "Understand before building.",
+  },
+  {
+    title: "Craft",
+    text: "Details matter.",
+  },
+  {
+    title: "Ownership",
+    text: "Care about the outcome.",
+  },
+];
+---
+
+<section class="about-me" id="about" aria-labelledby="about-title">
+  <!-- ====================================================
+       HEADING
+  ===================================================== -->
+
+  <header class="about-me__header">
+    <SectionHeading id="about-title" title="About me" />
+  </header>
+
+  <!-- ====================================================
+       MAIN
+  ===================================================== -->
+
+  <div class="about-me__main">
+    <!-- ==================================================
+         PORTRAIT
+    =================================================== -->
+
+    <figure class="about-me__portrait">
+      <img
+        src={imageSrc}
+        alt={imageAlt}
+        class="about-me__portrait-image"
+        loading="lazy"
+      />
+
+      <div class="about-me__monogram" aria-hidden="true">JC</div>
+    </figure>
+
+    <!-- ==================================================
+         CONTENT
+    =================================================== -->
+
+    <div class="about-me__content">
+      <div class="about-me__statement">
+        <h3 class="about-me__statement-title">
+          I turn complex product problems into clear, maintainable experiences.
+        </h3>
+
+        <span class="about-me__accent" aria-hidden="true"></span>
+
+        <p class="about-me__statement-text">
+          I like understanding why we build something before deciding how to
+          build it.
+        </p>
+      </div>
+
+      <!-- ================================================
+           ABOUT ITEMS
+      ================================================= -->
+
+      <div class="about-me__items">
+        {
+          aboutItems.map((item) => (
+            <article class="about-me__item">
+              <div class="about-me__item-heading">
+                <span class="about-me__item-number">{item.number}</span>
+
+                <h4 class="about-me__item-title">{item.title}</h4>
+              </div>
+
+              <p class="about-me__item-text">{item.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================
+       PRINCIPLES
+  ===================================================== -->
+
+  <div class="about-me__principles">
+    <div class="about-me__principles-heading">Working principles</div>
+
+    <div class="about-me__principles-list">
+      {
+        principles.map((principle) => (
+          <article class="about-me__principle">
+            <span class="about-me__principle-symbol" aria-hidden="true" />
+
+            <div class="about-me__principle-content">
+              <h4 class="about-me__principle-title">{principle.title}</h4>
+
+              <p class="about-me__principle-text">{principle.text}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

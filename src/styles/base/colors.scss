@@ -6,6 +6,7 @@
 // PRIMARY — Copper / warm brown
 // ------------------------------------------------------
 
+$primary-0: #f8f8f8;
 $primary-1: #f7f6f2;
 $primary-2: #f5eee9;
 $primary-3: #eaded3;
@@ -40,6 +41,7 @@ $navy-10: #0f1a24;
 
 :root {
   // Primary
+  --primary-0: #{$primary-0};
   --primary-1: #{$primary-1};
   --primary-2: #{$primary-2};
   --primary-3: #{$primary-3};

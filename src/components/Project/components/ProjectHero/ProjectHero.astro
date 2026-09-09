@@ -1,0 +1,168 @@
+---
+import type { ProjectType } from "../../../../layouts/Projects/Projects.types";
+
+import "./ProjectHero.scss";
+
+interface Props {
+  number: number;
+  total?: number;
+  project: ProjectType;
+  reverse?: boolean;
+  caseStudyId: string;
+}
+
+const { number, total, project, reverse = false, caseStudyId } = Astro.props;
+
+const projectLabel = [project.company, project.kind]
+  .filter(Boolean)
+  .join(" · ");
+---
+
+<div class:list={["project-hero", reverse && "project-hero--reverse"]}>
+  <!-- ====================================================
+       INTRO
+       En mobile aparece antes de la imagen
+  ===================================================== -->
+
+  <div class="project-meta project-meta--intro">
+    <div class="project-meta__number">
+      <span>
+        {String(number).padStart(2, "0")}
+      </span>
+
+      {
+        total && (
+          <>
+            <span class="project-meta__separator">/</span>
+
+            <span class="project-meta__total">
+              {String(total).padStart(2, "0")}
+            </span>
+          </>
+        )
+      }
+    </div>
+
+    {projectLabel && <span class="project-meta__eyebrow">{projectLabel}</span>}
+
+    <h3 class="project-meta__title">
+      {project.title}
+    </h3>
+  </div>
+
+  <!-- ====================================================
+       MEDIA
+       En mobile aparece inmediatamente después del título
+  ===================================================== -->
+
+  <div class="project-hero__media">
+    <img
+      src={project.previewImageSrc}
+      alt={project.previewImageAlt}
+      class="project-hero__image"
+      loading="lazy"
+    />
+  </div>
+
+  <!-- ====================================================
+       DETAILS
+  ===================================================== -->
+
+  <div class="project-meta project-meta--details">
+    <p class="project-meta__tagline">
+      {project.tagline}
+    </p>
+
+    <!-- ROLE / TIMELINE -->
+
+    <div class="project-meta__professional">
+      <span class="project-meta__role">
+        {project.role}
+      </span>
+
+      {
+        project.timeline && (
+          <>
+            <span
+              class="project-meta__professional-separator"
+              aria-hidden="true"
+            >
+              ·
+            </span>
+
+            <span class="project-meta__timeline">{project.timeline}</span>
+          </>
+        )
+      }
+    </div>
+
+    <!-- CONTRIBUTION -->
+
+    <div class="project-meta__contribution">
+      <span class="project-meta__label"> Contribution </span>
+
+      <p class="project-meta__contribution-text">
+        {project.contribution}
+      </p>
+    </div>
+
+    <!-- STACK -->
+
+    {
+      project.stack.length > 0 && (
+        <ul class="project-meta__stack" aria-label="Core technologies">
+          {project.stack.map((technology) => (
+            <li class="project-meta__stack-item">{technology}</li>
+          ))}
+        </ul>
+      )
+    }
+
+    <!-- HIGHLIGHTS -->
+
+    {
+      project.highlights && project.highlights.length > 0 && (
+        <ul class="project-meta__highlights">
+          {project.highlights.map((highlight) => (
+            <li class="project-meta__highlight">{highlight}</li>
+          ))}
+        </ul>
+      )
+    }
+
+    <!-- ACTIONS -->
+
+    <div class="project-meta__actions">
+      <!-- <button
+        type="button"
+        class="project-meta__case-study"
+        aria-expanded="false"
+        aria-controls={caseStudyId}
+        data-project-toggle
+      >
+        <span data-project-toggle-label> View case study </span>
+
+        <span class="project-meta__case-study-icon" aria-hidden="true">
+          —
+        </span>
+      </button> -->
+
+      {
+        project.liveHref && (
+          <a
+            href={project.liveHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-meta__live"
+          >
+            <span>Live site</span>
+
+            <span class="project-meta__live-icon" aria-hidden="true">
+              ↗
+            </span>
+          </a>
+        )
+      }
+    </div>
+  </div>
+</div>

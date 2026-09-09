@@ -1,0 +1,211 @@
+---
+import type { ProjectType } from "../../../../layouts/Projects/Projects.types";
+
+import "./ProjectCaseStudy.scss";
+
+interface Props {
+  project: ProjectType;
+}
+
+const { project } = Astro.props;
+
+const hasGallery =
+  Boolean(project.caseStudyDesktopImageSrc) ||
+  Boolean(project.caseStudyMobileImageSrc);
+
+const hasChallenges = Boolean(project.challenges?.length);
+
+const hasDecisions = Boolean(project.decisions?.length);
+
+const hasMetrics = Boolean(project.metrics?.length);
+---
+
+<section class="project-case-study">
+  <!-- ====================================================
+       INTRO
+  ===================================================== -->
+
+  <header class="project-case-study__intro">
+    <span class="project-case-study__eyebrow"> Case study </span>
+
+    <h3 class="project-case-study__heading">
+      {project.title}
+    </h3>
+  </header>
+
+  <!-- ====================================================
+       CONTENT GRID
+  ===================================================== -->
+
+  <div class="project-case-study__grid">
+    <!-- ==================================================
+         01 — CONTEXT
+    =================================================== -->
+
+    {
+      project.context && (
+        <section class="project-case-study__section project-case-study__section--context">
+          <header class="project-case-study__section-header">
+            <span class="project-case-study__section-index">01</span>
+
+            <h4 class="project-case-study__section-title">Context</h4>
+          </header>
+
+          <p class="project-case-study__lead">{project.context}</p>
+        </section>
+      )
+    }
+
+    <!-- ==================================================
+         02 — MY CONTRIBUTION
+    =================================================== -->
+
+    {
+      project.contributionDetail && (
+        <section class="project-case-study__section project-case-study__section--contribution">
+          <header class="project-case-study__section-header">
+            <span class="project-case-study__section-index">02</span>
+
+            <h4 class="project-case-study__section-title">My contribution</h4>
+          </header>
+
+          <p class="project-case-study__body">{project.contributionDetail}</p>
+        </section>
+      )
+    }
+
+    <!-- ==================================================
+         03 — KEY CHALLENGES
+    =================================================== -->
+
+    {
+      hasChallenges && (
+        <section class="project-case-study__section project-case-study__section--challenges">
+          <header class="project-case-study__section-header">
+            <span class="project-case-study__section-index">03</span>
+
+            <h4 class="project-case-study__section-title">Key challenges</h4>
+          </header>
+
+          <ol class="project-case-study__challenge-list">
+            {project.challenges?.map((challenge) => (
+              <li class="project-case-study__challenge">
+                <span class="project-case-study__challenge-number" />
+
+                <div class="project-case-study__challenge-content">
+                  <h5 class="project-case-study__challenge-title">
+                    {challenge.title}
+                  </h5>
+
+                  <p class="project-case-study__challenge-description">
+                    {challenge.description}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )
+    }
+
+    <!-- ==================================================
+         PRODUCT GALLERY
+    =================================================== -->
+
+    {
+      hasGallery && (
+        <section class="project-case-study__gallery">
+          {project.caseStudyDesktopImageSrc && (
+            <div class="project-case-study__gallery-desktop">
+              <img
+                src={project.caseStudyDesktopImageSrc}
+                alt={project.caseStudyDesktopImageAlt ?? ""}
+                loading="lazy"
+              />
+            </div>
+          )}
+
+          {project.caseStudyMobileImageSrc && (
+            <div class="project-case-study__gallery-mobile">
+              <img
+                src={project.caseStudyMobileImageSrc}
+                alt={project.caseStudyMobileImageAlt ?? ""}
+                loading="lazy"
+              />
+            </div>
+          )}
+        </section>
+      )
+    }
+
+    <!-- ==================================================
+         04 — KEY DECISIONS
+    =================================================== -->
+
+    {
+      hasDecisions && (
+        <section class="project-case-study__section project-case-study__section--decisions">
+          <header class="project-case-study__section-header">
+            <span class="project-case-study__section-index">04</span>
+
+            <h4 class="project-case-study__section-title">Key decisions</h4>
+          </header>
+
+          <ol class="project-case-study__decision-list">
+            {project.decisions?.map((decision) => (
+              <li class="project-case-study__decision">
+                <span class="project-case-study__decision-number" />
+
+                <div class="project-case-study__decision-content">
+                  <h5 class="project-case-study__decision-title">
+                    {decision.title}
+                  </h5>
+
+                  <p class="project-case-study__decision-description">
+                    {decision.description}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )
+    }
+
+    <!-- ==================================================
+         05 — OUTCOME
+    =================================================== -->
+
+    {
+      (project.outcome || hasMetrics) && (
+        <section class="project-case-study__section project-case-study__section--outcome">
+          <header class="project-case-study__section-header">
+            <span class="project-case-study__section-index">05</span>
+
+            <h4 class="project-case-study__section-title">Outcome</h4>
+          </header>
+
+          {project.outcome && (
+            <p class="project-case-study__outcome-text">{project.outcome}</p>
+          )}
+
+          {hasMetrics && (
+            <div class="project-case-study__metrics">
+              {project.metrics?.map((metric) => (
+                <div class="project-case-study__metric">
+                  <span class="project-case-study__metric-value">
+                    {metric.value}
+                  </span>
+
+                  <span class="project-case-study__metric-label">
+                    {metric.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      )
+    }
+  </div>
+</section>

@@ -1,6 +1,10 @@
 ---
 import Hero from "../layouts/Hero/Hero.astro";
 import Projects from "../layouts/Projects/Projects.astro";
+import AboutMe from "../layouts/AboutMe/AboutMe.astro";
+import Experience from "../layouts/Experience/Experience.astro";
+import Contact from "../layouts/Contact/Contact.astro";
+import Footer from "../layouts/Footer/Footer.astro";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -26,10 +30,14 @@ import Projects from "../layouts/Projects/Projects.astro";
   <body>
     <Hero />
     <Projects />
+    <AboutMe />
+    <Experience />
+    <Contact />
+    <Footer />
   </body>
 </html>
 
-<style lang="scss">
+<style lang="scss" is:global>
   @use "../styles/global.scss" as *;
   html {
     box-sizing: border-box;
@@ -43,7 +51,7 @@ import Projects from "../layouts/Projects/Projects.astro";
   *,
   *::before,
   *::after {
-    box-sizing: inherit;
+    box-sizing: border-box;
   }
 
   body {

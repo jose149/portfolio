@@ -1,0 +1,367 @@
+.footer {
+  width: 100%;
+
+  padding: 0 clamp(1.25rem, 5vw, 5rem);
+
+  background-color: var(--primary-1);
+
+  color: var(--navy-10);
+
+  // ======================================================
+  // INNER
+  // ======================================================
+
+  &__inner {
+    display: grid;
+
+    grid-template-columns:
+      auto
+      minmax(0, 1fr)
+      auto;
+
+    align-items: center;
+
+    gap: 2rem;
+
+    min-height: 5.5rem;
+
+    border-top: 1px solid var(--primary-3);
+  }
+
+  // ======================================================
+  // BRAND
+  // ======================================================
+
+  &__brand {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+
+    color: var(--primary-7);
+
+    font-family: var(--font-display);
+
+    font-size: 1.2rem;
+
+    font-weight: var(--font-weight-light);
+
+    line-height: 1;
+
+    text-decoration: none;
+
+    span {
+      display: inline-block;
+
+      transition:
+        transform 500ms cubic-bezier(0.16, 1, 0.3, 1),
+        color 250ms ease;
+    }
+
+    &::after {
+      content: "";
+
+      position: absolute;
+
+      right: 0;
+      bottom: -0.3rem;
+      left: 0;
+
+      height: 1px;
+
+      background-color: var(--primary-6);
+
+      opacity: 0;
+
+      transform: scaleX(0.4);
+
+      transform-origin: center;
+
+      transition:
+        opacity 250ms ease,
+        transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    &:hover {
+      span {
+        color: var(--navy-10);
+
+        transform: translateY(-0.08rem) rotate(-1.5deg);
+      }
+
+      &::after {
+        opacity: 0.65;
+
+        transform: scaleX(1);
+      }
+    }
+
+    &:focus-visible {
+      outline: 1px solid var(--primary-6);
+
+      outline-offset: 0.35rem;
+    }
+  }
+
+  // ======================================================
+  // COPYRIGHT
+  // ======================================================
+
+  &__copyright {
+    min-width: 0;
+
+    margin: 0;
+
+    color: var(--navy-6);
+
+    font-size: 0.68rem;
+
+    letter-spacing: 0.035em;
+
+    text-align: center;
+
+    white-space: nowrap;
+  }
+
+  // ======================================================
+  // CODE DETAIL
+  // ======================================================
+
+  &__code {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    min-width: 2.5rem;
+    height: 2.5rem;
+
+    padding: 0 0.25rem;
+
+    border-radius: 999px;
+
+    color: var(--primary-7);
+
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    font-size: 0.78rem;
+    font-weight: 500;
+
+    letter-spacing: 0;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    transition:
+      color 250ms ease,
+      background-color 300ms ease;
+
+    &:focus-visible {
+      outline: 1px solid var(--primary-6);
+
+      outline-offset: 0.15rem;
+    }
+  }
+
+  // ======================================================
+  // CODE CHARACTERS
+  // ======================================================
+
+  &__code-chevron,
+  &__code-slash {
+    display: inline-block;
+
+    flex: 0 0 auto;
+
+    transition:
+      transform 600ms cubic-bezier(0.16, 1, 0.3, 1),
+      color 250ms ease;
+  }
+
+  // ======================================================
+  // HIDDEN "HELLO"
+  // ======================================================
+
+  &__code-word {
+    display: inline-block;
+
+    width: 0;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    transform: translateX(0.15rem);
+
+    white-space: nowrap;
+
+    --hello-width: 2.45rem;
+
+    transition:
+      width 650ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 300ms ease,
+      transform 650ms cubic-bezier(0.16, 1, 0.3, 1),
+      margin 650ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  // ======================================================
+  // CODE INTERACTION
+  // ======================================================
+
+  &__code:hover {
+    color: var(--navy-10);
+
+    background-color: rgb(161 127 94 / 0.04);
+
+    .footer__code-word {
+      width: var(--hello-width);
+
+      margin: 0 0.22rem;
+
+      opacity: 1;
+
+      transform: translateX(0);
+    }
+
+    .footer__code-chevron--open {
+      transform: translateX(-0.08rem);
+    }
+
+    .footer__code-slash {
+      transform: rotate(7deg) translateY(-0.02rem);
+    }
+
+    .footer__code-chevron--close {
+      transform: translateX(0.08rem);
+    }
+  }
+}
+
+// ========================================================
+// MOBILE
+// ========================================================
+
+@media (max-width: 39.999rem) {
+  .footer {
+    padding: 0 1rem;
+
+    &__inner {
+      grid-template-columns:
+        auto
+        minmax(0, 1fr)
+        auto;
+
+      align-items: center;
+
+      gap: 0.75rem;
+
+      min-height: 4.5rem;
+    }
+
+    &__brand {
+      font-size: 1rem;
+    }
+
+    &__copyright {
+      min-width: 0;
+
+      font-size: 0.58rem;
+
+      letter-spacing: 0.015em;
+
+      text-align: center;
+
+      white-space: nowrap;
+    }
+
+    &__code {
+      min-width: 1.9rem;
+      height: 1.9rem;
+
+      padding: 0;
+
+      font-size: 0.68rem;
+    }
+
+    &__code-word {
+      --hello-width: 2rem;
+    }
+  }
+}
+
+// ========================================================
+// DARK THEME
+// ========================================================
+
+[data-theme="dark"] {
+  .footer {
+    background-color: var(--navy-10);
+
+    color: var(--primary-1);
+
+    &__inner {
+      border-color: var(--navy-8);
+    }
+
+    &__brand {
+      color: var(--primary-5);
+
+      &:hover {
+        span {
+          color: var(--primary-1);
+        }
+      }
+
+      &::after {
+        background-color: var(--primary-5);
+      }
+    }
+
+    &__copyright {
+      color: var(--primary-4);
+    }
+
+    &__code {
+      color: var(--primary-5);
+
+      &:hover {
+        color: var(--primary-1);
+
+        background-color: rgb(255 255 255 / 0.025);
+      }
+    }
+  }
+}
+
+// ========================================================
+// REDUCED MOTION
+// ========================================================
+
+@media (prefers-reduced-motion: reduce) {
+  .footer {
+    &__brand,
+    &__brand span,
+    &__brand::after,
+    &__code,
+    &__code-word,
+    &__code-chevron,
+    &__code-slash {
+      transition: none;
+    }
+
+    &__brand:hover {
+      span {
+        transform: none;
+      }
+    }
+
+    &__code:hover {
+      .footer__code-chevron--open,
+      .footer__code-chevron--close,
+      .footer__code-slash {
+        transform: none;
+      }
+    }
+  }
+}

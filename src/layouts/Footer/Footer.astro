@@ -1,0 +1,49 @@
+---
+import "./Footer.scss";
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer__inner">
+    <!-- ==================================================
+         BRAND
+    =================================================== -->
+
+    <a href="#top" class="footer__brand" aria-label="Back to top">
+      <span>JC</span>
+    </a>
+
+    <!-- ==================================================
+         COPYRIGHT
+    =================================================== -->
+
+    <p class="footer__copyright">
+      © José Crespí Portfolio {currentYear}
+    </p>
+
+    <!-- ==================================================
+         SMALL CODE EASTER EGG
+    =================================================== -->
+
+    <a href="#top" class="footer__code" aria-label="Back to top">
+      <span
+        class="footer__code-chevron footer__code-chevron--open"
+        aria-hidden="true"
+      >
+        &lt;
+      </span>
+
+      <span class="footer__code-word" aria-hidden="true"> hello </span>
+
+      <span class="footer__code-slash" aria-hidden="true"> / </span>
+
+      <span
+        class="footer__code-chevron footer__code-chevron--close"
+        aria-hidden="true"
+      >
+        &gt;
+      </span>
+    </a>
+  </div>
+</footer>

@@ -1,4 +1,5 @@
 .section-heading {
+  margin-bottom: var(--spacing-64);
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -93,7 +94,6 @@
 @media (max-width: 40rem) {
   .section-heading {
     width: 100%;
-    box-sizing: border-box;
     align-items: flex-end;
 
     padding-bottom: 1.25rem;

@@ -1,8 +1,10 @@
 ---
-import type { ProjectType } from "../../layouts/Projects/Projects.data";
+import type { ProjectType } from "../../layouts/Projects/Projects.types";
+
 import "./Project.scss";
 
-import ProjectMeta from "./components/ProjectMeta/ProjectMeta.astro";
+import ProjectHero from "./components/ProjectHero/ProjectHero.astro";
+import ProjectCaseStudy from "./components/ProjectCaseStudy/ProjectCaseStudy.astro";
 
 interface Props {
   number: number;
@@ -13,54 +15,17 @@ interface Props {
 
 const { number, total, project, reverse = false } = Astro.props;
 
-const {
-  previewImageSrc,
-  previewImageAlt,
-
-  caseStudyDesktopImageSrc,
-  caseStudyDesktopImageAlt,
-  caseStudyMobileImageSrc,
-  caseStudyMobileImageAlt,
-
-  context,
-  myRole,
-  challenges,
-  outcomeText,
-  metrics,
-  techHighlights,
-} = project;
-
 const caseStudyId = `project-${project.id}-case-study`;
 ---
 
-<div class:list={["project", reverse && "project--reverse"]} data-project>
-  <!-- ==========================================
-       PROJECT SUMMARY
-       ========================================== -->
-
-  <div class="project__hero">
-    <div class="project__meta">
-      <ProjectMeta
-        number={number}
-        total={total}
-        project={project}
-        caseStudyId={caseStudyId}
-      />
-    </div>
-
-    <div class="project__media">
-      <img
-        src={previewImageSrc}
-        alt={previewImageAlt}
-        class="project__preview-image"
-        loading="lazy"
-      />
-    </div>
-  </div>
-
-  <!-- ==========================================
-       EXPANDABLE CASE STUDY
-       ========================================== -->
+<article class:list={["project", reverse && "project--reverse"]} data-project>
+  <ProjectHero
+    number={number}
+    total={total}
+    project={project}
+    reverse={reverse}
+    caseStudyId={caseStudyId}
+  />
 
   <div
     id={caseStudyId}
@@ -70,126 +35,28 @@ const caseStudyId = `project-${project.id}-case-study`;
     inert
   >
     <div class="project__expandable-inner">
-      <div class="project__case-study-panel">
-        {
-          caseStudyDesktopImageSrc && (
-            <div class="project__case-study-media">
-              <div class="project__case-study-desktop-frame">
-                <img
-                  src={caseStudyDesktopImageSrc}
-                  alt={caseStudyDesktopImageAlt ?? ""}
-                  class="project__case-study-desktop-image"
-                  loading="lazy"
-                />
-              </div>
-
-              {caseStudyMobileImageSrc && (
-                <div class="project__case-study-mobile-frame">
-                  <img
-                    src={caseStudyMobileImageSrc}
-                    alt={caseStudyMobileImageAlt ?? ""}
-                    class="project__case-study-mobile-image"
-                    loading="lazy"
-                  />
-                </div>
-              )}
-            </div>
-          )
-        }
-
-        <div class="project__case-study-content">
-          <div class="project__case-study-column">
-            <div class="project__case-study-block">
-              <span class="project__case-study-index"> 01 </span>
-
-              <h4 class="project__case-study-title">Context</h4>
-
-              <p>{context}</p>
-            </div>
-
-            <div class="project__case-study-block">
-              <span class="project__case-study-index"> 02 </span>
-
-              <h4 class="project__case-study-title">My role</h4>
-
-              <p>{myRole}</p>
-            </div>
-
-            <div class="project__case-study-block">
-              <span class="project__case-study-index"> 03 </span>
-
-              <h4 class="project__case-study-title">Key challenges</h4>
-
-              <ul class="project__list">
-                {challenges.map((item) => <li>{item}</li>)}
-              </ul>
-            </div>
-          </div>
-
-          <div class="project__case-study-column">
-            <div class="project__case-study-block">
-              <span class="project__case-study-index"> 04 </span>
-
-              <h4 class="project__case-study-title">Outcome</h4>
-
-              <p>{outcomeText}</p>
-            </div>
-
-            {
-              techHighlights.length > 0 && (
-                <div class="project__case-study-block">
-                  <span class="project__case-study-index">05</span>
-
-                  <h4 class="project__case-study-title">Tech highlights</h4>
-
-                  <ul class="project__list project__list--highlights">
-                    {techHighlights.map((item) => (
-                      <li>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )
-            }
-          </div>
-        </div>
-
-        {
-          metrics.length > 0 && (
-            <div class="project__metrics">
-              {metrics.map((metric) => (
-                <div class="project__metric">
-                  <span class="project__metric-value">{metric.value}</span>
-
-                  <span class="project__metric-label">{metric.label}</span>
-                </div>
-              ))}
-            </div>
-          )
-        }
-      </div>
+      <ProjectCaseStudy project={project} />
     </div>
   </div>
-</div>
+</article>
 
 <script>
-  const triggers = document.querySelectorAll<HTMLButtonElement>(
-    "[data-project-toggle]",
-  );
+  const projects = document.querySelectorAll<HTMLElement>("[data-project]");
 
-  triggers.forEach((trigger) => {
+  projects.forEach((project) => {
+    const trigger = project.querySelector<HTMLButtonElement>(
+      "[data-project-toggle]",
+    );
+
+    const panel = project.querySelector<HTMLElement>("[data-project-panel]");
+
+    const label = trigger?.querySelector<HTMLElement>(
+      "[data-project-toggle-label]",
+    );
+
+    if (!trigger || !panel) return;
+
     trigger.addEventListener("click", () => {
-      const project = trigger.closest<HTMLElement>("[data-project]");
-
-      if (!project) return;
-
-      const panel = project.querySelector<HTMLElement>("[data-project-panel]");
-
-      if (!panel) return;
-
-      const label = trigger.querySelector<HTMLElement>(
-        "[data-project-toggle-label]",
-      );
-
       const isExpanded = project.classList.toggle("project--expanded");
 
       trigger.setAttribute("aria-expanded", String(isExpanded));

@@ -1,0 +1,1250 @@
+---
+import SectionHeading from "../../components/SectionHeading/SectionHeading.astro";
+import "./Experience.scss";
+
+type ExperienceCategory =
+  | "employment"
+  | "independent"
+  | "education";
+
+interface ExperienceItem {
+  id: string;
+  startDate: string;
+  endDate?: string;
+
+  category: ExperienceCategory;
+
+  company: string;
+  role: string;
+  team?: string;
+
+  description?: string;
+
+  impact?: string[];
+  stack?: string[];
+
+  relatedProject?: {
+    label: string;
+    href: string;
+  };
+
+  defaultOpen?: boolean;
+}
+
+const filters: {
+  label: string;
+  value: "all" | ExperienceCategory;
+}[] = [
+  {
+    label: "All",
+    value: "all",
+  },
+  {
+    label: "Employment",
+    value: "employment",
+  },
+  {
+    label: "Independent work",
+    value: "independent",
+  },
+  {
+    label: "Education",
+    value: "education",
+  },
+];
+
+const categoryLabels: Record<
+  ExperienceCategory,
+  string
+> = {
+  employment: "Employment",
+  independent: "Independent work",
+  education: "Education",
+};
+
+const experienceItems: ExperienceItem[] = [
+  {
+    id: "sembo-inspire",
+
+    startDate: "Oct 2024",
+    endDate: "Feb 2026",
+
+    category: "employment",
+
+    company: "Sembo · Stena Line",
+    role: "Frontend Engineer",
+    team: "Inspire team",
+
+    description:
+      "Product-focused frontend development across React, Next.js and content-driven platforms, working closely with Product, Design and Backend teams.",
+
+    impact: [
+      "Improved SEO indexing and achieved full accessibility compliance.",
+      "Integrated headless CMS workflows with Sanity.",
+      "Engineered Redis / S3 caching strategies and automated cache invalidation through webhooks.",
+    ],
+
+    stack: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Sanity",
+      "Redis",
+      "S3",
+    ],
+
+    relatedProject: {
+      label: "Marketplace",
+      href: "#sembo-marketplace",
+    },
+
+    defaultOpen: true,
+  },
+
+  {
+    id: "sembo-plan",
+
+    startDate: "Mar 2022",
+    endDate: "Sep 2024",
+
+    category: "employment",
+
+    company: "Sembo · Stena Line",
+    role: "Frontend Developer",
+    team: "Plan team",
+
+    description:
+      "Built and evolved booking, search and core product flows for Sembo's production travel platform.",
+
+    impact: [
+      "Developed booking and search experiences using Vue 3, TypeScript and Pinia.",
+      "Strengthened frontend quality through unit, integration and end-to-end testing.",
+      "Redesigned the Google Maps request strategy, reducing operational costs by 38%.",
+    ],
+
+    stack: [
+      "Vue 3",
+      "TypeScript",
+      "Pinia",
+      "Vitest",
+      "Cypress",
+    ],
+
+    relatedProject: {
+      label: "TripPlanner",
+      href: "#sembo-tripplanner",
+    },
+  },
+
+  {
+    id: "electrical-engineer",
+
+    startDate: "Sep 2019",
+    endDate: "Jun 2021",
+
+    category: "employment",
+
+    company:
+      "Spark Ibérica · Omexom · Autosolar",
+
+    role: "Electrical Engineer",
+
+    description:
+      "Engineering and automation experience before transitioning professionally into software development.",
+
+    impact: [
+      "Developed internal automation tools to support engineering workflows.",
+    ],
+
+    stack: [
+      "VBA",
+      "Automation",
+    ],
+  },
+
+  {
+    id: "uib",
+
+    startDate: "2015",
+    endDate: "2019",
+
+    category: "education",
+
+    company:
+      "Universitat de les Illes Balears (UIB)",
+
+    role: "Electronics and Computer Engineering",
+
+    description:
+      "Engineering foundation across electronics, computing, systems and analytical problem solving.",
+  },
+
+  {
+    id: "portfolio",
+
+    startDate: "2026",
+
+    category: "independent",
+
+    company: "Personal Portfolio",
+
+    role: "Design & Development",
+
+    description:
+      "Editorial portfolio exploring product storytelling, component architecture and frontend craft.",
+
+    stack: [
+      "Astro",
+      "React",
+      "TypeScript",
+      "SCSS",
+    ],
+
+    relatedProject: {
+      label: "View portfolio",
+      href: "#top",
+    },
+  },
+
+  {
+    id: "vscode-extension",
+
+    startDate: "2026",
+
+    category: "independent",
+
+    company: "VS Code Extension",
+
+    role: "Personal project",
+
+    description:
+      "Developer tooling created around a real workflow problem, with a focus on simplicity and developer experience.",
+
+    stack: [
+      "TypeScript",
+      "VS Code API",
+    ],
+  },
+];
+---
+
+<section
+  class="experience"
+  id="experience"
+  aria-labelledby="experience-title"
+>
+  <!-- ==================================================
+       HEADER
+  =================================================== -->
+
+  <div class="experience__header">
+    <SectionHeading
+      id="experience-title"
+      title="Experience"
+    />
+
+    <div class="experience__links">
+      <a
+        href="/Jose-Crespi-CV-EN.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="experience__header-link"
+      >
+        Download résumé
+
+        <span aria-hidden="true">
+          ↗
+        </span>
+      </a>
+
+      <a
+        href="https://www.linkedin.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="experience__header-link"
+      >
+        LinkedIn
+
+        <span aria-hidden="true">
+          ↗
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ==================================================
+       FILTERS
+  =================================================== -->
+
+  <div class="experience__filters-shell">
+    <div
+      class="experience__filters"
+      data-experience-filters
+      aria-label="Filter experience"
+    >
+      <span
+        class="experience__filter-indicator"
+        data-experience-indicator
+        aria-hidden="true"
+      ></span>
+
+      {
+        filters.map((filter, index) => (
+          <button
+            type="button"
+            class:list={[
+              "experience__filter",
+              index === 0 &&
+                "experience__filter--active",
+            ]}
+            data-experience-filter={filter.value}
+            data-experience-filter-index={index}
+            aria-pressed={
+              index === 0
+                ? "true"
+                : "false"
+            }
+          >
+            <span>
+              {filter.label}
+            </span>
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- ==================================================
+       TIMELINE
+  =================================================== -->
+
+  <div
+    class="experience__timeline"
+    data-experience-list
+  >
+    {
+      experienceItems.map((item) => {
+        const panelId =
+          `experience-${item.id}-panel`;
+
+        const isOpen =
+          Boolean(item.defaultOpen);
+
+        return (
+          <article
+            class:list={[
+              "experience-item",
+              isOpen &&
+                "experience-item--expanded",
+            ]}
+            data-experience-item
+            data-category={item.category}
+          >
+            <!-- ================================
+                 DATE
+            ================================= -->
+
+            <div class="experience-item__date">
+              <span class="experience-item__date-value">
+                {item.startDate}
+
+                {item.endDate && (
+                  <>
+                    <span aria-hidden="true">
+                      {" — "}
+                    </span>
+
+                    {item.endDate}
+                  </>
+                )}
+              </span>
+
+              <span class="experience-item__category">
+                {
+                  categoryLabels[
+                    item.category
+                  ]
+                }
+              </span>
+            </div>
+
+            <!-- ================================
+                 TIMELINE MARKER
+            ================================= -->
+
+            <div
+              class="experience-item__marker"
+              aria-hidden="true"
+            >
+              <span></span>
+            </div>
+
+            <!-- ================================
+                 CONTENT
+            ================================= -->
+
+            <div class="experience-item__content">
+              <button
+                type="button"
+                class="experience-item__toggle"
+                data-experience-toggle
+                aria-expanded={String(
+                  isOpen,
+                )}
+                aria-controls={panelId}
+              >
+                <span class="experience-item__identity">
+                  <span class="experience-item__company">
+                    {item.company}
+                  </span>
+
+                  <span class="experience-item__role">
+                    {item.role}
+                  </span>
+
+                  {
+                    item.team && (
+                      <span class="experience-item__team">
+                        {item.team}
+                      </span>
+                    )
+                  }
+                </span>
+
+                <span class="experience-item__toggle-label">
+                  <span data-experience-toggle-label>
+                    {
+                      isOpen
+                        ? "Close"
+                        : "View details"
+                    }
+                  </span>
+
+                  <span
+                    class="experience-item__toggle-icon"
+                    aria-hidden="true"
+                  >
+                    {isOpen ? "−" : "+"}
+                  </span>
+                </span>
+              </button>
+
+              <!-- ================================
+                   EXPANDED CONTENT
+              ================================= -->
+
+              <div
+                id={panelId}
+                class="experience-item__panel"
+                data-experience-panel
+                aria-hidden={String(
+                  !isOpen,
+                )}
+                inert={!isOpen}
+              >
+                <div class="experience-item__panel-inner">
+                  <div class="experience-item__detail">
+                    {
+                      item.description && (
+                        <p class="experience-item__description">
+                          {
+                            item.description
+                          }
+                        </p>
+                      )
+                    }
+
+                    {
+                      item.impact &&
+                        item.impact.length >
+                          0 && (
+                          <div class="experience-item__impact">
+                            <span class="experience-item__label">
+                              Selected impact
+                            </span>
+
+                            <ul class="experience-item__impact-list">
+                              {
+                                item.impact.map(
+                                  (
+                                    impact,
+                                  ) => (
+                                    <li>
+                                      {
+                                        impact
+                                      }
+                                    </li>
+                                  ),
+                                )
+                              }
+                            </ul>
+                          </div>
+                        )
+                    }
+                  </div>
+
+                  {
+                    ((item.stack &&
+                      item.stack.length >
+                        0) ||
+                      item.relatedProject) && (
+                      <aside class="experience-item__aside">
+                        {
+                          item.stack &&
+                            item.stack
+                              .length >
+                              0 && (
+                              <div class="experience-item__stack">
+                                <span class="experience-item__label">
+                                  Tech stack
+                                </span>
+
+                                <ul class="experience-item__stack-list">
+                                  {
+                                    item.stack.map(
+                                      (
+                                        technology,
+                                      ) => (
+                                        <li>
+                                          {
+                                            technology
+                                          }
+                                        </li>
+                                      ),
+                                    )
+                                  }
+                                </ul>
+                              </div>
+                            )
+                        }
+
+                        {
+                          item.relatedProject && (
+                            <div class="experience-item__related">
+                              <span class="experience-item__label">
+                                Related project
+                              </span>
+
+                              <a
+                                href={
+                                  item
+                                    .relatedProject
+                                    .href
+                                }
+                                class="experience-item__related-link"
+                              >
+                                {
+                                  item
+                                    .relatedProject
+                                    .label
+                                }
+
+                                <span aria-hidden="true">
+                                  ↗
+                                </span>
+                              </a>
+                            </div>
+                          )
+                        }
+                      </aside>
+                    )
+                  }
+                </div>
+              </div>
+            </div>
+          </article>
+        );
+      })
+    }
+  </div>
+</section>
+
+<script>
+  const experience =
+    document.querySelector<HTMLElement>(
+      ".experience",
+    );
+
+  if (experience) {
+    const filterContainer =
+      experience.querySelector<HTMLElement>(
+        "[data-experience-filters]",
+      );
+
+    const indicator =
+      experience.querySelector<HTMLElement>(
+        "[data-experience-indicator]",
+      );
+
+    const timeline =
+      experience.querySelector<HTMLElement>(
+        "[data-experience-list]",
+      );
+
+    const filterButtons = [
+      ...experience.querySelectorAll<HTMLButtonElement>(
+        "[data-experience-filter]",
+      ),
+    ];
+
+    const items = [
+      ...experience.querySelectorAll<HTMLElement>(
+        "[data-experience-item]",
+      ),
+    ];
+
+    const reducedMotion =
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      );
+
+    let activeFilterIndex = 0;
+
+    let indicatorAnimation:
+      | Animation
+      | null = null;
+
+    let transitionId = 0;
+
+    // ==================================================
+    // HELPERS
+    // ==================================================
+
+    const wait = (
+      duration: number,
+    ) =>
+      new Promise<void>((resolve) => {
+        window.setTimeout(
+          resolve,
+          duration,
+        );
+      });
+
+    // ==================================================
+    // ACCORDION
+    // ==================================================
+
+    const closeItem = (
+      item: HTMLElement,
+    ) => {
+      const toggle =
+        item.querySelector<HTMLButtonElement>(
+          "[data-experience-toggle]",
+        );
+
+      const panel =
+        item.querySelector<HTMLElement>(
+          "[data-experience-panel]",
+        );
+
+      const label =
+        item.querySelector<HTMLElement>(
+          "[data-experience-toggle-label]",
+        );
+
+      const icon =
+        item.querySelector<HTMLElement>(
+          ".experience-item__toggle-icon",
+        );
+
+      item.classList.remove(
+        "experience-item--expanded",
+      );
+
+      toggle?.setAttribute(
+        "aria-expanded",
+        "false",
+      );
+
+      panel?.setAttribute(
+        "aria-hidden",
+        "true",
+      );
+
+      if (panel) {
+        panel.inert = true;
+      }
+
+      if (label) {
+        label.textContent =
+          "View details";
+      }
+
+      if (icon) {
+        icon.textContent = "+";
+      }
+    };
+
+    const openItem = (
+      item: HTMLElement,
+    ) => {
+      const toggle =
+        item.querySelector<HTMLButtonElement>(
+          "[data-experience-toggle]",
+        );
+
+      const panel =
+        item.querySelector<HTMLElement>(
+          "[data-experience-panel]",
+        );
+
+      const label =
+        item.querySelector<HTMLElement>(
+          "[data-experience-toggle-label]",
+        );
+
+      const icon =
+        item.querySelector<HTMLElement>(
+          ".experience-item__toggle-icon",
+        );
+
+      item.classList.add(
+        "experience-item--expanded",
+      );
+
+      toggle?.setAttribute(
+        "aria-expanded",
+        "true",
+      );
+
+      panel?.setAttribute(
+        "aria-hidden",
+        "false",
+      );
+
+      if (panel) {
+        panel.inert = false;
+      }
+
+      if (label) {
+        label.textContent = "Close";
+      }
+
+      if (icon) {
+        icon.textContent = "−";
+      }
+    };
+
+    items.forEach((item) => {
+      const toggle =
+        item.querySelector<HTMLButtonElement>(
+          "[data-experience-toggle]",
+        );
+
+      if (!toggle) return;
+
+      toggle.addEventListener(
+        "click",
+        () => {
+          const isExpanded =
+            item.classList.contains(
+              "experience-item--expanded",
+            );
+
+          items.forEach(
+            (otherItem) => {
+              if (
+                otherItem !== item
+              ) {
+                closeItem(
+                  otherItem,
+                );
+              }
+            },
+          );
+
+          if (isExpanded) {
+            closeItem(item);
+          } else {
+            openItem(item);
+          }
+        },
+      );
+    });
+
+    // ==================================================
+    // INDICATOR
+    // ==================================================
+
+    const setIndicatorPosition = (
+      button: HTMLButtonElement,
+    ) => {
+      if (!indicator) return;
+
+      const x =
+        button.offsetLeft;
+
+      const width =
+        button.offsetWidth;
+
+      indicator.style.width =
+        `${width}px`;
+
+      indicator.style.transform =
+        `translate3d(${x}px, 0, 0)`;
+
+      indicator.dataset.x =
+        String(x);
+
+      indicator.dataset.width =
+        String(width);
+    };
+
+    const animateIndicator = (
+      button: HTMLButtonElement,
+      direction: number,
+    ) => {
+      if (!indicator) return;
+
+      const toX =
+        button.offsetLeft;
+
+      const toWidth =
+        button.offsetWidth;
+
+      const fromX =
+        Number(
+          indicator.dataset.x ??
+            toX,
+        );
+
+      const fromWidth =
+        Number(
+          indicator.dataset.width ??
+            toWidth,
+        );
+
+      indicatorAnimation?.cancel();
+
+      if (
+        reducedMotion.matches
+      ) {
+        setIndicatorPosition(
+          button,
+        );
+
+        return;
+      }
+
+      const distance =
+        toX - fromX;
+
+      const travel =
+        Math.abs(distance);
+
+      const stretch =
+        Math.min(
+          34,
+          travel * 0.18,
+        );
+
+      const middleWidth =
+        Math.max(
+          fromWidth,
+          toWidth,
+        ) + stretch;
+
+      const middleX =
+        fromX +
+        distance * 0.58 -
+        (direction < 0
+          ? stretch * 0.25
+          : 0);
+
+      indicatorAnimation =
+        indicator.animate(
+          [
+            {
+              transform:
+                `translate3d(${fromX}px, 0, 0) scaleY(1)`,
+
+              width:
+                `${fromWidth}px`,
+            },
+
+            {
+              offset: 0.52,
+
+              transform:
+                `translate3d(${middleX}px, 0, 0) scaleY(0.82)`,
+
+              width:
+                `${middleWidth}px`,
+            },
+
+            {
+              transform:
+                `translate3d(${toX}px, 0, 0) scaleY(1)`,
+
+              width:
+                `${toWidth}px`,
+            },
+          ],
+          {
+            duration: 580,
+
+            easing:
+              "cubic-bezier(0.16, 1, 0.3, 1)",
+
+            fill: "forwards",
+          },
+        );
+
+      indicator.dataset.x =
+        String(toX);
+
+      indicator.dataset.width =
+        String(toWidth);
+
+      indicatorAnimation.finished
+        .then(() => {
+          indicator.style.width =
+            `${toWidth}px`;
+
+          indicator.style.transform =
+            `translate3d(${toX}px, 0, 0)`;
+
+          indicatorAnimation?.cancel();
+
+          indicatorAnimation =
+            null;
+        })
+        .catch(() => {
+          // Interrupted by another tab change.
+        });
+    };
+
+    // ==================================================
+    // TIMELINE FILTER TRANSITION
+    // ==================================================
+
+    const clearFilterAnimation =
+      () => {
+        if (!timeline) return;
+
+        timeline.classList.remove(
+          "experience__timeline--leaving-left",
+          "experience__timeline--leaving-right",
+          "experience__timeline--pre-enter-left",
+          "experience__timeline--pre-enter-right",
+        );
+
+        timeline.style.height =
+          "";
+
+        timeline.style.overflow =
+          "";
+
+        items.forEach(
+          (item) => {
+            item.classList.remove(
+              "experience-item--filter-entering",
+            );
+
+            item.style.removeProperty(
+              "--filter-delay",
+            );
+          },
+        );
+      };
+
+    const applyVisibility = (
+      filter:
+        | string
+        | undefined,
+    ) => {
+      items.forEach((item) => {
+        const category =
+          item.dataset.category;
+
+        const visible =
+          filter === "all" ||
+          category === filter;
+
+        item.hidden =
+          !visible;
+      });
+    };
+
+    const filterTimeline =
+      async (
+        filter:
+          | string
+          | undefined,
+
+        direction: number,
+      ) => {
+        if (!timeline) {
+          applyVisibility(
+            filter,
+          );
+
+          return;
+        }
+
+        const currentTransition =
+          ++transitionId;
+
+        clearFilterAnimation();
+
+        if (
+          reducedMotion.matches
+        ) {
+          applyVisibility(
+            filter,
+          );
+
+          return;
+        }
+
+        const previousHeight =
+          timeline.getBoundingClientRect()
+            .height;
+
+        timeline.style.height =
+          `${previousHeight}px`;
+
+        timeline.style.overflow =
+          "hidden";
+
+        const leavingClass =
+          direction > 0
+            ? "experience__timeline--leaving-left"
+            : "experience__timeline--leaving-right";
+
+        timeline.classList.add(
+          leavingClass,
+        );
+
+        await wait(190);
+
+        if (
+          currentTransition !==
+          transitionId
+        ) {
+          return;
+        }
+
+        applyVisibility(filter);
+
+        timeline.classList.remove(
+          leavingClass,
+        );
+
+        timeline.style.height =
+          "auto";
+
+        const nextHeight =
+          timeline.getBoundingClientRect()
+            .height;
+
+        timeline.style.height =
+          `${previousHeight}px`;
+
+        const enterClass =
+          direction > 0
+            ? "experience__timeline--pre-enter-right"
+            : "experience__timeline--pre-enter-left";
+
+        timeline.classList.add(
+          enterClass,
+        );
+
+        const visibleItems =
+          items.filter(
+            (item) =>
+              !item.hidden,
+          );
+
+        visibleItems.forEach(
+          (item, index) => {
+            item.classList.add(
+              "experience-item--filter-entering",
+            );
+
+            item.style.setProperty(
+              "--filter-delay",
+              `${index * 38}ms`,
+            );
+          },
+        );
+
+        void timeline.offsetHeight;
+
+        requestAnimationFrame(
+          () => {
+            if (
+              currentTransition !==
+              transitionId
+            ) {
+              return;
+            }
+
+            timeline.style.height =
+              `${nextHeight}px`;
+
+            timeline.classList.remove(
+              enterClass,
+            );
+
+            visibleItems.forEach(
+              (item) => {
+                item.classList.remove(
+                  "experience-item--filter-entering",
+                );
+              },
+            );
+          },
+        );
+
+        const staggerDuration =
+          Math.min(
+            visibleItems.length *
+              38,
+            180,
+          );
+
+        await wait(
+          540 +
+            staggerDuration,
+        );
+
+        if (
+          currentTransition !==
+          transitionId
+        ) {
+          return;
+        }
+
+        timeline.style.height =
+          "auto";
+
+        timeline.style.overflow =
+          "";
+      };
+
+    // ==================================================
+    // FILTER EVENTS
+    // ==================================================
+
+    filterButtons.forEach(
+      (button) => {
+        button.addEventListener(
+          "click",
+          () => {
+            const index =
+              Number(
+                button.dataset
+                  .experienceFilterIndex,
+              );
+
+            if (
+              index ===
+              activeFilterIndex
+            ) {
+              return;
+            }
+
+            const direction =
+              index >
+              activeFilterIndex
+                ? 1
+                : -1;
+
+            activeFilterIndex =
+              index;
+
+            filterButtons.forEach(
+              (
+                otherButton,
+                otherIndex,
+              ) => {
+                const active =
+                  otherIndex ===
+                  index;
+
+                otherButton.classList.toggle(
+                  "experience__filter--active",
+                  active,
+                );
+
+                otherButton.setAttribute(
+                  "aria-pressed",
+                  String(active),
+                );
+              },
+            );
+
+            animateIndicator(
+              button,
+              direction,
+            );
+
+            filterTimeline(
+              button.dataset
+                .experienceFilter,
+              direction,
+            );
+          },
+        );
+      },
+    );
+
+    // ==================================================
+    // INITIAL INDICATOR
+    // ==================================================
+
+    const activeFilter =
+      filterButtons.find(
+        (button) =>
+          button.classList.contains(
+            "experience__filter--active",
+          ),
+      );
+
+    if (activeFilter) {
+      requestAnimationFrame(
+        () => {
+          setIndicatorPosition(
+            activeFilter,
+          );
+        },
+      );
+
+      document.fonts?.ready.then(
+        () => {
+          setIndicatorPosition(
+            activeFilter,
+          );
+        },
+      );
+    }
+
+    // ==================================================
+    // RESPONSIVE INDICATOR
+    // ==================================================
+
+    const resizeObserver =
+      new ResizeObserver(() => {
+        const active =
+          filterButtons.find(
+            (button) =>
+              button.classList.contains(
+                "experience__filter--active",
+              ),
+          );
+
+        if (active) {
+          setIndicatorPosition(
+            active,
+          );
+        }
+      });
+
+    if (filterContainer) {
+      resizeObserver.observe(
+        filterContainer,
+      );
+    }
+  }
+</script>

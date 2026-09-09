@@ -1,265 +1,244 @@
-export type ProjectType = {
-  id: number;
-
-  title: string;
-  subtitle: string;
-  description: string;
-  purpose: string;
-  contributionSummary: string;
-  webCategory?: WebCategory;
-  webArchitecture?: WebArchitecture;
-  renderingStrategy?: RenderingStrategy;
-
-  role: string;
-  stack: string[];
-
-  liveHref?: string;
-  liveLabel?: string;
-
-  previewImageSrc: string;
-  previewImageAlt: string;
-
-  caseStudyDesktopImageSrc?: string;
-  caseStudyDesktopImageAlt?: string;
-  caseStudyMobileImageSrc?: string;
-  caseStudyMobileImageAlt?: string;
-
-  outlineItems?: {
-    number: string;
-    title: string;
-  }[];
-
-  context: string;
-  myRole: string;
-  challenges: string[];
-  outcomeText: string;
-  techHighlights: string[];
-  metrics: {
-    value: string;
-    label: string;
-  }[];
-};
-
-// interface OutlineItem {
-//   number: string;
-//   title: string;
-// }
-
-// interface Metric {
-//   value: string;
-//   label: string;
-// }
-
-/**
- * What the website/product fundamentally is.
- */
-export enum WebCategory {
-  CorporateWebsite = "Corporate Website",
-  Portfolio = "Portfolio",
-  Blog = "Blog",
-  NewsWebsite = "News Website",
-  DocumentationWebsite = "Documentation Website",
-
-  LandingPage = "Landing Page",
-  Microsite = "Microsite",
-  EventWebsite = "Event Website",
-
-  Ecommerce = "E-commerce",
-  Marketplace = "Marketplace",
-  TravelMarketplace = "Travel Marketplace",
-  BookingPlatform = "Booking Platform",
-
-  WebApplication = "Web Application",
-  SaaS = "SaaS",
-  Dashboard = "Dashboard",
-  AdminPanel = "Admin Panel",
-  CustomerPortal = "Customer Portal",
-
-  SocialNetwork = "Social Network",
-  CommunityPlatform = "Community Platform",
-  Forum = "Forum",
-
-  SearchEngine = "Search Engine",
-  Directory = "Directory",
-  Aggregator = "Aggregator",
-
-  EducationalPlatform = "Educational Platform",
-  StreamingPlatform = "Streaming Platform",
-}
-
-/**
- * How pages/views are structured and navigation behaves.
- */
-export enum WebArchitecture {
-  StaticSite = "Static Site",
-  MultiPageApplication = "Multi-Page Application",
-  SinglePageApplication = "Single-Page Application",
-  HybridApplication = "Hybrid Application",
-}
-
-/**
- * How the HTML/content is rendered.
- *
- * A website may use more than one rendering strategy.
- */
-export enum RenderingStrategy {
-  StaticSiteGeneration = "Static Site Generation",
-  ServerSideRendering = "Server-Side Rendering",
-  ClientSideRendering = "Client-Side Rendering",
-  IncrementalStaticRegeneration = "Incremental Static Regeneration",
-  PartialRendering = "Partial Rendering",
-}
+import type { ProjectType } from "./Projects.types";
 
 export const projects: ProjectType[] = [
+  // ======================================================
+  // TRIPPLANNER
+  // ======================================================
+
   {
-    id: 0,
+    id: "sembo-tripplanner",
+
+    // ====================================================
+    // IDENTITY
+    // ====================================================
+
+    company: "Sembo",
+
+    kind: "Professional",
+
     title: "TripPlanner",
-    subtitle: "All-in-one travel planning platform",
 
-    description:
-      "A full-stack trip planning platform to discover destinations, organize itineraries, and collaborate in real time.",
+    tagline:
+      "A trip planning and booking experience for searching, combining and booking complete journeys.",
 
-    purpose:
-      "Simplify travel planning by bringing destinations, itineraries, bookings and collaboration into a single experience.",
+    // ====================================================
+    // HERO
+    // ====================================================
 
-    contributionSummary:
-      "Built and evolved core product features across the frontend and backend, including trip planning flows, application architecture and external service integrations.",
+    role: "Frontend Developer",
 
-    role: "Full-Stack Engineer",
+    timeline: "2022 — 2024",
 
-    stack: [
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "Prisma",
-      "PostgreSQL",
-      "AWS S3",
+    contribution:
+      "Built booking and search flows for a production travel platform, improving frontend quality and reducing Google Maps operational costs by 38%.",
+
+    stack: ["Vue 3", "TypeScript", "Pinia", "Vitest", "Cypress", "SCSS"],
+
+    highlights: [
+      "Production booking platform",
+      "38% lower Google Maps costs",
+      "Booking & search flows",
+      "Cross-functional development",
     ],
-
-    webCategory: WebCategory.TravelMarketplace,
-    webArchitecture: WebArchitecture.SinglePageApplication,
-    renderingStrategy: RenderingStrategy.ClientSideRendering,
-
-    liveHref: "https://example.com",
 
     previewImageSrc: "/images/tripPlanner.png",
-    previewImageAlt: "TripPlanner application preview",
 
-    caseStudyDesktopImageSrc: "/images/projects/tripplanner/desktop.webp",
-    caseStudyDesktopImageAlt: "TripPlanner desktop application",
+    previewImageAlt: "TripPlanner travel planning and booking experience",
 
-    caseStudyMobileImageSrc: "/images/projects/tripplanner/mobile.webp",
-    caseStudyMobileImageAlt: "TripPlanner mobile application",
+    liveHref:
+      "https://www.sembo.com/travel/plan/overview?pax=rpp&day=2026-09-30&i1=00ot&i2=polygon-id:517571+fltr:07000000000000000000000000sug:2ht&i3=00ot",
+
+    // ====================================================
+    // CASE STUDY
+    // ====================================================
 
     context:
-      "Travel planning is often fragmented across maps, spreadsheets, booking websites and messaging applications. The goal was to bring the most important parts of that process into a single coherent experience.",
+      "TripPlanner is part of Sembo's travel planning experience, where customers can search for destinations, build a trip and move through complex booking flows involving multiple travel products and services.",
 
-    myRole:
-      "I worked as a Full-Stack Engineer, contributing to product features, frontend architecture, backend integrations and the evolution of the platform.",
+    contributionDetail:
+      "I developed booking, search and core product features using Vue 3, TypeScript and Pinia, working closely with UX/UI and backend engineers to turn product requirements and designs into production-ready functionality. I also focused on maintainability and quality by introducing stricter code standards and strengthening the automated testing strategy across unit, integration and end-to-end tests.",
 
     challenges: [
-      "Designing an intuitive itinerary experience with complex underlying data.",
-      "Keeping different parts of a trip synchronized and easy to understand.",
-      "Maintaining performance as the amount of information displayed increased.",
-      "Integrating external services without leaking their complexity into the user experience.",
+      {
+        title: "Complex booking and search flows",
+        description:
+          "Travel planning involves interconnected states and user decisions across search, destination selection and booking, requiring predictable frontend behaviour throughout the complete flow.",
+      },
+      {
+        title: "Maintaining quality as the product evolved",
+        description:
+          "New functionality had to be added to an actively developed production application without making the codebase progressively harder to maintain or increasing regression risk.",
+      },
+      {
+        title: "Google Maps operational costs",
+        description:
+          "The existing Google Maps integration generated unnecessary requests, creating an opportunity to redesign the request strategy and reduce external API costs.",
+      },
     ],
 
-    outcomeText:
-      "The resulting platform provides a more coherent way of planning a trip while keeping the interface understandable as the underlying product grows in complexity.",
-
-    techHighlights: [
-      "Modular frontend architecture",
-      "Typed application boundaries",
-      "Server-side data handling",
-      "External service integrations",
+    decisions: [
+      {
+        title: "Strengthen automated testing",
+        description:
+          "Unit and integration tests with Vitest together with Cypress end-to-end coverage were used to make important booking flows safer to evolve and reduce regression risk.",
+      },
+      {
+        title: "Enforce consistent code quality",
+        description:
+          "Clean Code practices together with strict ESLint and Prettier rules helped keep an expanding frontend codebase more predictable and maintainable.",
+      },
+      {
+        title: "Redesign the Google Maps request strategy",
+        description:
+          "The integration was reworked to avoid unnecessary API requests, reducing Google Maps operational costs by 38%.",
+      },
     ],
+
+    outcome:
+      "TripPlanner continued evolving as a production travel product with new booking and search capabilities, stronger automated quality controls and a more efficient Google Maps integration.",
 
     metrics: [
       {
-        value: "2 yrs",
-        label: "Continuous development",
+        value: "38%",
+        label: "Reduction in Google Maps operational costs",
       },
       {
-        value: "Full-stack",
-        label: "Product ownership",
-      },
-      {
-        value: "Production",
-        label: "Real-world environment",
-      },
-      {
-        value: "Team",
-        label: "Collaborative development",
+        value: "2.5 yrs",
+        label: "Continuous product development",
       },
     ],
+
+    // ====================================================
+    // CASE STUDY MEDIA
+    // ====================================================
+
+    caseStudyDesktopImageSrc: "/images/tripPlanner.png",
+
+    caseStudyDesktopImageAlt: "TripPlanner desktop booking experience",
+
+    caseStudyMobileImageSrc: "/images/tripPlannerMobile.png",
+
+    caseStudyMobileImageAlt: "TripPlanner mobile booking experience",
   },
 
-  // {
-  //   id: 1,
-  //   title: "CodeAtlas",
-  //   subtitle: "Developer tooling & code intelligence",
+  // ======================================================
+  // MARKETPLACE
+  // ======================================================
 
-  //   description:
-  //     "A developer-focused tool designed to make complex repositories easier to explore, understand and work with.",
+  {
+    id: "sembo-marketplace",
 
-  //   purpose:
-  //     "Help developers understand and navigate complex codebases by presenting relevant structural information in a clear and accessible way.",
+    // ====================================================
+    // IDENTITY
+    // ====================================================
 
-  //   contributionSummary:
-  //     "Designed and implemented the core experience with a focus on reusable components, information hierarchy and an extensible frontend architecture.",
+    company: "Sembo",
 
-  //   role: "Software Engineer",
+    kind: "Professional",
 
-  //   stack: ["React", "TypeScript", "Node.js", "REST APIs", "SCSS"],
+    title: "Marketplace",
 
-  //   liveHref: "https://example.com",
+    tagline:
+      "A content-driven travel marketplace designed to inspire users and help them discover their next journey.",
 
-  //   previewImageSrc: "/images/projects/codeatlas/preview.webp",
-  //   previewImageAlt: "CodeAtlas application preview",
+    // ====================================================
+    // HERO
+    // ====================================================
 
-  //   caseStudyDesktopImageSrc: "/images/projects/codeatlas/desktop.webp",
-  //   caseStudyDesktopImageAlt: "CodeAtlas desktop interface",
+    role: "Frontend Engineer",
 
-  //   context:
-  //     "Large codebases quickly become difficult to navigate. The project explores ways of exposing useful structural information without overwhelming developers with even more visual noise.",
+    timeline: "2024 — 2026",
 
-  //   myRole:
-  //     "I worked on the architecture and implementation of the experience, with particular attention to reusable components, information hierarchy and maintainability.",
+    contribution:
+      "Delivered product features with React and Next.js while improving accessibility, SEO and content delivery through a headless CMS and advanced caching architecture.",
 
-  //   challenges: [
-  //     "Presenting large quantities of technical information without creating visual overload.",
-  //     "Creating reusable components for several related developer workflows.",
-  //     "Keeping interactions predictable and fast.",
-  //     "Designing the architecture so additional tools could be incorporated later.",
-  //   ],
+    stack: ["React", "Next.js", "TypeScript", "Sanity", "Redis", "S3"],
 
-  //   outcomeText:
-  //     "The result is an interface focused on clarity and progressive disclosure, allowing developers to access additional information only when it becomes useful.",
+    highlights: [
+      "Production marketplace",
+      "Accessibility compliant",
+      "SEO optimized",
+      "Automated CMS cache invalidation",
+    ],
 
-  //   techHighlights: [
-  //     "Component-driven architecture",
-  //     "Reusable React patterns",
-  //     "Progressive disclosure",
-  //     "Strong TypeScript boundaries",
-  //   ],
+    // Replace these with the final Marketplace images.
+    previewImageSrc: "/images/marketplace.png",
 
-  //   metrics: [
-  //     {
-  //       value: "React",
-  //       label: "Interactive UI",
-  //     },
-  //     {
-  //       value: "TS",
-  //       label: "Type-safe architecture",
-  //     },
-  //     {
-  //       value: "DX",
-  //       label: "Developer focused",
-  //     },
-  //     {
-  //       value: "Modular",
-  //       label: "Extensible structure",
-  //     },
-  //   ],
-  // },
+    previewImageAlt: "Sembo Marketplace travel discovery experience",
+
+    liveHref: "https://www.sembo.com",
+
+    // ====================================================
+    // CASE STUDY
+    // ====================================================
+
+    context:
+      "Marketplace focused on the inspiration and discovery side of Sembo's customer journey. The platform needed to support continuously evolving editorial content and product features while remaining fast, discoverable by search engines and accessible to users.",
+
+    contributionDetail:
+      "I developed prioritized product features using React, Next.js and TypeScript, collaborating with Product and Design during refinement to align technical implementation with business goals. I integrated headless CMS workflows, worked on SEO indexing and accessibility, and partnered with the architect on a caching architecture using Redis and S3 with automated invalidation through Sanity webhooks. I also supported frontend requirements beyond the UI by implementing API endpoints with Express, TypeScript, Zod and MySQL and coordinating with backend and data teams.",
+
+    challenges: [
+      {
+        title: "Keeping editorial content synchronized",
+        description:
+          "Content managed through the headless CMS needed to remain aggressively cached for performance while still becoming visible to users immediately after editors published changes.",
+      },
+      {
+        title: "Performance versus content freshness",
+        description:
+          "The platform needed an effective caching strategy without creating stale content or requiring manual intervention whenever content changed.",
+      },
+      {
+        title: "SEO and accessibility at product scale",
+        description:
+          "The marketplace had to remain discoverable by search engines while meeting accessibility requirements across continuously evolving pages and features.",
+      },
+      {
+        title: "Cross-functional product delivery",
+        description:
+          "Features required coordination between Product, Design, Marketing, frontend, backend and data teams, with technical constraints considered during refinement rather than only during implementation.",
+      },
+    ],
+
+    decisions: [
+      {
+        title: "Combine Redis and S3 caching",
+        description:
+          "Together with the architect, I worked on a caching strategy that balanced fast content delivery with the requirements of a content-driven production platform.",
+      },
+      {
+        title: "Automate cache invalidation",
+        description:
+          "Sanity webhooks were used to invalidate affected cached content automatically when editors published changes, avoiding stale data while preserving caching benefits.",
+      },
+      {
+        title: "Treat accessibility and SEO as product requirements",
+        description:
+          "Accessibility compliance and search indexing were incorporated into feature development instead of being handled as separate post-development improvements.",
+      },
+      {
+        title: "Build supporting API functionality when needed",
+        description:
+          "Express endpoints with TypeScript, Zod and MySQL were implemented when frontend product requirements required functionality beyond the existing service interfaces.",
+      },
+    ],
+
+    outcome:
+      "The marketplace evolved with new customer-facing features while improving its accessibility, search visibility and content-delivery architecture. Automated invalidation allowed CMS changes to remain synchronized with heavily cached production content without requiring manual cache management.",
+
+    metrics: [],
+
+    // ====================================================
+    // CASE STUDY MEDIA
+    // ====================================================
+
+    caseStudyDesktopImageSrc: "/images/marketplace.png",
+
+    caseStudyDesktopImageAlt: "Sembo Marketplace desktop experience",
+
+    caseStudyMobileImageSrc: "/images/marketplaceMobile.png",
+
+    caseStudyMobileImageAlt: "Sembo Marketplace mobile experience",
+  },
 ];

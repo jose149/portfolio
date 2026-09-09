@@ -1,0 +1,710 @@
+.about-me {
+  width: 100%;
+
+  padding: clamp(3.5rem, 6vw, 6rem) clamp(1.25rem, 5vw, 5rem);
+
+  background-color: var(--primary-1);
+
+  color: var(--navy-10);
+
+  // ======================================================
+  // HEADER
+  // ======================================================
+
+  &__header {
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  // ======================================================
+  // MAIN
+  // ======================================================
+
+  &__main {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 2rem;
+
+    width: 100%;
+  }
+
+  // ======================================================
+  // PORTRAIT
+  // ======================================================
+
+  &__portrait {
+    position: relative;
+
+    width: 100%;
+
+    margin: 0;
+
+    overflow: visible;
+  }
+
+  &__portrait-image {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    aspect-ratio: 4 / 5;
+
+    object-fit: cover;
+    object-position: center;
+
+    background-color: var(--primary-2);
+  }
+
+  &__monogram {
+    position: absolute;
+
+    right: 1rem;
+    bottom: -1.75rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 4.5rem;
+    height: 4.5rem;
+
+    border: 1px solid var(--primary-6);
+
+    border-radius: 50%;
+
+    background-color: var(--primary-1);
+
+    color: var(--primary-7);
+
+    font-family: var(--font-display);
+
+    font-size: 1.35rem;
+    font-weight: var(--font-weight-light);
+  }
+
+  // ======================================================
+  // CONTENT
+  // ======================================================
+
+  &__content {
+    min-width: 0;
+
+    padding-top: 0.5rem;
+  }
+
+  // ======================================================
+  // STATEMENT
+  // ======================================================
+
+  &__statement {
+    width: 100%;
+  }
+
+  &__statement-title {
+    max-width: 19ch;
+
+    margin: 0;
+
+    color: var(--navy-10);
+
+    font-family: var(--font-display);
+
+    font-size: clamp(2.25rem, 5vw, 4.25rem);
+
+    font-weight: var(--font-weight-light);
+
+    line-height: 1.02;
+
+    letter-spacing: -0.025em;
+  }
+
+  &__accent {
+    display: block;
+
+    width: 3rem;
+    height: 1px;
+
+    margin: 1.75rem 0;
+
+    background-color: var(--primary-6);
+  }
+
+  &__statement-text {
+    margin: 0;
+
+    color: var(--navy-7);
+
+    font-size: 0.95rem;
+
+    line-height: 1.6;
+
+    text-align: left;
+  }
+
+  // ======================================================
+  // ITEMS
+  // ======================================================
+
+  &__items {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    margin-top: clamp(2rem, 4vw, 3.5rem);
+
+    border-top: 1px solid var(--primary-3);
+  }
+
+  &__item {
+    padding: 1.25rem 0;
+
+    border-bottom: 1px solid var(--primary-3);
+  }
+
+  &__item-heading {
+    display: grid;
+
+    grid-template-columns:
+      2.25rem
+      minmax(0, 1fr);
+
+    gap: 0.75rem;
+
+    align-items: baseline;
+  }
+
+  &__item-number {
+    color: var(--primary-7);
+
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  &__item-title {
+    margin: 0;
+
+    color: var(--navy-10);
+
+    font-family: var(--font-display);
+
+    font-size: 1.2rem;
+    font-weight: var(--font-weight-light);
+
+    line-height: 1.2;
+  }
+
+  &__item-text {
+    margin: 0.55rem 0 0 3rem;
+
+    color: var(--navy-7);
+
+    font-size: 0.78rem;
+
+    line-height: 1.5;
+
+    text-align: left;
+  }
+
+  // ======================================================
+  // PRINCIPLES
+  // ======================================================
+
+  &__principles {
+    margin-top: clamp(3rem, 6vw, 5rem);
+
+    padding-top: 1.75rem;
+
+    border-top: 1px solid var(--primary-3);
+  }
+
+  &__principles-heading {
+    margin-bottom: 1.75rem;
+
+    color: var(--primary-7);
+
+    font-size: 0.65rem;
+    font-weight: 600;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+  }
+
+  &__principles-list {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 1.5rem;
+  }
+
+  &__principle {
+    display: grid;
+
+    grid-template-columns:
+      2.75rem
+      minmax(0, 1fr);
+
+    gap: 1rem;
+
+    align-items: center;
+  }
+
+  &__principle-symbol {
+    width: 2.4rem;
+    height: 2.4rem;
+
+    border: 1px solid var(--primary-6);
+
+    border-radius: 50%;
+  }
+
+  &__principle-content {
+    min-width: 0;
+  }
+
+  &__principle-title {
+    margin: 0;
+
+    color: var(--navy-10);
+
+    font-family: var(--font-display);
+
+    font-size: 1.15rem;
+    font-weight: var(--font-weight-light);
+
+    line-height: 1.2;
+  }
+
+  &__principle-text {
+    margin: 0.3rem 0 0;
+
+    color: var(--navy-7);
+
+    font-size: 0.75rem;
+
+    line-height: 1.45;
+
+    text-align: left;
+  }
+}
+
+// ======================================================
+// TABLET
+// ======================================================
+
+@media (min-width: 48rem) {
+  .about-me {
+    &__main {
+      grid-template-columns:
+        minmax(16rem, 0.8fr)
+        minmax(0, 1.2fr);
+
+      gap: clamp(2.5rem, 5vw, 5rem);
+
+      align-items: start;
+    }
+
+    &__content {
+      padding-top: 0;
+    }
+
+    &__items {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    &__item {
+      padding: 1.35rem 1rem 1.35rem 0;
+
+      &:nth-child(odd) {
+        padding-right: 1.5rem;
+      }
+
+      &:nth-child(even) {
+        padding-left: 1.5rem;
+      }
+    }
+
+    &__principles-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+
+      gap: 2rem;
+    }
+  }
+}
+
+// ======================================================
+// DESKTOP
+// ======================================================
+
+@media (min-width: 64rem) {
+  .about-me {
+    &__header {
+      margin-bottom: clamp(2.5rem, 4vw, 4rem);
+    }
+
+    &__main {
+      grid-template-columns:
+        minmax(20rem, 0.72fr)
+        minmax(0, 1.28fr);
+
+      gap: clamp(3.5rem, 6vw, 7rem);
+
+      align-items: start;
+    }
+
+    &__portrait {
+      max-width: 31rem;
+    }
+
+    &__monogram {
+      right: -1.5rem;
+      bottom: 2rem;
+
+      width: 5.5rem;
+      height: 5.5rem;
+
+      font-size: 1.6rem;
+    }
+
+    &__statement-title {
+      max-width: 18ch;
+
+      font-size: clamp(3rem, 4vw, 4.4rem);
+    }
+
+    &__items {
+      margin-top: 3rem;
+    }
+
+    &__principles {
+      display: grid;
+
+      grid-template-columns:
+        minmax(10rem, 0.35fr)
+        minmax(0, 1.65fr);
+
+      gap: clamp(2rem, 4vw, 4rem);
+
+      align-items: start;
+    }
+
+    &__principles-heading {
+      margin: 0;
+
+      padding-top: 0.65rem;
+    }
+  }
+}
+
+// ======================================================
+// LARGE DESKTOP
+// ======================================================
+
+@media (min-width: 90rem) {
+  .about-me {
+    &__main {
+      grid-template-columns:
+        minmax(24rem, 0.75fr)
+        minmax(0, 1.25fr);
+    }
+
+    &__portrait {
+      max-width: 34rem;
+    }
+  }
+}
+
+// ======================================================
+// MOBILE
+// ======================================================
+
+@media (max-width: 39.999rem) {
+  .about-me {
+    padding: 3rem 1.25rem;
+
+    // ====================================================
+    // HEADER
+    // ====================================================
+
+    &__header {
+      margin-bottom: 2rem;
+    }
+
+    // ====================================================
+    // MAIN
+    // ====================================================
+
+    &__main {
+      gap: 0;
+    }
+
+    // ====================================================
+    // PORTRAIT
+    // ====================================================
+
+    &__portrait {
+      margin: 0;
+    }
+
+    &__portrait-image {
+      width: 100%;
+
+      aspect-ratio: 4 / 5;
+
+      object-position: center;
+
+      border-radius: 0.15rem;
+    }
+
+    &__monogram {
+      right: 0.75rem;
+      bottom: -1.4rem;
+
+      width: 3.5rem;
+      height: 3.5rem;
+
+      font-size: 1.1rem;
+    }
+
+    // ====================================================
+    // CONTENT
+    // ====================================================
+
+    &__content {
+      width: 100%;
+
+      padding-top: 2.75rem;
+    }
+
+    // ====================================================
+    // STATEMENT
+    // ====================================================
+
+    &__statement {
+      width: 100%;
+
+      max-width: none;
+    }
+
+    &__statement-title {
+      width: 100%;
+
+      max-width: none;
+
+      margin: 0;
+
+      font-size: clamp(2.15rem, 10vw, 2.9rem);
+
+      line-height: 1.03;
+
+      letter-spacing: -0.025em;
+
+      text-align: left;
+    }
+
+    &__accent {
+      width: 2.5rem;
+
+      margin: 1.4rem 0;
+    }
+
+    &__statement-text {
+      width: 100%;
+
+      max-width: none;
+
+      margin: 0;
+
+      font-size: 0.9rem;
+
+      line-height: 1.6;
+
+      text-align: left;
+    }
+
+    // ====================================================
+    // ABOUT ITEMS
+    // ====================================================
+
+    &__items {
+      width: 100%;
+
+      margin-top: 2.25rem;
+    }
+
+    &__item {
+      width: 100%;
+
+      padding: 1.25rem 0;
+    }
+
+    &__item-heading {
+      grid-template-columns:
+        1.75rem
+        minmax(0, 1fr);
+
+      gap: 0.65rem;
+    }
+
+    &__item-number {
+      font-size: 0.65rem;
+
+      line-height: 1.4;
+    }
+
+    &__item-title {
+      font-size: 1.15rem;
+
+      line-height: 1.2;
+
+      text-align: left;
+    }
+
+    &__item-text {
+      width: auto;
+
+      max-width: none;
+
+      margin: 0.45rem 0 0 2.4rem;
+
+      font-size: 0.76rem;
+
+      line-height: 1.45;
+
+      text-align: left;
+    }
+
+    // ====================================================
+    // PRINCIPLES
+    // ====================================================
+
+    &__principles {
+      margin-top: 2.75rem;
+
+      padding-top: 1.5rem;
+    }
+
+    &__principles-heading {
+      margin-bottom: 1.25rem;
+
+      font-size: 0.62rem;
+    }
+
+    &__principles-list {
+      display: grid;
+
+      grid-template-columns: 1fr;
+
+      gap: 0;
+    }
+
+    &__principle {
+      grid-template-columns:
+        2rem
+        minmax(0, 1fr);
+
+      gap: 0.85rem;
+
+      padding: 1rem 0;
+
+      border-bottom: 1px solid var(--primary-3);
+
+      &:first-child {
+        padding-top: 0;
+      }
+
+      &:last-child {
+        padding-bottom: 0;
+
+        border-bottom: 0;
+      }
+    }
+
+    &__principle-symbol {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+
+    &__principle-title {
+      font-size: 1.05rem;
+
+      line-height: 1.15;
+    }
+
+    &__principle-text {
+      margin-top: 0.2rem;
+
+      font-size: 0.72rem;
+
+      line-height: 1.4;
+    }
+  }
+
+  [data-theme="dark"] {
+    .about-me {
+      &__principle {
+        border-bottom-color: var(--navy-8);
+
+        &:last-child {
+          border-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+// ======================================================
+// DARK
+// ======================================================
+
+[data-theme="dark"] {
+  .about-me {
+    background-color: var(--navy-10);
+
+    &__statement-title,
+    &__item-title,
+    &__principle-title {
+      color: var(--primary-1);
+    }
+
+    &__statement-text,
+    &__item-text,
+    &__principle-text {
+      color: var(--primary-3);
+    }
+
+    &__item-number,
+    &__principles-heading {
+      color: var(--primary-5);
+    }
+
+    &__accent {
+      background-color: var(--primary-5);
+    }
+
+    &__items,
+    &__item,
+    &__principles {
+      border-color: var(--navy-8);
+    }
+
+    &__monogram {
+      border-color: var(--primary-5);
+
+      background-color: var(--navy-10);
+
+      color: var(--primary-5);
+    }
+
+    &__principle-symbol {
+      border-color: var(--primary-5);
+    }
+
+    &__portrait-image {
+      background-color: var(--navy-9);
+    }
+  }
+}
