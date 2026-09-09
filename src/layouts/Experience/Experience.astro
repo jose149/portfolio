@@ -388,9 +388,7 @@ const experienceItems: ExperienceItem[] = [
                 type="button"
                 class="experience-item__toggle"
                 data-experience-toggle
-                aria-expanded={String(
-                  isOpen,
-                )}
+                aria-expanded={isOpen}
                 aria-controls={panelId}
               >
                 <span class="experience-item__identity">
@@ -437,9 +435,7 @@ const experienceItems: ExperienceItem[] = [
                 id={panelId}
                 class="experience-item__panel"
                 data-experience-panel
-                aria-hidden={String(
-                  !isOpen,
-                )}
+                aria-hidden={!isOpen}
                 inert={!isOpen}
               >
                 <div class="experience-item__panel-inner">
