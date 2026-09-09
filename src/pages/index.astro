@@ -24,7 +24,7 @@ import Navbar from "../layouts/Navbar/Navbar.astro";
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300,400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Prata&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -41,8 +41,9 @@ import Navbar from "../layouts/Navbar/Navbar.astro";
 
 <style lang="scss" is:global>
   @use "../styles/global.scss" as *;
+  @import "../styles/shared/reset.css";
+
   html {
-    box-sizing: border-box;
     font-size: 16px;
 
     @media (max-width: $breakpoint-md) {
@@ -50,16 +51,15 @@ import Navbar from "../layouts/Navbar/Navbar.astro";
     }
   }
 
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-
   body {
-    margin: 0;
-    padding: 0;
     width: 100%;
     background-color: var(--primary-2);
+  }
+
+  section {
+    padding: var(--spacing-20) var(--spacing-20) var(--spacing-64);
+    @media (max-width: 40rem) {
+      padding: var(--spacing-20) var(--spacing-20) var(--spacing-64);
+    }
   }
 </style>

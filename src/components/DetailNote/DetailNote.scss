@@ -2,18 +2,16 @@
   position: relative;
   box-sizing: border-box;
   display: inline-flex;
-  align-items: center;
   max-height: 80%;
   height: 100%;
-  padding: 0 1.25rem 3vh 1.75rem;
+  padding: 0 1.25rem 3vh 2rem;
   flex: 1;
   align-items: end;
   overflow: hidden;
 
   color: var(--black);
 
-  font-size: 0.875rem;
-  font-weight: 500;
+  font: var(--secundary-font);
   line-height: 1.2;
   letter-spacing: 0.025em;
 

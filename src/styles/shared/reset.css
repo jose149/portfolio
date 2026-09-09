@@ -1,0 +1,62 @@
+/* Box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margins */
+* {
+  margin: 0;
+}
+
+/* Better text rendering */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+/* Lists */
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+/* Images */
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+/* Forms */
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}

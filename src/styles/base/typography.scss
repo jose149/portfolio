@@ -1,23 +1,22 @@
 :root {
   // Font families
-  --font-primary: "YourPrimaryFont", system-ui, sans-serif;
-  --font-secondary: "YourSecondaryFont", Georgia, serif;
+  --font-primary: "Prata", serif;
+  --font-secondary: "Inter", sans-serif;
 
-  // Font size
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-md: 1rem;
-  --font-size-lg: 1.25rem;
-  --font-size-xl: 2.5rem;
-  --font-size-3xl: 5.5rem;
+  // Size
+  --font-size-heading-sm: clamp(2rem, 4vw, 3rem);
+  --font-size-heading-md: clamp(2.75rem, 6vw, 5rem);
+  --font-size-heading-lg: clamp(4rem, 9vw, 8rem);
 
   // Weight
+  --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
+  --font-weight-bold: 700;
 
   // Line height
-  --line-height-tight: 0.95;
+  --line-height-tight: 0.9;
   --line-height-heading: 1.1;
   --line-height-body: 1.6;
 
@@ -25,4 +24,21 @@
   --letter-spacing-tight: -0.03em;
   --letter-spacing-normal: 0;
   --letter-spacing-wide: 0.08em;
+
+  // Font size
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 2.5rem;
+  --font-size-3xl: 5rem;
+
+  --heading-1-font: var(--font-weight-regular) var(--font-size-3xl) /
+    var(--line-height-heading) var(--font-primary);
+  --sub-heading-1-font: var(--font-weight-semibold) var(--font-size-md) /
+    var(--line-height-heading) var(--font-secondary);
+  --secundary-font: var(--font-weight-medium) var(--font-size-sm) /
+    var(--line-height-body) var(--font-secondary);
+  --button-font: var(--font-weight-bold) var(--font-size-sm) /
+    var(--line-height-heading) var(--font-secondary);
 }

@@ -1,24 +1,4 @@
 :root {
-  --font-size-heading-sm: clamp(2rem, 4vw, 3rem);
-  --font-size-heading-md: clamp(2.75rem, 6vw, 5rem);
-  --font-size-heading-lg: clamp(4rem, 9vw, 8rem);
-
-  // Weight
-  --font-weight-light: 300;
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-
-  // Line height
-  --line-height-tight: 0.9;
-  --line-height-heading: 1.1;
-  --line-height-body: 1.6;
-
-  // Letter spacing
-  --letter-spacing-tight: -0.03em;
-  --letter-spacing-normal: 0;
-  --letter-spacing-wide: 0.08em;
-
   // Spacing
   --spacing-0: 0;
   --spacing-2: 0.125rem; // 2px

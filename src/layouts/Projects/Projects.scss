@@ -1,11 +1,5 @@
 .projects {
-  --projects-page-padding: clamp(1.5rem, 5vw, 5rem);
-
-  box-sizing: border-box;
-
   width: 100%;
-
-  padding: var(--spacing-64) var(--projects-page-padding);
 
   background-color: var(--primary-1);
 
@@ -30,12 +24,6 @@
 // ======================================================
 // MOBILE
 // ======================================================
-
-@media (max-width: 40rem) {
-  .projects {
-    --projects-page-padding: 1.25rem;
-  }
-}
 
 // ======================================================
 // DARK THEME

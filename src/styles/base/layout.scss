@@ -8,7 +8,15 @@
   --header-height: 5rem;
 
   --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
+  --radius-md: 0.75rem;
   --radius-lg: 1rem;
   --radius-full: 9999px;
+
+  --hero-height: 100dvh;
+  --hero-padding: 25vh 3rem 15vh;
+  --hero-background: linear-gradient(
+    180deg,
+    var(--primary-2) 50%,
+    var(--primary-1) 100%
+  );
 }
