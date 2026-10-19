@@ -1,29 +1,22 @@
 .section-heading {
   margin-bottom: var(--spacing-64);
+  border-bottom: 1px solid var(--primary-3);
+  padding: var(--spacing-16) var(--spacing-28);
+  width: 100%;
+
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 2rem;
-
-  width: 100%;
-
-  padding: var(--spacing-16) var(--spacing-28);
-
-  border-bottom: 1px solid var(--primary-3);
 
   &__title {
     margin: 0;
 
     color: var(--navy-10);
 
-    font-family: var(--font-display);
-    font-weight: var(--font-weight-light);
-    font-size: var(--font-size-xl);
-
-    line-height: 0.9;
+    font: var(--heading-2-font);
 
     letter-spacing: -0.03em;
-    text-transform: uppercase;
   }
 
   &__link {
@@ -37,10 +30,9 @@
 
     color: var(--primary-7);
 
-    font-size: 0.75rem;
-    font-weight: 600;
+    font: var(--link-font);
 
-    letter-spacing: 0.12em;
+    letter-spacing: 0.03rem;
     text-decoration: none;
     text-transform: uppercase;
 

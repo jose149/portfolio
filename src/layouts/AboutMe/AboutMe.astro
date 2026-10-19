@@ -1,5 +1,6 @@
 ---
 import SectionHeading from "../../components/SectionHeading/SectionHeading.astro";
+import { aboutItems, aboutPrinciples } from "./AboutMe.data";
 import "./AboutMe.scss";
 
 interface Props {
@@ -10,79 +11,25 @@ interface Props {
 const {
   imageSrc = "/images/portrait.png",
   imageAlt = "Portrait of Jose Crespí",
-} = Astro.props;
-
-const aboutItems = [
-  {
-    number: "01",
-    title: "Problems I enjoy solving",
-    text: "Complex products. Clear experiences.",
-  },
-  {
-    number: "02",
-    title: "How I work",
-    text: "Close to Product, Design and Engineering.",
-  },
-  {
-    number: "03",
-    title: "Beyond frontend",
-    text: "Product thinking, APIs and systems.",
-  },
-  {
-    number: "04",
-    title: "What I care about",
-    text: "Quality, simplicity and real impact.",
-  },
-];
-
-const principles = [
-  {
-    title: "Clarity",
-    text: "Understand before building.",
-  },
-  {
-    title: "Craft",
-    text: "Details matter.",
-  },
-  {
-    title: "Ownership",
-    text: "Care about the outcome.",
-  },
-];
+}: Props = Astro.props;
 ---
 
 <section class="about-me" id="about" aria-labelledby="about-title">
-  <!-- ====================================================
-       HEADING
-  ===================================================== -->
-
   <header class="about-me__header">
     <SectionHeading id="about-title" title="About me" />
   </header>
 
-  <!-- ====================================================
-       MAIN
-  ===================================================== -->
-
   <div class="about-me__main">
-    <!-- ==================================================
-         PORTRAIT
-    =================================================== -->
-
     <figure class="about-me__portrait">
       <img
+        class="about-me__portrait-image"
         src={imageSrc}
         alt={imageAlt}
-        class="about-me__portrait-image"
         loading="lazy"
       />
 
       <div class="about-me__monogram" aria-hidden="true">JC</div>
     </figure>
-
-    <!-- ==================================================
-         CONTENT
-    =================================================== -->
 
     <div class="about-me__content">
       <div class="about-me__statement">
@@ -98,21 +45,16 @@ const principles = [
         </p>
       </div>
 
-      <!-- ================================================
-           ABOUT ITEMS
-      ================================================= -->
-
       <div class="about-me__items">
         {
-          aboutItems.map((item) => (
+          aboutItems.map(({ number, title, text }) => (
             <article class="about-me__item">
               <div class="about-me__item-heading">
-                <span class="about-me__item-number">{item.number}</span>
-
-                <h4 class="about-me__item-title">{item.title}</h4>
+                <span class="about-me__item-number">{number}</span>
+                <h4 class="about-me__item-title">{title}</h4>
               </div>
 
-              <p class="about-me__item-text">{item.text}</p>
+              <p class="about-me__item-text">{text}</p>
             </article>
           ))
         }
@@ -120,23 +62,18 @@ const principles = [
     </div>
   </div>
 
-  <!-- ====================================================
-       PRINCIPLES
-  ===================================================== -->
-
   <div class="about-me__principles">
-    <div class="about-me__principles-heading">Working principles</div>
+    <p class="about-me__principles-heading">Working principles</p>
 
     <div class="about-me__principles-list">
       {
-        principles.map((principle) => (
+        aboutPrinciples.map(({ title, text }) => (
           <article class="about-me__principle">
             <span class="about-me__principle-symbol" aria-hidden="true" />
 
             <div class="about-me__principle-content">
-              <h4 class="about-me__principle-title">{principle.title}</h4>
-
-              <p class="about-me__principle-text">{principle.text}</p>
+              <h4 class="about-me__principle-title">{title}</h4>
+              <p class="about-me__principle-text">{text}</p>
             </div>
           </article>
         ))

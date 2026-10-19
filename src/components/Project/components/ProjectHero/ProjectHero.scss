@@ -1,3 +1,5 @@
+@use "variables" as *;
+
 .project-hero {
   position: relative;
 
@@ -7,10 +9,9 @@
     "intro"
     "media"
     "details";
-
   gap: 0;
 
-  padding: 1.25rem;
+  padding: clamp(2.5rem, 3.5vw, 3.5rem);
 
   transition: padding 750ms cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -39,16 +40,12 @@
 
       gap: 0.4rem;
 
-      margin-bottom: 1.5rem;
+      margin-bottom: var(--spacing-16);
 
-      color: var(--navy-10);
+      color: var(--black);
 
       font-family: var(--font-display);
-
-      font-size: 1.4rem;
-      font-weight: var(--font-weight-light);
-
-      line-height: 1;
+      font: var(--heading-4-font);
     }
 
     &__separator,
@@ -60,17 +57,24 @@
     // IDENTITY
     // ====================================================
 
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: var(--spacing-16);
+    }
+
     &__eyebrow {
       display: block;
 
-      margin-bottom: 0.6rem;
+      margin-bottom: var(--spacing-8);
 
       color: var(--primary-7);
 
-      font-size: 0.65rem;
-      font-weight: 600;
+      font: var(--eyebrow-font);
 
-      letter-spacing: 0.14em;
+      letter-spacing: 0.04rem;
 
       text-transform: uppercase;
     }
@@ -80,16 +84,15 @@
 
       margin: 0;
 
-      color: var(--navy-10);
+      color: var(--black);
 
-      font-family: var(--font-display);
-
-      font-size: clamp(2.75rem, 12vw, 4rem);
-      font-weight: var(--font-weight-light);
-
-      line-height: 0.92;
+      font: var(--heading-3-font);
 
       letter-spacing: -0.035em;
+
+      @media (min-width: $breakpoint-lg) {
+        max-width: 11ch;
+      }
     }
 
     // ====================================================
@@ -99,15 +102,14 @@
     &__tagline {
       max-width: 34rem;
 
-      margin: 1.25rem 0 0;
+      margin-bottom: var(--spacing-24);
 
-      color: var(--navy-8);
+      color: var(--black);
 
       font-size: 0.95rem;
-
       line-height: 1.55;
-
       text-align: left;
+      font: var(--body-font-secondary-md);
     }
 
     // ====================================================
@@ -121,16 +123,27 @@
 
       gap: 0.45rem;
 
-      margin-top: 1.15rem;
+      margin-bottom: var(--spacing-16);
 
       color: var(--primary-7);
 
-      font-size: 0.65rem;
-      font-weight: 600;
-
-      letter-spacing: 0.09em;
+      font: var(--body-font-secondary-md);
 
       text-transform: uppercase;
+
+      @media (min-width: $breakpoint-md) {
+        font: var(--body-font-secondary-xs);
+      }
+    }
+
+    &__role {
+      font: var(--body-font-secondary-semibold-sm);
+
+      @media (min-width: $breakpoint-md) {
+        font: var(--body-font-secondary-xxs);
+
+        letter-spacing: 0.1rem;
+      }
     }
 
     &__professional-separator {
@@ -143,8 +156,6 @@
 
     &__contribution {
       max-width: 34rem;
-
-      margin-top: 1.5rem;
     }
 
     &__label {
@@ -154,22 +165,23 @@
 
       color: var(--primary-6);
 
-      font-size: 0.62rem;
-      font-weight: 600;
+      font: var(--body-font-primary-sm);
 
       letter-spacing: 0.14em;
 
       text-transform: uppercase;
+
+      @media (min-width: $breakpoint-md) {
+        font: var(--body-font-primary-xxs);
+      }
     }
 
     &__contribution-text {
       margin: 0;
 
-      color: var(--navy-9);
+      color: var(--black);
 
-      font-size: 0.9rem;
-
-      line-height: 1.6;
+      font: var(--body-font-secondary-md);
 
       text-align: left;
     }
@@ -181,26 +193,29 @@
     &__stack {
       display: flex;
       flex-wrap: wrap;
-
+      justify-content: center;
       gap: 0.4rem;
 
       margin: 1.25rem 0 0;
-
-      padding: 0;
-
+      padding: 0 var(--spacing-10) 0 var(--spacing-16);
       list-style: none;
+
+      @media (min-width: $breakpoint-sm) {
+        justify-content: flex-start;
+      }
     }
 
     &__stack-item {
+      text-align: center;
+      white-space: nowrap;
       padding: 0.32rem 0.65rem;
 
       border: 1px solid var(--primary-3);
-
       border-radius: 999px;
 
-      color: var(--navy-8);
+      color: var(--black);
 
-      font-size: 0.67rem;
+      font: var(--body-font-secondary-sm);
 
       line-height: 1;
     }
@@ -220,6 +235,12 @@
       padding: 0;
 
       list-style: none;
+
+      @media (max-width: ($breakpoint-md - 1px)) {
+        flex-direction: column;
+
+        gap: 0.35rem;
+      }
     }
 
     &__highlight {
@@ -229,9 +250,7 @@
 
       color: var(--navy-7);
 
-      font-size: 0.7rem;
-
-      line-height: 1.4;
+      font: var(--body-font-secondary-sm);
 
       &::before {
         content: "";
@@ -264,6 +283,16 @@
       width: 100%;
 
       margin-top: 1.5rem;
+
+      font: var(--body-font-primary-md);
+
+      @media (max-width: ($breakpoint-md - 1px)) {
+        align-items: stretch;
+      }
+
+      @media (min-width: $breakpoint-md) {
+        gap: 1.5rem;
+      }
     }
 
     &__case-study {
@@ -292,6 +321,12 @@
         color 180ms ease,
         border-color 180ms ease,
         background-color 180ms ease;
+
+      @media (max-width: ($breakpoint-md - 1px)) {
+        flex: 1;
+
+        min-width: 0;
+      }
 
       &:hover {
         border-color: var(--primary-6);
@@ -385,21 +420,19 @@
     align-items: center;
     justify-content: center;
 
-    min-width: 0;
-
-    margin-top: 1.25rem;
+    margin: var(--spacing-32) 0;
 
     overflow: hidden;
 
     // Este es el "marco" oscuro/contrastado.
     // En mobile queremos que sea bastante fino.
-    padding: 0.5rem;
+    padding: var(--spacing-16);
 
-    border-radius: 0.3rem;
+    border-radius: var(--radius-md);
 
     background-color: var(--primary-2);
 
-    transform: translateY(0);
+    transform: translateY(0) scale(1.15);
 
     box-shadow: 0 1rem 3rem rgb(0 0 0 / 0);
 
@@ -407,6 +440,26 @@
       transform 800ms cubic-bezier(0.22, 1, 0.36, 1),
       border-radius 700ms cubic-bezier(0.22, 1, 0.36, 1),
       box-shadow 700ms ease;
+
+    @media (min-width: $breakpoint-md) {
+      margin-top: 1.5rem;
+
+      padding: 2rem;
+
+      transform: translateY(0);
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      align-self: stretch;
+
+      min-height: 32rem;
+
+      margin-top: 0;
+
+      // Sigue teniendo presencia, pero ya no parece
+      // una imagen perdida dentro de una caja enorme.
+      padding: clamp(0.75rem, 1.3vw, 1.25rem);
+    }
   }
 
   &__image {
@@ -414,7 +467,6 @@
 
     width: 100%;
     height: auto;
-
     max-width: 100%;
 
     object-fit: contain;
@@ -428,6 +480,89 @@
     transition:
       transform 1000ms cubic-bezier(0.22, 1, 0.36, 1),
       filter 700ms ease;
+
+    @media (min-width: $breakpoint-lg) {
+      max-height: 38rem;
+
+      object-fit: contain;
+    }
+  }
+
+  // ======================================================
+  // TABLET
+  // ======================================================
+
+  @media (min-width: $breakpoint-md) {
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  // ======================================================
+  // DESKTOP
+  // ======================================================
+
+  @media (min-width: $breakpoint-lg) {
+    grid-template-columns:
+      minmax(18rem, 0.82fr)
+      minmax(0, 1.58fr);
+
+    grid-template-areas:
+      "intro media"
+      "details media";
+
+    column-gap: clamp(2.5rem, 4vw, 5rem);
+    row-gap: 0;
+
+    align-items: start;
+
+    min-height: 34rem;
+
+    .project-meta {
+      margin-bottom: var(--spacing-32);
+
+      &__eyebrow {
+        letter-spacing: inherit;
+      }
+    }
+
+    // ====================================================
+    // REVERSE
+    // ====================================================
+
+    &--reverse {
+      grid-template-columns:
+        minmax(0, 1.58fr)
+        minmax(18rem, 0.82fr);
+
+      grid-template-areas:
+        "media intro"
+        "media details";
+    }
+  }
+
+  // ======================================================
+  // REDUCED MOTION
+  // ======================================================
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    .project-meta {
+      &__case-study-icon,
+      &__live-icon {
+        transition: none;
+      }
+
+      &__live {
+        &::after {
+          transition: none;
+        }
+      }
+    }
+
+    &__media,
+    &__image {
+      transition: none;
+    }
   }
 }
 
@@ -438,6 +573,10 @@
 .project--expanded {
   .project-hero {
     padding-bottom: 1.5rem;
+
+    @media (min-width: $breakpoint-lg) {
+      padding-bottom: clamp(2.5rem, 4vw, 4rem);
+    }
 
     .project-meta {
       &__case-study-icon {
@@ -457,180 +596,6 @@
       transform: scale(1);
 
       filter: saturate(0.97);
-    }
-  }
-}
-
-// ======================================================
-// TABLET
-// ======================================================
-
-@media (min-width: 40rem) {
-  .project-hero {
-    padding: clamp(1.5rem, 3vw, 2.5rem);
-
-    .project-meta {
-      &__number {
-        font-size: 1.55rem;
-      }
-
-      &__title {
-        font-size: clamp(3.25rem, 8vw, 4.5rem);
-      }
-
-      &__tagline {
-        margin-top: 1.5rem;
-
-        font-size: 1rem;
-      }
-
-      &__contribution-text {
-        font-size: 0.95rem;
-      }
-
-      &__actions {
-        gap: 1.5rem;
-      }
-    }
-
-    &__media {
-      margin-top: 1.5rem;
-
-      padding: 0.75rem;
-    }
-  }
-}
-
-// ======================================================
-// DESKTOP
-// ======================================================
-
-@media (min-width: 64rem) {
-  .project-hero {
-    grid-template-columns:
-      minmax(18rem, 0.82fr)
-      minmax(0, 1.58fr);
-
-    grid-template-areas:
-      "intro media"
-      "details media";
-
-    column-gap: clamp(2.5rem, 4vw, 5rem);
-
-    row-gap: 0;
-
-    align-items: start;
-
-    min-height: 34rem;
-
-    padding: clamp(2.5rem, 3.5vw, 3.5rem);
-
-    .project-meta {
-      &__number {
-        margin-bottom: 2rem;
-
-        font-size: 1.7rem;
-      }
-
-      &__eyebrow {
-        margin-bottom: 0.75rem;
-
-        font-size: 0.7rem;
-      }
-
-      &__title {
-        max-width: 11ch;
-
-        font-size: clamp(3.5rem, 4.5vw, 5rem);
-      }
-
-      &__tagline {
-        margin-top: 1.5rem;
-      }
-
-      &__professional {
-        margin-top: 1.5rem;
-      }
-
-      &__contribution {
-        margin-top: 2rem;
-      }
-
-      &__stack {
-        margin-top: 1.5rem;
-      }
-
-      &__highlights {
-        margin-top: 1.5rem;
-      }
-
-      &__actions {
-        margin-top: 2rem;
-      }
-    }
-
-    &__media {
-      align-self: stretch;
-
-      min-height: 32rem;
-
-      margin-top: 0;
-
-      // Sigue teniendo presencia, pero ya no parece
-      // una imagen perdida dentro de una caja enorme.
-      padding: clamp(0.75rem, 1.3vw, 1.25rem);
-    }
-
-    &__image {
-      max-height: 38rem;
-
-      object-fit: contain;
-    }
-
-    // ====================================================
-    // REVERSE
-    // ====================================================
-
-    &--reverse {
-      grid-template-columns:
-        minmax(0, 1.58fr)
-        minmax(18rem, 0.82fr);
-
-      grid-template-areas:
-        "media intro"
-        "media details";
-    }
-  }
-
-  .project--expanded {
-    .project-hero {
-      padding-bottom: clamp(2.5rem, 4vw, 4rem);
-    }
-  }
-}
-
-// ======================================================
-// MOBILE
-// ======================================================
-
-@media (max-width: 39.999rem) {
-  .project-hero {
-    .project-meta {
-      &__highlights {
-        flex-direction: column;
-
-        gap: 0.35rem;
-      }
-
-      &__actions {
-        align-items: stretch;
-      }
-
-      &__case-study {
-        flex: 1;
-
-        min-width: 0;
-      }
     }
   }
 }
@@ -702,34 +667,6 @@
       &__media {
         box-shadow: 0 1.25rem 3rem rgb(0 0 0 / 0.16);
       }
-    }
-  }
-}
-
-// ======================================================
-// REDUCED MOTION
-// ======================================================
-
-@media (prefers-reduced-motion: reduce) {
-  .project-hero {
-    transition: none;
-
-    .project-meta {
-      &__case-study-icon,
-      &__live-icon {
-        transition: none;
-      }
-
-      &__live {
-        &::after {
-          transition: none;
-        }
-      }
-    }
-
-    &__media,
-    &__image {
-      transition: none;
     }
   }
 }

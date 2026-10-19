@@ -6,6 +6,121 @@ export const projects: ProjectType[] = [
   // ======================================================
 
   {
+    id: "sembo-marketplace",
+
+    // ====================================================
+    // IDENTITY
+    // ====================================================
+
+    company: "Sembo",
+
+    kind: "Professional",
+
+    title: "Marketplace",
+
+    tagline: "AI-powered travel booking marketplace",
+
+    // ====================================================
+    // HERO
+    // ====================================================
+
+    role: "Frontend Engineer",
+
+    timeline: "2024 — 2026",
+
+    contribution:
+      "Delivered product features with React and Next.js while improving accessibility, SEO and content delivery through a headless CMS and advanced caching architecture.",
+
+    stack: ["React", "Next.js", "TypeScript", "Sanity", "Redis", "S3"],
+
+    highlights: [
+      "Production marketplace",
+      "Accessibility compliant",
+      "SEO optimized",
+      "Automated CMS cache invalidation",
+    ],
+
+    // Replace these with the final Marketplace images.
+    previewImageSrc: "/images/marketplace.png",
+
+    previewImageAlt: "Sembo Marketplace travel discovery experience",
+
+    liveHref: "https://www.sembo.com",
+
+    // ====================================================
+    // CASE STUDY
+    // ====================================================
+
+    context:
+      "Marketplace focused on the inspiration and discovery side of Sembo's customer journey. The platform needed to support continuously evolving editorial content and product features while remaining fast, discoverable by search engines and accessible to users.",
+
+    contributionDetail:
+      "I developed prioritized product features using React, Next.js and TypeScript, collaborating with Product and Design during refinement to align technical implementation with business goals. I integrated headless CMS workflows, worked on SEO indexing and accessibility, and partnered with the architect on a caching architecture using Redis and S3 with automated invalidation through Sanity webhooks. I also supported frontend requirements beyond the UI by implementing API endpoints with Express, TypeScript, Zod and MySQL and coordinating with backend and data teams.",
+
+    challenges: [
+      {
+        title: "Keeping editorial content synchronized",
+        description:
+          "Content managed through the headless CMS needed to remain aggressively cached for performance while still becoming visible to users immediately after editors published changes.",
+      },
+      {
+        title: "Performance versus content freshness",
+        description:
+          "The platform needed an effective caching strategy without creating stale content or requiring manual intervention whenever content changed.",
+      },
+      {
+        title: "SEO and accessibility at product scale",
+        description:
+          "The marketplace had to remain discoverable by search engines while meeting accessibility requirements across continuously evolving pages and features.",
+      },
+      {
+        title: "Cross-functional product delivery",
+        description:
+          "Features required coordination between Product, Design, Marketing, frontend, backend and data teams, with technical constraints considered during refinement rather than only during implementation.",
+      },
+    ],
+
+    decisions: [
+      {
+        title: "Combine Redis and S3 caching",
+        description:
+          "Together with the architect, I worked on a caching strategy that balanced fast content delivery with the requirements of a content-driven production platform.",
+      },
+      {
+        title: "Automate cache invalidation",
+        description:
+          "Sanity webhooks were used to invalidate affected cached content automatically when editors published changes, avoiding stale data while preserving caching benefits.",
+      },
+      {
+        title: "Treat accessibility and SEO as product requirements",
+        description:
+          "Accessibility compliance and search indexing were incorporated into feature development instead of being handled as separate post-development improvements.",
+      },
+      {
+        title: "Build supporting API functionality when needed",
+        description:
+          "Express endpoints with TypeScript, Zod and MySQL were implemented when frontend product requirements required functionality beyond the existing service interfaces.",
+      },
+    ],
+
+    outcome:
+      "The marketplace evolved with new customer-facing features while improving its accessibility, search visibility and content-delivery architecture. Automated invalidation allowed CMS changes to remain synchronized with heavily cached production content without requiring manual cache management.",
+
+    metrics: [],
+
+    // ====================================================
+    // CASE STUDY MEDIA
+    // ====================================================
+
+    caseStudyDesktopImageSrc: "/images/marketplace.png",
+
+    caseStudyDesktopImageAlt: "Sembo Marketplace desktop experience",
+
+    caseStudyMobileImageSrc: "/images/marketplaceMobile.png",
+
+    caseStudyMobileImageAlt: "Sembo Marketplace mobile experience",
+  },
+  {
     id: "sembo-tripplanner",
 
     // ====================================================
@@ -18,8 +133,7 @@ export const projects: ProjectType[] = [
 
     title: "TripPlanner",
 
-    tagline:
-      "A trip planning and booking experience for searching, combining and booking complete journeys.",
+    tagline: "Travel planning and booking platform",
 
     // ====================================================
     // HERO
@@ -124,121 +238,4 @@ export const projects: ProjectType[] = [
   // ======================================================
   // MARKETPLACE
   // ======================================================
-
-  {
-    id: "sembo-marketplace",
-
-    // ====================================================
-    // IDENTITY
-    // ====================================================
-
-    company: "Sembo",
-
-    kind: "Professional",
-
-    title: "Marketplace",
-
-    tagline:
-      "A content-driven travel marketplace designed to inspire users and help them discover their next journey.",
-
-    // ====================================================
-    // HERO
-    // ====================================================
-
-    role: "Frontend Engineer",
-
-    timeline: "2024 — 2026",
-
-    contribution:
-      "Delivered product features with React and Next.js while improving accessibility, SEO and content delivery through a headless CMS and advanced caching architecture.",
-
-    stack: ["React", "Next.js", "TypeScript", "Sanity", "Redis", "S3"],
-
-    highlights: [
-      "Production marketplace",
-      "Accessibility compliant",
-      "SEO optimized",
-      "Automated CMS cache invalidation",
-    ],
-
-    // Replace these with the final Marketplace images.
-    previewImageSrc: "/images/marketplace.png",
-
-    previewImageAlt: "Sembo Marketplace travel discovery experience",
-
-    liveHref: "https://www.sembo.com",
-
-    // ====================================================
-    // CASE STUDY
-    // ====================================================
-
-    context:
-      "Marketplace focused on the inspiration and discovery side of Sembo's customer journey. The platform needed to support continuously evolving editorial content and product features while remaining fast, discoverable by search engines and accessible to users.",
-
-    contributionDetail:
-      "I developed prioritized product features using React, Next.js and TypeScript, collaborating with Product and Design during refinement to align technical implementation with business goals. I integrated headless CMS workflows, worked on SEO indexing and accessibility, and partnered with the architect on a caching architecture using Redis and S3 with automated invalidation through Sanity webhooks. I also supported frontend requirements beyond the UI by implementing API endpoints with Express, TypeScript, Zod and MySQL and coordinating with backend and data teams.",
-
-    challenges: [
-      {
-        title: "Keeping editorial content synchronized",
-        description:
-          "Content managed through the headless CMS needed to remain aggressively cached for performance while still becoming visible to users immediately after editors published changes.",
-      },
-      {
-        title: "Performance versus content freshness",
-        description:
-          "The platform needed an effective caching strategy without creating stale content or requiring manual intervention whenever content changed.",
-      },
-      {
-        title: "SEO and accessibility at product scale",
-        description:
-          "The marketplace had to remain discoverable by search engines while meeting accessibility requirements across continuously evolving pages and features.",
-      },
-      {
-        title: "Cross-functional product delivery",
-        description:
-          "Features required coordination between Product, Design, Marketing, frontend, backend and data teams, with technical constraints considered during refinement rather than only during implementation.",
-      },
-    ],
-
-    decisions: [
-      {
-        title: "Combine Redis and S3 caching",
-        description:
-          "Together with the architect, I worked on a caching strategy that balanced fast content delivery with the requirements of a content-driven production platform.",
-      },
-      {
-        title: "Automate cache invalidation",
-        description:
-          "Sanity webhooks were used to invalidate affected cached content automatically when editors published changes, avoiding stale data while preserving caching benefits.",
-      },
-      {
-        title: "Treat accessibility and SEO as product requirements",
-        description:
-          "Accessibility compliance and search indexing were incorporated into feature development instead of being handled as separate post-development improvements.",
-      },
-      {
-        title: "Build supporting API functionality when needed",
-        description:
-          "Express endpoints with TypeScript, Zod and MySQL were implemented when frontend product requirements required functionality beyond the existing service interfaces.",
-      },
-    ],
-
-    outcome:
-      "The marketplace evolved with new customer-facing features while improving its accessibility, search visibility and content-delivery architecture. Automated invalidation allowed CMS changes to remain synchronized with heavily cached production content without requiring manual cache management.",
-
-    metrics: [],
-
-    // ====================================================
-    // CASE STUDY MEDIA
-    // ====================================================
-
-    caseStudyDesktopImageSrc: "/images/marketplace.png",
-
-    caseStudyDesktopImageAlt: "Sembo Marketplace desktop experience",
-
-    caseStudyMobileImageSrc: "/images/marketplaceMobile.png",
-
-    caseStudyMobileImageAlt: "Sembo Marketplace mobile experience",
-  },
 ];

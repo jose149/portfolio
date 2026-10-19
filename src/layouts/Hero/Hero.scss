@@ -1,4 +1,4 @@
-@use "../../styles/global.scss" as *;
+@use "variables" as *;
 
 .hero {
   padding: var(--hero-padding);

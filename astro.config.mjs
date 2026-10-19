@@ -13,5 +13,12 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          loadPaths: ["./src/styles"],
+        },
+      },
+    },
   },
 });

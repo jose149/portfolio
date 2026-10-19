@@ -16,6 +16,8 @@ const {
   target = "_self",
   ariaLabel,
 } = Astro.props;
+
+const isInternalAnchor = href.startsWith("#");
 ---
 
 <a
@@ -23,6 +25,7 @@ const {
   target={target}
   aria-label={ariaLabel}
   rel={target === "_blank" ? "noopener noreferrer" : undefined}
+  data-scroll-link={isInternalAnchor ? "true" : undefined}
   class:list={[
     "action-link",
     `action-link--${variant}`,

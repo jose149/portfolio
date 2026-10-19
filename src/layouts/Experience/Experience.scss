@@ -1,9 +1,8 @@
 .experience {
   width: 100%;
 
-  padding: clamp(3.5rem, 6vw, 6rem) clamp(1.25rem, 5vw, 5rem);
-
-  background-color: var(--primary-1);
+  background-color: var(--primary-2);
+  // background-color: var(--primary-1);
 
   color: var(--navy-10);
 
@@ -26,61 +25,6 @@
     flex-wrap: wrap;
 
     gap: 0.75rem 1.5rem;
-  }
-
-  &__header-link {
-    position: relative;
-
-    display: inline-flex;
-    align-items: center;
-
-    gap: 0.4rem;
-
-    width: fit-content;
-
-    color: var(--navy-9);
-
-    font-size: 0.7rem;
-    font-weight: 600;
-
-    letter-spacing: 0.04em;
-
-    text-decoration: none;
-
-    text-transform: uppercase;
-
-    &::after {
-      content: "";
-
-      position: absolute;
-
-      right: 0;
-      bottom: -0.25rem;
-      left: 0;
-
-      height: 1px;
-
-      background-color: currentColor;
-
-      transform: scaleX(0);
-      transform-origin: right;
-
-      transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    &:hover {
-      &::after {
-        transform: scaleX(1);
-
-        transform-origin: left;
-      }
-    }
-
-    &:focus-visible {
-      outline: 2px solid var(--primary-6);
-
-      outline-offset: 0.35rem;
-    }
   }
 
   // ======================================================
@@ -175,9 +119,7 @@
 
     color: var(--navy-6);
 
-    font: inherit;
-    font-size: 0.68rem;
-    font-weight: 500;
+    font: var(--link-font);
 
     letter-spacing: 0.045em;
 
@@ -346,8 +288,7 @@
   &__date-value {
     color: var(--navy-10);
 
-    font-size: 0.7rem;
-    font-weight: 600;
+    font: var(--body-font-secondary-semibold-sm);
 
     letter-spacing: 0.02em;
 
@@ -357,8 +298,7 @@
   &__category {
     color: var(--primary-7);
 
-    font-size: 0.58rem;
-    font-weight: 600;
+    font: var(--body-font-secondary-semibold-s);
 
     letter-spacing: 0.08em;
 
@@ -452,7 +392,7 @@
 
     color: var(--navy-8);
 
-    font-size: 0.9rem;
+    font: var(--body-font-primary-sm);
 
     line-height: 1.4;
   }
@@ -464,7 +404,7 @@
 
     color: var(--navy-6);
 
-    font-size: 0.75rem;
+    font: var(--body-font-secondary-md);
 
     line-height: 1.4;
   }
@@ -481,8 +421,7 @@
 
     color: var(--primary-7);
 
-    font-size: 0.65rem;
-    font-weight: 600;
+    font: var(--body-font-primary-xxs);
 
     letter-spacing: 0.04em;
 
@@ -544,7 +483,7 @@
 
     color: var(--navy-8);
 
-    font-size: 0.9rem;
+    font: var(--body-font-secondary-md);
 
     line-height: 1.65;
 
@@ -562,8 +501,7 @@
 
     color: var(--primary-7);
 
-    font-size: 0.6rem;
-    font-weight: 600;
+    font: var(--body-font-primary-xxs);
 
     letter-spacing: 0.08em;
 
@@ -595,7 +533,7 @@
 
       color: var(--navy-8);
 
-      font-size: 0.82rem;
+      font: var(--body-font-secondary-sm);
 
       line-height: 1.5;
 
@@ -653,7 +591,7 @@
 
       color: var(--navy-8);
 
-      font-size: 0.7rem;
+      font: var(--body-font-secondary-sm);
 
       line-height: 1;
     }
@@ -710,15 +648,12 @@
 
         padding: 0 1.25rem 1.25rem;
 
-        border: 1px solid var(--primary-5);
-
         border-radius: 0.4rem;
 
         background-color: var(--primary-2);
       }
 
       &__toggle {
-        padding-top: 1.25rem;
       }
 
       &__toggle-icon {
@@ -855,10 +790,6 @@
       padding: 1.15rem 1rem 0 0;
     }
 
-    &__date-value {
-      font-size: 0.68rem;
-    }
-
     &__marker {
       position: relative;
 
@@ -917,7 +848,15 @@
 
       gap: clamp(2.5rem, 4vw, 5rem);
     }
+    .experience-item {
+      &__content {
+        margin: 0 0 1.25rem;
 
+        padding: 0 clamp(1.75rem, 3vw, 3rem) clamp(1.75rem, 3vw, 2.5rem);
+
+        border-radius: 0.4rem;
+      }
+    }
     &--expanded {
       .experience-item {
         &__marker {
@@ -937,8 +876,6 @@
         }
 
         &__toggle {
-          padding-top: clamp(1.5rem, 2vw, 2rem);
-
           padding-bottom: 1.25rem;
         }
       }
@@ -1013,14 +950,6 @@
       padding: 1.25rem 0 0.25rem;
     }
 
-    &__date-value {
-      font-size: 0.65rem;
-    }
-
-    &__category {
-      font-size: 0.55rem;
-    }
-
     // ====================================================
     // SUMMARY
     // ====================================================
@@ -1043,11 +972,11 @@
     }
 
     &__role {
-      font-size: 0.85rem;
+      font: var(--body-font-primary-sm);
     }
 
     &__team {
-      font-size: 0.72rem;
+      font: var(--body-font-secondary-md);
     }
 
     // ====================================================
@@ -1108,7 +1037,7 @@
     }
 
     &__description {
-      font-size: 0.86rem;
+      font: var(--body-font-secondary-md);
 
       line-height: 1.65;
     }

@@ -153,9 +153,8 @@ const navigationItems = [
 
   if (navbar) {
     const scrollLinks = [
-      ...navbar.querySelectorAll<HTMLAnchorElement>("[data-scroll-link]"),
+      ...document.querySelectorAll<HTMLAnchorElement>("[data-scroll-link]"),
     ];
-
     const sectionLinks = [
       ...navbar.querySelectorAll<HTMLAnchorElement>("[data-nav-section]"),
     ];

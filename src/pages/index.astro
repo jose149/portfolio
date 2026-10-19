@@ -41,7 +41,7 @@ import Navbar from "../layouts/Navbar/Navbar.astro";
 
 <style lang="scss" is:global>
   @use "../styles/global.scss" as *;
-  @import "../styles/shared/reset.css";
+  @use "../styles/variables" as *;
 
   html {
     font-size: 16px;
@@ -57,7 +57,7 @@ import Navbar from "../layouts/Navbar/Navbar.astro";
   }
 
   section {
-    padding: var(--spacing-20) var(--spacing-20) var(--spacing-64);
+    padding: var(--spacing-20) 15dvw var(--spacing-64);
     @media (max-width: 40rem) {
       padding: var(--spacing-20) var(--spacing-20) var(--spacing-64);
     }

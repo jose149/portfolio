@@ -26,19 +26,62 @@
   --letter-spacing-wide: 0.08em;
 
   // Font size
+  --font-size-xxs: 0.7rem;
   --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
+  --font-size-sm: 0.9rem;
   --font-size-md: 1rem;
   --font-size-lg: 1.25rem;
+  --font-size-xlg: 1.35rem;
   --font-size-xl: 2.5rem;
+  --font-size-2xl: 3rem;
   --font-size-3xl: 5rem;
 
   --heading-1-font: var(--font-weight-regular) var(--font-size-3xl) /
     var(--line-height-heading) var(--font-primary);
-  --sub-heading-1-font: var(--font-weight-semibold) var(--font-size-md) /
+  --heading-2-font: var(--font-weight-light) var(--font-size-xl) /
+    var(--line-height-body) var(--font-primary);
+  --heading-3-font: var(--font-weight-light) var(--font-size-2xl) /
+    var(--line-height-heading) var(--font-primary);
+  --heading-4-font: var(--font-weight-light) var(--font-size-xlg) /
+    var(--line-height-heading) var(--font-primary);
+    --heading-5-font: var(--font-weight-light) var(--font-size-md) /
+    var(--line-height-heading) var(--font-primary);
+
+  --sub-heading-1-font: var(--font-weight-semibold) var(--font-size-lg) /
     var(--line-height-heading) var(--font-secondary);
-  --secundary-font: var(--font-weight-medium) var(--font-size-sm) /
-    var(--line-height-body) var(--font-secondary);
+
   --button-font: var(--font-weight-bold) var(--font-size-sm) /
     var(--line-height-heading) var(--font-secondary);
+
+  --link-font: var(--font-weight-medium) var(--font-size-xs) /
+    var(--line-height-body) var(--font-secondary);
+
+  --eyebrow-font: var(--font-weight-semibold) var(--font-size-md) /
+    var(--line-height-body) var(--font-secondary);
+
+  --secundary-font: var(--font-weight-medium) var(--font-size-md) /
+    var(--line-height-body) var(--font-secondary);
+
+  --body-font-primary-xs: var(--font-weight-semibold) var(--font-size-xs) / 1.5
+    var(--font-primary);
+  --body-font-primary-xxs: var(--font-weight-semibold) var(--font-size-xxs) /
+    1.5 var(--font-primary);
+  --body-font-primary-sm: var(--font-weight-semibold) var(--font-size-sm) / 1.5
+    var(--font-primary);
+  --body-font-primary-md: var(--font-weight-semibold) var(--font-size-md) / 1.5
+    var(--font-primary);
+
+  --body-font-secondary-semibold-sm: var(--font-weight-semibold)
+    var(--font-size-sm) / 1.5 var(--font-secondary);
+  --body-font-secondary-semibold-xs: var(--font-weight-semibold)
+    var(--font-size-xs) / 1.5 var(--font-secondary);
+
+  --body-font-secondary-md: var(--font-weight-medium) var(--font-size-md) / 1.5
+    var(--font-secondary);
+  --body-font-secondary-sm: var(--font-weight-medium) var(--font-size-sm) / 1.5
+    var(--font-secondary);
+  --body-font-secondary-xs: var(--font-weight-medium) var(--font-size-xs) / 1.5
+    var(--font-secondary);
+  --body-font-secondary-xxs: var(--font-weight-medium) var(--font-size-xxs) /
+    1.5 var(--font-secondary);
 }

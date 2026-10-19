@@ -2,8 +2,8 @@
 global.scss
 */
 
-@forward "./abstracts/breakpoints";
-@forward "./base/colors";
-@forward "./base/typography";
-@forward "./base/spacing";
-@forward "./base/layout";
+@use "./shared/reset";
+@use "./base/colors";
+@use "./base/typography";
+@use "./base/spacing";
+@use "./base/layout";
