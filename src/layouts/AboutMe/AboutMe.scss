@@ -1,7 +1,7 @@
 .about-me {
   width: 100%;
   background-color: var(--primary-1);
-    background-image: linear-gradient(180deg, var(--primary-1), var(--primary-2));
+  background-image: linear-gradient(180deg, var(--primary-1), var(--primary-2));
 
   color: var(--navy-10);
 
@@ -104,11 +104,7 @@
     text-align: center;
     margin: 0;
     color: var(--navy-10);
-    font-family: var(--font-display);
-    font-size: clamp(2.25rem, 5vw, 4.25rem);
-    font-weight: var(--font-weight-light);
-    line-height: 1.02;
-    letter-spacing: -0.025em;
+    font: var(--heading-3-font);
     text-align: center;
   }
 
@@ -340,7 +336,6 @@
     &__statement-title {
       text-align: left;
       padding-right: clamp(3.5rem, 6vw, 7rem);
-      font-size: clamp(3rem, 4vw, 4.4rem);
     }
 
     &__items {

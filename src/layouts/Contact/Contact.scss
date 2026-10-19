@@ -1,7 +1,7 @@
 .contact {
   width: 100%;
 
-  padding: clamp(3.5rem, 6vw, 6rem) clamp(1.25rem, 5vw, 5rem);
+  padding: var(--spacing-20) clamp(1.25rem, 5vw, 5rem);
 
   background-color: var(--primary-1);
 
@@ -17,8 +17,6 @@
     grid-template-columns: 1fr;
 
     gap: clamp(1rem, 2vw, 2rem);
-
-    margin-top: clamp(3rem, 6vw, 6rem);
   }
 }
 
@@ -61,8 +59,7 @@
 
     color: var(--primary-7);
 
-    font-size: 0.65rem;
-    font-weight: 600;
+    font: var(--body-font-secondary-semibold-xs);
 
     letter-spacing: 0.09em;
 
@@ -81,21 +78,9 @@
   }
 
   &__title {
-    max-width: 24rem;
-
     margin: clamp(1.8rem, 3vw, 2.5rem) 0 0;
-
     color: var(--navy-10);
-
-    font-family: var(--font-display);
-
-    font-size: clamp(1.75rem, 3vw, 2.4rem);
-
-    font-weight: var(--font-weight-light);
-
-    line-height: 1.08;
-
-    letter-spacing: -0.02em;
+    font: var(--heading-3-font);
   }
 
   // ======================================================
@@ -168,8 +153,7 @@
   &__label {
     color: var(--primary-7);
 
-    font-size: 0.6rem;
-    font-weight: 600;
+    font: var(--body-font-primary-xxs);
 
     letter-spacing: 0.08em;
 
@@ -181,9 +165,7 @@
 
     color: var(--navy-8);
 
-    font-size: 0.82rem;
-
-    line-height: 1.4;
+    font: var(--body-font-primary-md);
 
     overflow-wrap: anywhere;
 
@@ -252,9 +234,7 @@
 
       color: var(--navy-6);
 
-      font-size: 0.7rem;
-
-      line-height: 1.5;
+      font: var(--body-font-primary-xxs);
     }
   }
 
@@ -383,8 +363,7 @@
     label {
       color: var(--navy-7);
 
-      font-size: 0.6rem;
-      font-weight: 600;
+      font: var(--body-font-primary-xxs);
 
       letter-spacing: 0.055em;
 
@@ -403,8 +382,7 @@
 
       color: var(--navy-10);
 
-      font: inherit;
-      font-size: 0.85rem;
+      font: var(--body-font-secondary-md);
 
       outline: none;
 
@@ -475,11 +453,9 @@
 
     background-color: var(--primary-6);
 
-    color: var(--navy-10);
+    color: var(--primary-2);
 
-    font: inherit;
-    font-size: 0.72rem;
-    font-weight: 700;
+    font: var(--button-font);
 
     letter-spacing: 0.03em;
 
@@ -550,7 +526,7 @@
 
     color: var(--navy-5);
 
-    font-size: 0.65rem;
+    font: var(--body-font-primary-xxs);
 
     line-height: 1.5;
   }
