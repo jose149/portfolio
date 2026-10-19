@@ -2,13 +2,39 @@
 import SectionHeading from "../../components/SectionHeading/SectionHeading.astro";
 
 import {
-  experienceCategoryLabels,
-  experienceFilters,
-  experienceItems,
+  getExperienceCategoryLabels,
+  getExperienceFilters,
+  getExperienceItems,
 } from "./Experience.data";
 
+import {
+  getLocaleFromPath,
+  getTranslations,
+} from "../../i18n/i18n";
+
 import "./Experience.scss";
-const JOSE_CV_SOURCE = "/Jose-Crespi-CV-EN.pdf"
+
+const JOSE_CV_SOURCE =
+  "/Jose-Crespi-CV-EN.pdf";
+
+const locale =
+  getLocaleFromPath(
+    Astro.url.pathname,
+  );
+
+const t =
+  getTranslations(locale);
+
+const experienceFilters =
+  getExperienceFilters(locale);
+
+const experienceCategoryLabels =
+  getExperienceCategoryLabels(
+    locale,
+  );
+
+const experienceItems =
+  getExperienceItems(locale);
 ---
 
 <section
@@ -16,18 +42,20 @@ const JOSE_CV_SOURCE = "/Jose-Crespi-CV-EN.pdf"
   id="experience"
   aria-labelledby="experience-title"
   data-experience-root
+  data-details-label={t.experience.actions.details}
+  data-close-label={t.experience.actions.close}
 >
   <!-- ==================================================
        HEADER
   =================================================== -->
 
-    <SectionHeading
-      id="experience-title"
-      title="Experience"
-      href={JOSE_CV_SOURCE}
-      linkLabel="Download resume"
-      external
-    />
+  <SectionHeading
+    id="experience-title"
+    title={t.experience.title}
+    href={JOSE_CV_SOURCE}
+    linkLabel={t.experience.resume}
+    external
+  />
 
   <!-- ==================================================
        FILTERS
@@ -37,7 +65,7 @@ const JOSE_CV_SOURCE = "/Jose-Crespi-CV-EN.pdf"
     <div
       class="experience__filters"
       data-experience-filters
-      aria-label="Filter experience"
+      aria-label={t.experience.filterAriaLabel}
     >
       <span
         class="experience__filter-indicator"
@@ -170,8 +198,8 @@ const JOSE_CV_SOURCE = "/Jose-Crespi-CV-EN.pdf"
                   <span data-experience-toggle-label>
                     {
                       isOpen
-                        ? "Close"
-                        : "Details"
+                        ? t.experience.actions.close
+                        : t.experience.actions.details
                     }
                   </span>
 
@@ -207,7 +235,10 @@ const JOSE_CV_SOURCE = "/Jose-Crespi-CV-EN.pdf"
                       item.impact?.length && (
                         <div class="experience-item__impact">
                           <span class="experience-item__label">
-                            Selected impact
+                            {
+                              t.experience.labels
+                                .selectedImpact
+                            }
                           </span>
 
                           <ul class="experience-item__impact-list">
@@ -234,7 +265,10 @@ const JOSE_CV_SOURCE = "/Jose-Crespi-CV-EN.pdf"
                           item.stack?.length && (
                             <div class="experience-item__stack">
                               <span class="experience-item__label">
-                                Tech stack
+                                {
+                                  t.experience.labels
+                                    .techStack
+                                }
                               </span>
 
                               <ul class="experience-item__stack-list">
@@ -260,7 +294,10 @@ const JOSE_CV_SOURCE = "/Jose-Crespi-CV-EN.pdf"
                           item.relatedProject && (
                             <div class="experience-item__related">
                               <span class="experience-item__label">
-                                Related project
+                                {
+                                  t.experience.labels
+                                    .relatedProject
+                                }
                               </span>
 
                               <a

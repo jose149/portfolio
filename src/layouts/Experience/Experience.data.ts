@@ -4,67 +4,71 @@ import type {
   ExperienceItem,
 } from "./Experience.types";
 
-export const experienceFilters = [
-  {
-    label: "All",
-    value: "all",
-  },
-  {
-    label: "Employment",
-    value: "employment",
-  },
-  {
-    label: "Independent work",
-    value: "independent",
-  },
-  {
-    label: "Education",
-    value: "education",
-  },
-] satisfies ExperienceFilter[];
+import {
+  translations,
+  type Locale,
+  type TranslationDictionary,
+} from "../../i18n/translations";
 
-export const experienceCategoryLabels: Record<
-  ExperienceCategory,
-  string
-> = {
-  employment: "Employment",
-  independent: "Independent work",
-  education: "Education",
-};
+type ExperienceItemKey = keyof TranslationDictionary["experience"]["items"];
 
-export const experienceItems: ExperienceItem[] = [
+type RelatedProjectKey =
+  keyof TranslationDictionary["experience"]["relatedProjects"];
+
+interface ExperienceDate {
+  year: number;
+  month?: number;
+}
+
+interface ExperienceDataItem {
+  id: string;
+
+  translationKey: ExperienceItemKey;
+
+  startDate: ExperienceDate;
+
+  endDate?: ExperienceDate;
+
+  category: ExperienceCategory;
+
+  stack?: string[];
+
+  relatedProject?: {
+    translationKey: RelatedProjectKey;
+
+    href: string;
+  };
+
+  defaultOpen?: boolean;
+}
+
+// ========================================================
+// STRUCTURAL DATA
+// ========================================================
+
+const experienceData: ExperienceDataItem[] = [
   {
     id: "sembo-inspire",
 
-    startDate: "Oct 2024",
-    endDate: "Feb 2026",
+    translationKey: "semboInspire",
+
+    startDate: {
+      year: 2024,
+      month: 10,
+    },
+
+    endDate: {
+      year: 2026,
+      month: 2,
+    },
 
     category: "employment",
 
-    company: "Sembo · Stena Line",
-    role: "Frontend Engineer",
-    team: "Inspire team",
-
-    description:
-      "Product-focused frontend development across React, Next.js and content-driven platforms, working closely with Product, Design and Backend teams.",
-
-    impact: [
-      "Improved SEO indexing and achieved full accessibility compliance.",
-      "Integrated headless CMS workflows with Sanity.",
-      "Engineered Redis / S3 caching strategies and automated cache invalidation through webhooks.",
-    ],
-
-    stack: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Sanity",
-      "Redis",
-      "S3",
-    ],
+    stack: ["React", "Next.js", "TypeScript", "Sanity", "Redis", "S3"],
 
     relatedProject: {
-      label: "Marketplace",
+      translationKey: "marketplace",
+
       href: "#sembo-marketplace",
     },
 
@@ -74,34 +78,25 @@ export const experienceItems: ExperienceItem[] = [
   {
     id: "sembo-plan",
 
-    startDate: "Mar 2022",
-    endDate: "Sep 2024",
+    translationKey: "semboPlan",
+
+    startDate: {
+      year: 2022,
+      month: 3,
+    },
+
+    endDate: {
+      year: 2024,
+      month: 9,
+    },
 
     category: "employment",
 
-    company: "Sembo · Stena Line",
-    role: "Frontend Developer",
-    team: "Plan team",
-
-    description:
-      "Built and evolved booking, search and core product flows for Sembo's production travel platform.",
-
-    impact: [
-      "Developed booking and search experiences using Vue 3, TypeScript and Pinia.",
-      "Strengthened frontend quality through unit, integration and end-to-end testing.",
-      "Redesigned the Google Maps request strategy, reducing operational costs by 38%.",
-    ],
-
-    stack: [
-      "Vue 3",
-      "TypeScript",
-      "Pinia",
-      "Vitest",
-      "Cypress",
-    ],
+    stack: ["Vue 3", "TypeScript", "Pinia", "Vitest", "Cypress"],
 
     relatedProject: {
-      label: "TripPlanner",
+      translationKey: "tripPlanner",
+
       href: "#sembo-tripplanner",
     },
   },
@@ -109,69 +104,55 @@ export const experienceItems: ExperienceItem[] = [
   {
     id: "electrical-engineer",
 
-    startDate: "Sep 2019",
-    endDate: "Jun 2021",
+    translationKey: "electricalEngineer",
+
+    startDate: {
+      year: 2019,
+      month: 9,
+    },
+
+    endDate: {
+      year: 2021,
+      month: 6,
+    },
 
     category: "employment",
 
-    company:
-      "Spark Ibérica · Omexom · Autosolar",
-
-    role: "Electrical Engineer",
-
-    description:
-      "Engineering and automation experience before transitioning professionally into software development.",
-
-    impact: [
-      "Developed internal automation tools to support engineering workflows.",
-    ],
-
-    stack: [
-      "VBA",
-      "Automation",
-    ],
+    stack: ["VBA", "Automation"],
   },
 
   {
     id: "uib",
 
-    startDate: "2015",
-    endDate: "2019",
+    translationKey: "uib",
+
+    startDate: {
+      year: 2015,
+    },
+
+    endDate: {
+      year: 2019,
+    },
 
     category: "education",
-
-    company:
-      "Universitat de les Illes Balears (UIB)",
-
-    role: "Electronics and Computer Engineering",
-
-    description:
-      "Engineering foundation across electronics, computing, systems and analytical problem solving.",
   },
 
   {
     id: "portfolio",
 
-    startDate: "2026",
+    translationKey: "portfolio",
+
+    startDate: {
+      year: 2026,
+    },
 
     category: "independent",
 
-    company: "Personal Portfolio",
-
-    role: "Design & Development",
-
-    description:
-      "Editorial portfolio exploring product storytelling, component architecture and frontend craft.",
-
-    stack: [
-      "Astro",
-      "React",
-      "TypeScript",
-      "SCSS",
-    ],
+    stack: ["Astro", "React", "TypeScript", "SCSS"],
 
     relatedProject: {
-      label: "View portfolio",
+      translationKey: "portfolio",
+
       href: "#top",
     },
   },
@@ -179,20 +160,129 @@ export const experienceItems: ExperienceItem[] = [
   {
     id: "vscode-extension",
 
-    startDate: "2026",
+    translationKey: "vscodeExtension",
+
+    startDate: {
+      year: 2026,
+    },
 
     category: "independent",
 
-    company: "VS Code Extension",
-
-    role: "Personal project",
-
-    description:
-      "Developer tooling created around a real workflow problem, with a focus on simplicity and developer experience.",
-
-    stack: [
-      "TypeScript",
-      "VS Code API",
-    ],
+    stack: ["TypeScript", "VS Code API"],
   },
 ];
+
+// ========================================================
+// DATE FORMATTING
+// ========================================================
+
+function formatExperienceDate(date: ExperienceDate, locale: Locale): string {
+  if (!date.month) {
+    return String(date.year);
+  }
+
+  const value = new Date(Date.UTC(date.year, date.month - 1, 1));
+
+  return new Intl.DateTimeFormat(locale, {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  })
+    .format(value)
+    .replace(".", "");
+}
+
+// ========================================================
+// FILTERS
+// ========================================================
+
+export function getExperienceFilters(locale: Locale): ExperienceFilter[] {
+  const t = translations[locale].experience.filters;
+
+  return [
+    {
+      label: t.all,
+
+      value: "all",
+    },
+
+    {
+      label: t.employment,
+
+      value: "employment",
+    },
+
+    {
+      label: t.independent,
+
+      value: "independent",
+    },
+
+    {
+      label: t.education,
+
+      value: "education",
+    },
+  ];
+}
+
+// ========================================================
+// CATEGORY LABELS
+// ========================================================
+
+export function getExperienceCategoryLabels(
+  locale: Locale,
+): Record<ExperienceCategory, string> {
+  const categories = translations[locale].experience.categories;
+
+  return {
+    employment: categories.employment,
+
+    independent: categories.independent,
+
+    education: categories.education,
+  };
+}
+
+// ========================================================
+// EXPERIENCE ITEMS
+// ========================================================
+
+export function getExperienceItems(locale: Locale): ExperienceItem[] {
+  const experienceTranslations = translations[locale].experience;
+
+  return experienceData.map(
+    ({ translationKey, startDate, endDate, relatedProject, ...item }) => {
+      const copy = experienceTranslations.items[translationKey];
+
+      return {
+        ...item,
+
+        startDate: formatExperienceDate(startDate, locale),
+
+        endDate: endDate ? formatExperienceDate(endDate, locale) : undefined,
+
+        company: copy.company,
+
+        role: copy.role,
+
+        team: copy.team || undefined,
+
+        description: copy.description,
+
+        impact: [...copy.impact],
+
+        relatedProject: relatedProject
+          ? {
+              label:
+                experienceTranslations.relatedProjects[
+                  relatedProject.translationKey
+                ],
+
+              href: relatedProject.href,
+            }
+          : undefined,
+      };
+    },
+  );
+}

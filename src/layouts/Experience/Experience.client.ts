@@ -1,5 +1,7 @@
 const FILTER_EXIT_DURATION = 190;
+
 const FILTER_ENTER_DURATION = 540;
+
 const FILTER_STAGGER = 38;
 
 const wait = (duration: number) =>
@@ -7,23 +9,18 @@ const wait = (duration: number) =>
     window.setTimeout(resolve, duration);
   });
 
-const initExperience = (
-  experience: HTMLElement,
-) => {
-  const filterContainer =
-    experience.querySelector<HTMLElement>(
-      "[data-experience-filters]",
-    );
+const initExperience = (experience: HTMLElement) => {
+  const filterContainer = experience.querySelector<HTMLElement>(
+    "[data-experience-filters]",
+  );
 
-  const indicator =
-    experience.querySelector<HTMLElement>(
-      "[data-experience-indicator]",
-    );
+  const indicator = experience.querySelector<HTMLElement>(
+    "[data-experience-indicator]",
+  );
 
-  const timeline =
-    experience.querySelector<HTMLElement>(
-      "[data-experience-list]",
-    );
+  const timeline = experience.querySelector<HTMLElement>(
+    "[data-experience-list]",
+  );
 
   const filterButtons = [
     ...experience.querySelectorAll<HTMLButtonElement>(
@@ -32,21 +29,18 @@ const initExperience = (
   ];
 
   const items = [
-    ...experience.querySelectorAll<HTMLElement>(
-      "[data-experience-item]",
-    ),
+    ...experience.querySelectorAll<HTMLElement>("[data-experience-item]"),
   ];
 
-  const reducedMotion =
-    window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    );
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  const detailsLabel = experience.dataset.detailsLabel ?? "Details";
+
+  const closeLabel = experience.dataset.closeLabel ?? "Close";
 
   let activeFilterIndex = 0;
 
-  let indicatorAnimation:
-    | Animation
-    | null = null;
+  let indicatorAnimation: Animation | null = null;
 
   let transitionId = 0;
 
@@ -54,111 +48,75 @@ const initExperience = (
   // ACCORDION
   // ==================================================
 
-  const setItemState = (
-    item: HTMLElement,
-    expanded: boolean,
-  ) => {
-    const toggle =
-      item.querySelector<HTMLButtonElement>(
-        "[data-experience-toggle]",
-      );
-
-    const panel =
-      item.querySelector<HTMLElement>(
-        "[data-experience-panel]",
-      );
-
-    const label =
-      item.querySelector<HTMLElement>(
-        "[data-experience-toggle-label]",
-      );
-
-    const icon =
-      item.querySelector<HTMLElement>(
-        ".experience-item__toggle-icon",
-      );
-
-    item.classList.toggle(
-      "experience-item--expanded",
-      expanded,
+  const setItemState = (item: HTMLElement, expanded: boolean) => {
+    const toggle = item.querySelector<HTMLButtonElement>(
+      "[data-experience-toggle]",
     );
 
-    toggle?.setAttribute(
-      "aria-expanded",
-      String(expanded),
+    const panel = item.querySelector<HTMLElement>("[data-experience-panel]");
+
+    const label = item.querySelector<HTMLElement>(
+      "[data-experience-toggle-label]",
     );
 
-    panel?.setAttribute(
-      "aria-hidden",
-      String(!expanded),
+    const icon = item.querySelector<HTMLElement>(
+      ".experience-item__toggle-icon",
     );
+
+    item.classList.toggle("experience-item--expanded", expanded);
+
+    toggle?.setAttribute("aria-expanded", String(expanded));
+
+    panel?.setAttribute("aria-hidden", String(!expanded));
 
     if (panel) {
       panel.inert = !expanded;
     }
 
     if (label) {
-      label.textContent = expanded
-        ? "Close"
-        : "View details";
+      label.textContent = expanded ? closeLabel : detailsLabel;
     }
 
     if (icon) {
-      icon.textContent =
-        expanded ? "−" : "+";
+      icon.textContent = expanded ? "−" : "+";
     }
   };
 
-  const closeItem = (
-    item: HTMLElement,
-  ) => {
+  const closeItem = (item: HTMLElement) => {
     setItemState(item, false);
   };
 
-  const openItem = (
-    item: HTMLElement,
-  ) => {
+  const openItem = (item: HTMLElement) => {
     setItemState(item, true);
   };
 
   const initializeAccordion = () => {
     items.forEach((item) => {
-      const toggle =
-        item.querySelector<HTMLButtonElement>(
-          "[data-experience-toggle]",
-        );
-
-      if (!toggle) return;
-
-      toggle.addEventListener(
-        "click",
-        () => {
-          const isExpanded =
-            item.classList.contains(
-              "experience-item--expanded",
-            );
-
-          items.forEach(
-            (otherItem) => {
-              if (
-                otherItem !== item
-              ) {
-                closeItem(
-                  otherItem,
-                );
-              }
-            },
-          );
-
-          if (isExpanded) {
-            closeItem(item);
-
-            return;
-          }
-
-          openItem(item);
-        },
+      const toggle = item.querySelector<HTMLButtonElement>(
+        "[data-experience-toggle]",
       );
+
+      if (!toggle) {
+        return;
+      }
+
+      toggle.addEventListener("click", () => {
+        const isExpanded = item.classList.contains("experience-item--expanded");
+
+        items.forEach((otherItem) => {
+          if (otherItem !== item) {
+            closeItem(otherItem);
+          }
+        });
+
+        if (isExpanded) {
+          closeItem(item);
+
+          return;
+        }
+
+        openItem(item);
+      });
     });
   };
 
@@ -166,167 +124,115 @@ const initExperience = (
   // FILTER INDICATOR
   // ==================================================
 
-  const setIndicatorPosition = (
-    button: HTMLButtonElement,
-  ) => {
-    if (!indicator) return;
+  const setIndicatorPosition = (button: HTMLButtonElement) => {
+    if (!indicator) {
+      return;
+    }
 
-    const x =
-      button.offsetLeft;
+    const x = button.offsetLeft;
 
-    const width =
-      button.offsetWidth;
+    const width = button.offsetWidth;
 
-    indicator.style.width =
-      `${width}px`;
+    indicator.style.width = `${width}px`;
 
-    indicator.style.transform =
-      `translate3d(${x}px, 0, 0)`;
+    indicator.style.transform = `translate3d(${x}px, 0, 0)`;
 
-    indicator.dataset.x =
-      String(x);
+    indicator.dataset.x = String(x);
 
-    indicator.dataset.width =
-      String(width);
+    indicator.dataset.width = String(width);
   };
 
-  const animateIndicator = (
-    button: HTMLButtonElement,
-    direction: number,
-  ) => {
-    if (!indicator) return;
+  const animateIndicator = (button: HTMLButtonElement, direction: number) => {
+    if (!indicator) {
+      return;
+    }
 
-    const toX =
-      button.offsetLeft;
+    const toX = button.offsetLeft;
 
-    const toWidth =
-      button.offsetWidth;
+    const toWidth = button.offsetWidth;
 
-    const fromX =
-      Number(
-        indicator.dataset.x ??
-          toX,
-      );
+    const fromX = Number(indicator.dataset.x ?? toX);
 
-    const fromWidth =
-      Number(
-        indicator.dataset.width ??
-          toWidth,
-      );
+    const fromWidth = Number(indicator.dataset.width ?? toWidth);
 
     indicatorAnimation?.cancel();
 
     if (reducedMotion.matches) {
-      setIndicatorPosition(
-        button,
-      );
+      setIndicatorPosition(button);
 
       return;
     }
 
-    const distance =
-      toX - fromX;
+    const distance = toX - fromX;
 
-    const travel =
-      Math.abs(distance);
+    const travel = Math.abs(distance);
 
-    const stretch =
-      Math.min(
-        34,
-        travel * 0.18,
-      );
+    const stretch = Math.min(34, travel * 0.18);
 
-    const middleWidth =
-      Math.max(
-        fromWidth,
-        toWidth,
-      ) + stretch;
+    const middleWidth = Math.max(fromWidth, toWidth) + stretch;
 
     const middleX =
-      fromX +
-      distance * 0.58 -
-      (direction < 0
-        ? stretch * 0.25
-        : 0);
+      fromX + distance * 0.58 - (direction < 0 ? stretch * 0.25 : 0);
 
-    indicatorAnimation =
-      indicator.animate(
-        [
-          {
-            transform:
-              `translate3d(${fromX}px, 0, 0) scaleY(1)`,
-
-            width:
-              `${fromWidth}px`,
-          },
-
-          {
-            offset: 0.52,
-
-            transform:
-              `translate3d(${middleX}px, 0, 0) scaleY(0.82)`,
-
-            width:
-              `${middleWidth}px`,
-          },
-
-          {
-            transform:
-              `translate3d(${toX}px, 0, 0) scaleY(1)`,
-
-            width:
-              `${toWidth}px`,
-          },
-        ],
+    indicatorAnimation = indicator.animate(
+      [
         {
-          duration: 580,
+          transform: `translate3d(${fromX}px, 0, 0) scaleY(1)`,
 
-          easing:
-            "cubic-bezier(0.16, 1, 0.3, 1)",
-
-          fill: "forwards",
+          width: `${fromWidth}px`,
         },
-      );
 
-    indicator.dataset.x =
-      String(toX);
+        {
+          offset: 0.52,
 
-    indicator.dataset.width =
-      String(toWidth);
+          transform: `translate3d(${middleX}px, 0, 0) scaleY(0.82)`,
+
+          width: `${middleWidth}px`,
+        },
+
+        {
+          transform: `translate3d(${toX}px, 0, 0) scaleY(1)`,
+
+          width: `${toWidth}px`,
+        },
+      ],
+      {
+        duration: 580,
+
+        easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+
+        fill: "forwards",
+      },
+    );
+
+    indicator.dataset.x = String(toX);
+
+    indicator.dataset.width = String(toWidth);
 
     indicatorAnimation.finished
       .then(() => {
-        indicator.style.width =
-          `${toWidth}px`;
+        indicator.style.width = `${toWidth}px`;
 
-        indicator.style.transform =
-          `translate3d(${toX}px, 0, 0)`;
+        indicator.style.transform = `translate3d(${toX}px, 0, 0)`;
 
         indicatorAnimation?.cancel();
 
         indicatorAnimation = null;
       })
       .catch(() => {
-        // Animation interrupted
+        // Animation interrupted.
       });
   };
 
   // ==================================================
-  // FILTER VISIBILITY
+  // VISIBILITY
   // ==================================================
 
-  const applyVisibility = (
-    filter:
-      | string
-      | undefined,
-  ) => {
+  const applyVisibility = (filter: string | undefined) => {
     items.forEach((item) => {
-      const category =
-        item.dataset.category;
+      const category = item.dataset.category;
 
-      item.hidden =
-        filter !== "all" &&
-        category !== filter;
+      item.hidden = filter !== "all" && category !== filter;
     });
   };
 
@@ -334,315 +240,200 @@ const initExperience = (
   // FILTER ANIMATION
   // ==================================================
 
-  const clearFilterAnimation =
-    () => {
-      if (!timeline) return;
+  const clearFilterAnimation = () => {
+    if (!timeline) {
+      return;
+    }
 
-      timeline.classList.remove(
-        "experience__timeline--leaving-left",
-        "experience__timeline--leaving-right",
-        "experience__timeline--pre-enter-left",
-        "experience__timeline--pre-enter-right",
-      );
+    timeline.classList.remove(
+      "experience__timeline--leaving-left",
+      "experience__timeline--leaving-right",
+      "experience__timeline--pre-enter-left",
+      "experience__timeline--pre-enter-right",
+    );
 
-      timeline.style.height = "";
-      timeline.style.overflow = "";
+    timeline.style.height = "";
 
-      items.forEach(
-        (item) => {
-          item.classList.remove(
-            "experience-item--filter-entering",
-          );
+    timeline.style.overflow = "";
 
-          item.style.removeProperty(
-            "--filter-delay",
-          );
-        },
-      );
-    };
+    items.forEach((item) => {
+      item.classList.remove("experience-item--filter-entering");
 
-  const filterTimeline =
-    async (
-      filter:
-        | string
-        | undefined,
+      item.style.removeProperty("--filter-delay");
+    });
+  };
 
-      direction: number,
-    ) => {
-      if (!timeline) {
-        applyVisibility(filter);
+  const filterTimeline = async (
+    filter: string | undefined,
 
-        return;
-      }
-
-      const currentTransition =
-        ++transitionId;
-
-      clearFilterAnimation();
-
-      if (reducedMotion.matches) {
-        applyVisibility(filter);
-
-        return;
-      }
-
-      const previousHeight =
-        timeline
-          .getBoundingClientRect()
-          .height;
-
-      timeline.style.height =
-        `${previousHeight}px`;
-
-      timeline.style.overflow =
-        "hidden";
-
-      const leavingClass =
-        direction > 0
-          ? "experience__timeline--leaving-left"
-          : "experience__timeline--leaving-right";
-
-      timeline.classList.add(
-        leavingClass,
-      );
-
-      await wait(
-        FILTER_EXIT_DURATION,
-      );
-
-      if (
-        currentTransition !==
-        transitionId
-      ) {
-        return;
-      }
-
+    direction: number,
+  ) => {
+    if (!timeline) {
       applyVisibility(filter);
 
-      timeline.classList.remove(
-        leavingClass,
-      );
+      return;
+    }
 
-      timeline.style.height =
-        "auto";
+    const currentTransition = ++transitionId;
 
-      const nextHeight =
-        timeline
-          .getBoundingClientRect()
-          .height;
+    clearFilterAnimation();
 
-      timeline.style.height =
-        `${previousHeight}px`;
+    if (reducedMotion.matches) {
+      applyVisibility(filter);
 
-      const enterClass =
-        direction > 0
-          ? "experience__timeline--pre-enter-right"
-          : "experience__timeline--pre-enter-left";
+      return;
+    }
 
-      timeline.classList.add(
-        enterClass,
-      );
+    const previousHeight = timeline.getBoundingClientRect().height;
 
-      const visibleItems =
-        items.filter(
-          (item) =>
-            !item.hidden,
-        );
+    timeline.style.height = `${previousHeight}px`;
 
-      visibleItems.forEach(
-        (item, index) => {
-          item.classList.add(
-            "experience-item--filter-entering",
-          );
+    timeline.style.overflow = "hidden";
 
-          item.style.setProperty(
-            "--filter-delay",
-            `${index * FILTER_STAGGER}ms`,
-          );
-        },
-      );
+    const leavingClass =
+      direction > 0
+        ? "experience__timeline--leaving-left"
+        : "experience__timeline--leaving-right";
 
-      void timeline.offsetHeight;
+    timeline.classList.add(leavingClass);
 
-      requestAnimationFrame(
-        () => {
-          if (
-            currentTransition !==
-            transitionId
-          ) {
-            return;
-          }
+    await wait(FILTER_EXIT_DURATION);
 
-          timeline.style.height =
-            `${nextHeight}px`;
+    if (currentTransition !== transitionId) {
+      return;
+    }
 
-          timeline.classList.remove(
-            enterClass,
-          );
+    applyVisibility(filter);
 
-          visibleItems.forEach(
-            (item) => {
-              item.classList.remove(
-                "experience-item--filter-entering",
-              );
-            },
-          );
-        },
-      );
+    timeline.classList.remove(leavingClass);
 
-      const staggerDuration =
-        Math.min(
-          visibleItems.length *
-            FILTER_STAGGER,
-          180,
-        );
+    timeline.style.height = "auto";
 
-      await wait(
-        FILTER_ENTER_DURATION +
-          staggerDuration,
-      );
+    const nextHeight = timeline.getBoundingClientRect().height;
 
-      if (
-        currentTransition !==
-        transitionId
-      ) {
+    timeline.style.height = `${previousHeight}px`;
+
+    const enterClass =
+      direction > 0
+        ? "experience__timeline--pre-enter-right"
+        : "experience__timeline--pre-enter-left";
+
+    timeline.classList.add(enterClass);
+
+    const visibleItems = items.filter((item) => !item.hidden);
+
+    visibleItems.forEach((item, index) => {
+      item.classList.add("experience-item--filter-entering");
+
+      item.style.setProperty("--filter-delay", `${index * FILTER_STAGGER}ms`);
+    });
+
+    void timeline.offsetHeight;
+
+    requestAnimationFrame(() => {
+      if (currentTransition !== transitionId) {
         return;
       }
 
-      timeline.style.height =
-        "auto";
+      timeline.style.height = `${nextHeight}px`;
 
-      timeline.style.overflow =
-        "";
-    };
+      timeline.classList.remove(enterClass);
+
+      visibleItems.forEach((item) => {
+        item.classList.remove("experience-item--filter-entering");
+      });
+    });
+
+    const staggerDuration = Math.min(
+      visibleItems.length * FILTER_STAGGER,
+
+      180,
+    );
+
+    await wait(FILTER_ENTER_DURATION + staggerDuration);
+
+    if (currentTransition !== transitionId) {
+      return;
+    }
+
+    timeline.style.height = "auto";
+
+    timeline.style.overflow = "";
+  };
 
   // ==================================================
   // FILTER EVENTS
   // ==================================================
 
-  const initializeFilters =
-    () => {
-      filterButtons.forEach(
-        (button) => {
-          button.addEventListener(
-            "click",
-            () => {
-              const index =
-                Number(
-                  button.dataset
-                    .experienceFilterIndex,
-                );
+  const initializeFilters = () => {
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const index = Number(button.dataset.experienceFilterIndex);
 
-              if (
-                index ===
-                activeFilterIndex
-              ) {
-                return;
-              }
+        if (index === activeFilterIndex) {
+          return;
+        }
 
-              const direction =
-                index >
-                activeFilterIndex
-                  ? 1
-                  : -1;
+        const direction = index > activeFilterIndex ? 1 : -1;
 
-              activeFilterIndex =
-                index;
+        activeFilterIndex = index;
 
-              filterButtons.forEach(
-                (
-                  otherButton,
-                  otherIndex,
-                ) => {
-                  const active =
-                    otherIndex ===
-                    index;
+        filterButtons.forEach((otherButton, otherIndex) => {
+          const active = otherIndex === index;
 
-                  otherButton.classList.toggle(
-                    "experience__filter--active",
-                    active,
-                  );
+          otherButton.classList.toggle("experience__filter--active", active);
 
-                  otherButton.setAttribute(
-                    "aria-pressed",
-                    String(active),
-                  );
-                },
-              );
+          otherButton.setAttribute("aria-pressed", String(active));
+        });
 
-              animateIndicator(
-                button,
-                direction,
-              );
+        animateIndicator(button, direction);
 
-              filterTimeline(
-                button.dataset
-                  .experienceFilter,
-                direction,
-              );
-            },
-          );
-        },
-      );
-    };
+        filterTimeline(
+          button.dataset.experienceFilter,
+
+          direction,
+        );
+      });
+    });
+  };
 
   // ==================================================
   // INITIAL INDICATOR
   // ==================================================
 
-  const initializeIndicator =
-    () => {
-      const activeFilter =
-        filterButtons.find(
-          (button) =>
-            button.classList.contains(
-              "experience__filter--active",
-            ),
-        );
+  const initializeIndicator = () => {
+    const activeFilter = filterButtons.find((button) =>
+      button.classList.contains("experience__filter--active"),
+    );
 
-      if (!activeFilter) return;
+    if (!activeFilter) {
+      return;
+    }
 
-      requestAnimationFrame(
-        () => {
-          setIndicatorPosition(
-            activeFilter,
-          );
-        },
+    requestAnimationFrame(() => {
+      setIndicatorPosition(activeFilter);
+    });
+
+    document.fonts?.ready.then(() => {
+      setIndicatorPosition(activeFilter);
+    });
+
+    if (!filterContainer) {
+      return;
+    }
+
+    const resizeObserver = new ResizeObserver(() => {
+      const active = filterButtons.find((button) =>
+        button.classList.contains("experience__filter--active"),
       );
 
-      document.fonts?.ready.then(
-        () => {
-          setIndicatorPosition(
-            activeFilter,
-          );
-        },
-      );
-
-      if (!filterContainer) {
-        return;
+      if (active) {
+        setIndicatorPosition(active);
       }
+    });
 
-      const resizeObserver =
-        new ResizeObserver(() => {
-          const active =
-            filterButtons.find(
-              (button) =>
-                button.classList.contains(
-                  "experience__filter--active",
-                ),
-            );
-
-          if (active) {
-            setIndicatorPosition(
-              active,
-            );
-          }
-        });
-
-      resizeObserver.observe(
-        filterContainer,
-      );
-    };
+    resizeObserver.observe(filterContainer);
+  };
 
   // ==================================================
   // INITIALIZE
@@ -654,7 +445,5 @@ const initExperience = (
 };
 
 document
-  .querySelectorAll<HTMLElement>(
-    "[data-experience-root]",
-  )
+  .querySelectorAll<HTMLElement>("[data-experience-root]")
   .forEach(initExperience);

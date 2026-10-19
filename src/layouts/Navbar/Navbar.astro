@@ -1,36 +1,62 @@
 ---
 import "./Navbar.scss";
 
+import {
+  getLocaleFromPath,
+  getLocalizedPath,
+  getTranslations,
+  supportedLocales,
+} from "../../i18n/i18n";
+
+import { localeConfig } from "../../i18n/translations";
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+
+const t = getTranslations(locale);
+
 const navigationItems = [
   {
-    label: "Home",
+    label: t.navbar.home,
     href: "#top",
     section: "top",
   },
   {
-    label: "Projects",
+    label: t.navbar.projects,
     href: "#projects",
     section: "projects",
   },
   {
-    label: "About",
+    label: t.navbar.about,
     href: "#about",
     section: "about",
   },
   {
-    label: "Experience",
+    label: t.navbar.experience,
     href: "#experience",
     section: "experience",
   },
   {
-    label: "Contact",
+    label: t.navbar.contact,
     href: "#contact",
     section: "contact",
   },
 ];
+
+const languageOptions = supportedLocales.map((language) => ({
+  locale: language,
+
+  ...localeConfig[language],
+
+  href: getLocalizedPath(Astro.url.pathname, language),
+}));
 ---
 
-<header class="navbar" data-navbar>
+<header
+  class="navbar"
+  data-navbar
+  data-menu-open-label={t.navbar.mobile.open}
+  data-menu-close-label={t.navbar.mobile.close}
+>
   <div class="navbar__inner">
     <!-- ==================================================
          BRAND
@@ -40,7 +66,7 @@ const navigationItems = [
       href="#top"
       class="navbar__brand"
       data-scroll-link
-      aria-label="José Crespí — Back to home"
+      aria-label={t.navbar.brandLabel}
     >
       <span class="navbar__monogram"> JC </span>
     </a>
@@ -49,7 +75,7 @@ const navigationItems = [
          DESKTOP NAVIGATION
     =================================================== -->
 
-    <nav class="navbar__navigation" aria-label="Main navigation">
+    <nav class="navbar__navigation" aria-label={t.navbar.navigationLabel}>
       <ul class="navbar__list">
         {
           navigationItems.map((item, index) => (
@@ -58,6 +84,7 @@ const navigationItems = [
                 href={item.href}
                 class:list={[
                   "navbar__link",
+
                   index === 0 && "navbar__link--active",
                 ]}
                 data-scroll-link
@@ -77,18 +104,74 @@ const navigationItems = [
     =================================================== -->
 
     <div class="navbar__actions">
-      <button
-        type="button"
-        class="navbar__language"
-        aria-label="Change language"
-      >
-        <span> EN </span>
+      <!-- ================================================
+           LANGUAGE SELECTOR
+      ================================================= -->
 
-        <span class="navbar__language-arrow" aria-hidden="true"> ↓ </span>
-      </button>
+      <div class="navbar__language-selector" data-language-selector>
+        <button
+          type="button"
+          class="navbar__language"
+          data-language-button
+          aria-label={t.navbar.language.label}
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="language-menu"
+        >
+          <span>
+            {localeConfig[locale].shortLabel}
+          </span>
+
+          <span class="navbar__language-arrow" aria-hidden="true"> ↓ </span>
+        </button>
+
+        <div
+          id="language-menu"
+          class="navbar__language-menu"
+          data-language-menu
+          aria-hidden="true"
+          inert
+        >
+          <ul>
+            {
+              languageOptions.map((language) => (
+                <li>
+                  <a
+                    href={language.href}
+                    hreflang={language.locale}
+                    lang={language.locale}
+                    data-language-option
+                    class:list={[
+                      "navbar__language-option",
+
+                      language.locale === locale &&
+                        "navbar__language-option--active",
+                    ]}
+                    aria-current={
+                      language.locale === locale ? "true" : undefined
+                    }
+                  >
+                    <span>{language.label}</span>
+
+                    <span class="navbar__language-code">
+                      {language.shortLabel}
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <!-- ================================================
+           CONTACT CTA
+      ================================================= -->
 
       <a href="#contact" class="navbar__cta" data-scroll-link>
-        <span> Let's connect </span>
+        <span>
+          {t.navbar.connect}
+        </span>
 
         <span class="navbar__cta-arrow" aria-hidden="true"> → </span>
       </a>
@@ -102,7 +185,7 @@ const navigationItems = [
       type="button"
       class="navbar__menu-button"
       data-menu-button
-      aria-label="Open navigation"
+      aria-label={t.navbar.mobile.open}
       aria-expanded="false"
       aria-controls="mobile-navigation"
     >
@@ -121,30 +204,58 @@ const navigationItems = [
     data-mobile-menu
     aria-hidden="true"
   >
-    <nav aria-label="Mobile navigation">
-      <ul>
-        {
-          navigationItems.map((item, index) => (
-            <li>
-              <a
-                href={item.href}
-                class:list={[
-                  "navbar__mobile-link",
-                  index === 0 && "navbar__mobile-link--active",
-                ]}
-                data-scroll-link
-                data-nav-section={item.section}
-                aria-current={index === 0 ? "page" : undefined}
-              >
-                <span>{item.label}</span>
+    <div class="navbar__mobile-menu-inner">
+      <nav aria-label={t.navbar.mobile.navigationLabel}>
+        <ul>
+          {
+            navigationItems.map((item, index) => (
+              <li>
+                <a
+                  href={item.href}
+                  class:list={[
+                    "navbar__mobile-link",
 
-                <span aria-hidden="true">↗</span>
-              </a>
-            </li>
+                    index === 0 && "navbar__mobile-link--active",
+                  ]}
+                  data-scroll-link
+                  data-nav-section={item.section}
+                  aria-current={index === 0 ? "page" : undefined}
+                >
+                  <span>{item.label}</span>
+
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <!-- ================================================
+           MOBILE LANGUAGES
+      ================================================= -->
+
+      <div class="navbar__mobile-languages">
+        {
+          languageOptions.map((language) => (
+            <a
+              href={language.href}
+              hreflang={language.locale}
+              lang={language.locale}
+              data-language-option
+              class:list={[
+                "navbar__mobile-language",
+
+                language.locale === locale && "navbar__mobile-language--active",
+              ]}
+              aria-current={language.locale === locale ? "true" : undefined}
+            >
+              {language.shortLabel}
+            </a>
           ))
         }
-      </ul>
-    </nav>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -153,8 +264,9 @@ const navigationItems = [
 
   if (navbar) {
     const scrollLinks = [
-      ...document.querySelectorAll<HTMLAnchorElement>("[data-scroll-link]"),
+      ...navbar.querySelectorAll<HTMLAnchorElement>("[data-scroll-link]"),
     ];
+
     const sectionLinks = [
       ...navbar.querySelectorAll<HTMLAnchorElement>("[data-nav-section]"),
     ];
@@ -164,9 +276,106 @@ const navigationItems = [
 
     const mobileMenu = navbar.querySelector<HTMLElement>("[data-mobile-menu]");
 
+    const languageSelector = navbar.querySelector<HTMLElement>(
+      "[data-language-selector]",
+    );
+
+    const languageButton = navbar.querySelector<HTMLButtonElement>(
+      "[data-language-button]",
+    );
+
+    const languageMenu = navbar.querySelector<HTMLElement>(
+      "[data-language-menu]",
+    );
+
+    const languageOptions = [
+      ...navbar.querySelectorAll<HTMLAnchorElement>("[data-language-option]"),
+    ];
+
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+    const openMenuLabel = navbar.dataset.menuOpenLabel ?? "Open navigation";
+
+    const closeMenuLabel = navbar.dataset.menuCloseLabel ?? "Close navigation";
+
     let ticking = false;
+
+    // ==================================================
+    // LANGUAGE MENU
+    // ==================================================
+
+    const closeLanguageMenu = () => {
+      if (!languageSelector || !languageButton || !languageMenu) {
+        return;
+      }
+
+      languageSelector.classList.remove("navbar__language-selector--open");
+
+      languageButton.setAttribute("aria-expanded", "false");
+
+      languageMenu.setAttribute("aria-hidden", "true");
+
+      languageMenu.inert = true;
+    };
+
+    const openLanguageMenu = () => {
+      if (!languageSelector || !languageButton || !languageMenu) {
+        return;
+      }
+
+      languageSelector.classList.add("navbar__language-selector--open");
+
+      languageButton.setAttribute("aria-expanded", "true");
+
+      languageMenu.setAttribute("aria-hidden", "false");
+
+      languageMenu.inert = false;
+    };
+
+    languageButton?.addEventListener("click", () => {
+      const isOpen = languageSelector?.classList.contains(
+        "navbar__language-selector--open",
+      );
+
+      if (isOpen) {
+        closeLanguageMenu();
+
+        return;
+      }
+
+      openLanguageMenu();
+    });
+
+    // ==================================================
+    // LANGUAGE NAVIGATION
+    // ==================================================
+
+    languageOptions.forEach((option) => {
+      option.addEventListener("click", (event) => {
+        /*
+         * The server does not receive hashes,
+         * so preserve the current section manually.
+         *
+         * /en/#experience
+         * ->
+         * /es/#experience
+         */
+
+        const hash = window.location.hash;
+
+        if (!hash) {
+          return;
+        }
+
+        event.preventDefault();
+
+        const url = new URL(option.href, window.location.origin);
+
+        url.hash = hash;
+
+        window.location.assign(url.toString());
+      });
+    });
 
     // ==================================================
     // MOBILE MENU
@@ -181,7 +390,7 @@ const navigationItems = [
 
       menuButton.setAttribute("aria-expanded", "false");
 
-      menuButton.setAttribute("aria-label", "Open navigation");
+      menuButton.setAttribute("aria-label", openMenuLabel);
 
       mobileMenu.setAttribute("aria-hidden", "true");
     };
@@ -191,11 +400,13 @@ const navigationItems = [
         return;
       }
 
+      closeLanguageMenu();
+
       navbar.classList.add("navbar--menu-open");
 
       menuButton.setAttribute("aria-expanded", "true");
 
-      menuButton.setAttribute("aria-label", "Close navigation");
+      menuButton.setAttribute("aria-label", closeMenuLabel);
 
       mobileMenu.setAttribute("aria-hidden", "false");
     };
@@ -207,6 +418,50 @@ const navigationItems = [
         closeMobileMenu();
       } else {
         openMobileMenu();
+      }
+    });
+
+    // ==================================================
+    // CLICK OUTSIDE
+    // ==================================================
+
+    document.addEventListener("click", (event) => {
+      if (!languageSelector) {
+        return;
+      }
+
+      if (languageSelector.contains(event.target as Node)) {
+        return;
+      }
+
+      closeLanguageMenu();
+    });
+
+    // ==================================================
+    // ESCAPE
+    // ==================================================
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") {
+        return;
+      }
+
+      const languageOpen = languageSelector?.classList.contains(
+        "navbar__language-selector--open",
+      );
+
+      if (languageOpen) {
+        closeLanguageMenu();
+
+        languageButton?.focus();
+
+        return;
+      }
+
+      if (navbar.classList.contains("navbar--menu-open")) {
+        closeMobileMenu();
+
+        menuButton?.focus();
       }
     });
 
@@ -240,9 +495,10 @@ const navigationItems = [
 
     const updateActiveSection = () => {
       /*
-       * At the very top we always
-       * consider Home active.
+       * At the very top, Home
+       * is always considered active.
        */
+
       if (window.scrollY < 80) {
         setActiveSection("top");
 
@@ -268,9 +524,10 @@ const navigationItems = [
       });
 
       /*
-       * At the bottom of the document,
-       * Contact should remain active.
+       * Contact stays active
+       * at the end of the document.
        */
+
       const isAtBottom =
         window.innerHeight + window.scrollY >=
         document.documentElement.scrollHeight - 4;
@@ -319,16 +576,11 @@ const navigationItems = [
           return;
         }
 
-        /*
-         * Important:
-         * prevent native anchor jump
-         * BEFORE searching for target.
-         */
         event.preventDefault();
 
-        // ==============================================
+        // ==========================================
         // HOME
-        // ==============================================
+        // ==========================================
 
         if (href === "#top") {
           window.scrollTo({
@@ -344,9 +596,9 @@ const navigationItems = [
           return;
         }
 
-        // ==============================================
+        // ==========================================
         // OTHER SECTIONS
-        // ==============================================
+        // ==========================================
 
         const target = document.querySelector<HTMLElement>(href);
 
@@ -354,10 +606,6 @@ const navigationItems = [
 
         const navbarHeight = navbar.offsetHeight;
 
-        /*
-         * Small visual breathing room
-         * below the floating navbar.
-         */
         const offset = 24;
 
         const targetPosition =
@@ -386,6 +634,8 @@ const navigationItems = [
       if (window.innerWidth >= 768) {
         closeMobileMenu();
       }
+
+      closeLanguageMenu();
 
       updateActiveSection();
     });

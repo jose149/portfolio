@@ -1,24 +1,32 @@
 ---
 import ActionLink from "../../components/ActionLink/ActionLink.astro";
 import DetailNote from "../../components/DetailNote/DetailNote.astro";
+
+import { getLocaleFromPath, getTranslations } from "../../i18n/i18n";
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+
+const t = getTranslations(locale);
 ---
 
 <section class="hero" id="top">
   <h1 class="hero__title">
     <span class="hero__title-name"> JOSE CRESPÍ </span>
 
-    <span class="hero__title-job"> SOFTWARE ENGINEER </span>
+    <span class="hero__title-job">
+      {t.hero.jobTitle}
+    </span>
   </h1>
 
-  <DetailNote text="Building with purpose" />
+  <DetailNote text={t.hero.detailNote} />
 
   <div class="hero__main-navigation">
     <ActionLink href="#contact" variant="primary" fluid>
-      CONTACT ME
+      {t.hero.contact}
     </ActionLink>
 
     <ActionLink href="#projects" variant="secondary" fluid>
-      VIEW MY WORK
+      {t.hero.viewWork}
     </ActionLink>
   </div>
 </section>

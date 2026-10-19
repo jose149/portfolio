@@ -1,34 +1,58 @@
 ---
 import SectionHeading from "../../components/SectionHeading/SectionHeading.astro";
+
+import { getLocaleFromPath, getTranslations } from "../../i18n/i18n";
+
 import "./Contact.scss";
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+
+const t = getTranslations(locale);
 
 const contactItems = [
   {
-    label: "Email",
+    label: t.contact.items.email,
+
     value: "hello@josecrespi.dev",
+
     href: "mailto:hello@josecrespi.dev",
+
     icon: "email",
   },
+
   {
-    label: "LinkedIn",
+    label: t.contact.items.linkedin,
+
     value: "linkedin.com/in/jose-crespi",
+
     href: "https://www.linkedin.com/in/jose-crespi",
+
     icon: "linkedin",
   },
+
   {
-    label: "GitHub",
+    label: t.contact.items.github,
+
     value: "github.com/josecrespi",
+
     href: "https://github.com/josecrespi",
+
     icon: "github",
   },
+
   {
-    label: "Location",
-    value: "Mallorca, Spain · CET/CEST",
+    label: t.contact.items.location,
+
+    value: t.contact.items.locationValue,
+
     icon: "location",
   },
+
   {
-    label: "Working",
-    value: "Remote-friendly",
+    label: t.contact.items.working,
+
+    value: t.contact.items.workingValue,
+
     icon: "working",
   },
 ];
@@ -39,7 +63,7 @@ const contactItems = [
        HEADING
   =================================================== -->
 
-  <SectionHeading id="contact-title" title="Contact" />
+  <SectionHeading id="contact-title" title={t.contact.title} />
 
   <!-- ==================================================
        CONTENT
@@ -56,11 +80,13 @@ const contactItems = [
           <span class="contact-card__availability-dot" aria-hidden="true"
           ></span>
 
-          <span> Available </span>
+          <span>
+            {t.contact.available}
+          </span>
         </div>
 
         <h3 class="contact-card__title">
-          Available for selected projects and frontend opportunities.
+          {t.contact.availabilityText}
         </h3>
       </div>
 
@@ -192,7 +218,9 @@ const contactItems = [
       </ul>
 
       <div class="contact-card__footer">
-        <p>I usually reply within 1–2 working days.</p>
+        <p>
+          {t.contact.replyTime}
+        </p>
 
         <div class="contact-card__monogram" aria-hidden="true">
           <span> JC </span>
@@ -210,78 +238,96 @@ const contactItems = [
          FORM
     ================================================== -->
 
-    <form class="contact-form" data-contact-form>
+    <form
+      class="contact-form"
+      data-contact-form
+      data-mail-name-label={t.contact.mail.name}
+      data-mail-email-label={t.contact.mail.email}
+      data-mail-company-label={t.contact.mail.company}
+    >
       <div class="contact-form__row contact-form__row--split">
         <div class="contact-form__field">
-          <label for="contact-name"> Name </label>
+          <label for="contact-name">
+            {t.contact.form.name.label}
+          </label>
 
           <input
             id="contact-name"
             name="name"
             type="text"
             autocomplete="name"
-            placeholder="Your name"
+            placeholder={t.contact.form.name.placeholder}
             required
           />
         </div>
 
         <div class="contact-form__field">
-          <label for="contact-email"> Email </label>
+          <label for="contact-email">
+            {t.contact.form.email.label}
+          </label>
 
           <input
             id="contact-email"
             name="email"
             type="email"
             autocomplete="email"
-            placeholder="you@company.com"
+            placeholder={t.contact.form.email.placeholder}
             required
           />
         </div>
       </div>
 
       <div class="contact-form__field">
-        <label for="contact-company"> Company / organisation </label>
+        <label for="contact-company">
+          {t.contact.form.company.label}
+        </label>
 
         <input
           id="contact-company"
           name="company"
           type="text"
           autocomplete="organization"
-          placeholder="Your company (optional)"
+          placeholder={t.contact.form.company.placeholder}
         />
       </div>
 
       <div class="contact-form__field">
-        <label for="contact-subject"> What would you like to discuss? </label>
+        <label for="contact-subject">
+          {t.contact.form.subject.label}
+        </label>
 
         <input
           id="contact-subject"
           name="subject"
           type="text"
-          placeholder="Project, opportunity, collaboration..."
+          placeholder={t.contact.form.subject.placeholder}
           required
         />
       </div>
 
       <div class="contact-form__field">
-        <label for="contact-message"> Message </label>
+        <label for="contact-message">
+          {t.contact.form.message.label}
+        </label>
 
         <textarea
           id="contact-message"
           name="message"
           rows="6"
-          placeholder="Tell me more about your idea, project or question..."
+          placeholder={t.contact.form.message.placeholder}
           required></textarea>
       </div>
 
       <button type="submit" class="contact-form__submit">
-        <span> Start the conversation </span>
+        <span>
+          {t.contact.form.submit}
+        </span>
 
         <span class="contact-form__submit-arrow" aria-hidden="true"> → </span>
       </button>
 
       <p class="contact-form__privacy">
-        Your details remain private and are used only to reply.
+        {t.contact.form.privacy}
       </p>
     </form>
   </div>
@@ -307,10 +353,18 @@ const contactItems = [
 
     const message = String(formData.get("message") ?? "").trim();
 
+    const nameLabel = contactForm.dataset.mailNameLabel ?? "Name";
+
+    const emailLabel = contactForm.dataset.mailEmailLabel ?? "Email";
+
+    const companyLabel = contactForm.dataset.mailCompanyLabel ?? "Company";
+
     const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      company ? `Company: ${company}` : "",
+      `${nameLabel}: ${name}`,
+      `${emailLabel}: ${email}`,
+
+      company ? `${companyLabel}: ${company}` : "",
+
       "",
       message,
     ]

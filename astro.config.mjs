@@ -9,6 +9,9 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
+  trailingSlash: "always",
+
+  site: "https://tudominio.com",
   integrations: [react(), mdx()],
 
   vite: {

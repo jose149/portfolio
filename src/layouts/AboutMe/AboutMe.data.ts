@@ -1,50 +1,59 @@
-import type {
-  AboutItem,
-  AboutPrinciple,
-  AboutStatement,
-} from "./AboutMe.types";
+import type { AboutItem, AboutPrinciple } from "./AboutMe.types";
 
-export const aboutStatement: AboutStatement = {
-  title:
-    "I turn complex product problems into clear, maintainable experiences.",
+import {
+  translations,
+  type Locale,
+  type TranslationDictionary,
+} from "../../i18n/translations";
 
-  text: "I like understanding why we build something before deciding how to build it.",
-};
+type AboutItemKey = keyof TranslationDictionary["about"]["items"];
 
-export const aboutItems: AboutItem[] = [
+type AboutPrincipleKey = keyof TranslationDictionary["about"]["principles"];
+
+interface AboutItemData {
+  number: string;
+  translationKey: AboutItemKey;
+}
+
+const aboutItemsData: AboutItemData[] = [
   {
     number: "01",
-    title: "Problems I enjoy solving",
-    text: "Complex products. Clear experiences.",
+    translationKey: "problems",
   },
   {
     number: "02",
-    title: "How I work",
-    text: "Close to Product, Design and Engineering.",
+    translationKey: "work",
   },
   {
     number: "03",
-    title: "Beyond frontend",
-    text: "Product thinking, APIs and systems.",
+    translationKey: "beyondFrontend",
   },
   {
     number: "04",
-    title: "What I care about",
-    text: "Quality, simplicity and real impact.",
+    translationKey: "care",
   },
 ];
 
-export const aboutPrinciples: AboutPrinciple[] = [
-  {
-    title: "Clarity",
-    text: "Understand before building.",
-  },
-  {
-    title: "Craft",
-    text: "Details matter.",
-  },
-  {
-    title: "Ownership",
-    text: "Care about the outcome.",
-  },
+const aboutPrincipleKeys: AboutPrincipleKey[] = [
+  "clarity",
+  "craft",
+  "ownership",
 ];
+
+export function getAboutItems(locale: Locale): AboutItem[] {
+  const itemTranslations = translations[locale].about.items;
+
+  return aboutItemsData.map(({ number, translationKey }) => ({
+    number,
+
+    ...itemTranslations[translationKey],
+  }));
+}
+
+export function getAboutPrinciples(locale: Locale): AboutPrinciple[] {
+  const principleTranslations = translations[locale].about.principles;
+
+  return aboutPrincipleKeys.map((translationKey) => ({
+    ...principleTranslations[translationKey],
+  }));
+}

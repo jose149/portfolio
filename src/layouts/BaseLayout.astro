@@ -1,0 +1,59 @@
+---
+import {
+  getLocaleFromPath,
+  getLocalizedPath,
+  supportedLocales,
+} from "../i18n/i18n";
+
+import { DEFAULT_LOCALE } from "../i18n/translations";
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+
+const site = Astro.site ?? Astro.url.origin;
+
+const canonicalUrl = new URL(Astro.url.pathname, site);
+
+const alternateUrls = supportedLocales.map((alternateLocale) => ({
+  locale: alternateLocale,
+
+  href: new URL(getLocalizedPath(Astro.url.pathname, alternateLocale), site),
+}));
+
+const defaultUrl = new URL(
+  getLocalizedPath(Astro.url.pathname, DEFAULT_LOCALE),
+  site,
+);
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    {
+      alternateUrls.map(({ locale, href }) => (
+        <link rel="alternate" hreflang={locale} href={href} />
+      ))
+    }
+
+    <link rel="alternate" hreflang="x-default" href={defaultUrl} />
+    <title>Jose Crespi</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Prata&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <slot />
+  </body>
+</html>

@@ -2,23 +2,35 @@
 import "./Projects.scss";
 
 import Project from "../../components/Project/Project.astro";
-
-import { projects } from "./Projects.data.ts";
 import SectionHeading from "../../components/SectionHeading/SectionHeading.astro";
+
+import { getProjects } from "./Projects.data";
+
+import {
+  getLocaleFromPath,
+  getLocalizedPath,
+  getTranslations,
+} from "../../i18n/i18n";
 
 interface Props {
   archiveHref?: string;
 }
 
-const { archiveHref = "/projects" } = Astro.props;
+const locale = getLocaleFromPath(Astro.url.pathname);
+
+const t = getTranslations(locale);
+
+const projects = getProjects(locale);
+
+const { archiveHref = getLocalizedPath("/projects/", locale) } = Astro.props;
 ---
 
 <section id="projects" class="projects" aria-labelledby="projects-title">
   <SectionHeading
     id="projects-title"
-    title="Projects"
+    title={t.projects.title}
     href={archiveHref}
-    linkLabel="All projects"
+    linkLabel={t.projects.allProjects}
   />
 
   <div class="projects__content">
@@ -28,7 +40,7 @@ const { archiveHref = "/projects" } = Astro.props;
           number={index + 1}
           total={projects.length}
           project={project}
-          reverse={!!(index % 2)}
+          reverse={index % 2 !== 0}
         />
       ))
     }

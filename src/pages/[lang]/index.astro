@@ -1,0 +1,74 @@
+---
+import Hero from "../../layouts/Hero/Hero.astro";
+import Projects from "../../layouts/Projects/Projects.astro";
+import AboutMe from "../../layouts/AboutMe/AboutMe.astro";
+import Experience from "../../layouts/Experience/Experience.astro";
+import Contact from "../../layouts/Contact/Contact.astro";
+import Footer from "../../layouts/Footer/Footer.astro";
+import Navbar from "../../layouts/Navbar/Navbar.astro";
+import { supportedLocales } from "../../i18n/i18n";
+
+export function getStaticPaths() {
+  return supportedLocales.map((locale) => ({
+    params: {
+      lang: locale,
+    },
+  }));
+}
+
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Jose Crespi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Prata&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Navbar />
+    <Hero />
+    <Projects />
+    <AboutMe />
+    <Experience />
+    <Contact />
+    <Footer />
+  </body>
+</html>
+
+<style lang="scss" is:global>
+  @use "../styles/global.scss" as *;
+  @use "../styles/variables" as *;
+
+  html {
+    font-size: 16px;
+
+    @media (max-width: $breakpoint-md) {
+      font-size: 14px;
+    }
+  }
+
+  body {
+    width: 100%;
+    background-color: var(--primary-2);
+  }
+
+  section {
+    padding: var(--spacing-20) 15dvw var(--spacing-64);
+    @media (max-width: 40rem) {
+      padding: var(--spacing-20) var(--spacing-20) var(--spacing-64);
+    }
+  }
+</style>
