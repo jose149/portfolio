@@ -80,19 +80,31 @@ const languageOptions = supportedLocales.map((language) => ({
         {
           navigationItems.map((item, index) => (
             <li>
-              <a
-                href={item.href}
-                class:list={[
-                  "navbar__link",
-
-                  index === 0 && "navbar__link--active",
-                ]}
-                data-scroll-link
-                data-nav-section={item.section}
-                aria-current={index === 0 ? "page" : undefined}
-              >
-                <span>{item.label}</span>
-              </a>
+              {index === navigationItems.length - 1 ? (
+                <a
+                  href="#contact"
+                  class:list={[
+                    "navbar__cta",
+                    index === 0 && "navbar__link--active",
+                  ]}
+                  data-scroll-link
+                >
+                  <span>{t.navbar.contact}</span>
+                </a>
+              ) : (
+                <a
+                  href={item.href}
+                  class:list={[
+                    "navbar__link",
+                    index === 0 && "navbar__link--active",
+                  ]}
+                  data-scroll-link
+                  data-nav-section={item.section}
+                  aria-current={index === 0 ? "page" : undefined}
+                >
+                  <span>{item.label}</span>
+                </a>
+              )}
             </li>
           ))
         }
@@ -121,8 +133,6 @@ const languageOptions = supportedLocales.map((language) => ({
           <span>
             {localeConfig[locale].shortLabel}
           </span>
-
-          <span class="navbar__language-arrow" aria-hidden="true"> ↓ </span>
         </button>
 
         <div
@@ -167,14 +177,6 @@ const languageOptions = supportedLocales.map((language) => ({
       <!-- ================================================
            CONTACT CTA
       ================================================= -->
-
-      <a href="#contact" class="navbar__cta" data-scroll-link>
-        <span>
-          {t.navbar.connect}
-        </span>
-
-        <span class="navbar__cta-arrow" aria-hidden="true"> → </span>
-      </a>
     </div>
 
     <!-- ==================================================

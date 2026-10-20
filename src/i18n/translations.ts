@@ -42,8 +42,6 @@ const en = {
 
     contact: "Contact",
 
-    connect: "Let's connect",
-
     language: {
       label: "Change language",
     },
