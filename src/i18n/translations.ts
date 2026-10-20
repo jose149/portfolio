@@ -1,5 +1,7 @@
 // src/i18n/translations.ts
 
+import type { ProjectTranslation } from "../layouts/Projects/Projects.types";
+
 export const localeConfig = {
   en: {
     label: "English",
@@ -200,7 +202,7 @@ const en = {
         caseStudyDesktopImageAlt: "Sembo Marketplace desktop experience",
 
         caseStudyMobileImageAlt: "Sembo Marketplace mobile experience",
-      },
+      } satisfies ProjectTranslation,
 
       tripPlanner: {
         kind: "Professional",
@@ -293,7 +295,7 @@ const en = {
         caseStudyDesktopImageAlt: "TripPlanner desktop booking experience",
 
         caseStudyMobileImageAlt: "TripPlanner mobile booking experience",
-      },
+      } satisfies ProjectTranslation,
     },
   },
 

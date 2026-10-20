@@ -78,3 +78,21 @@ export interface ProjectType {
 
   caseStudyMobileImageAlt?: string;
 }
+
+type TranslatedProjectFields =
+  | "kind"
+  | "tagline"
+  | "role"
+  | "contribution"
+  | "highlights"
+  | "previewImageAlt"
+  | "context"
+  | "contributionDetail"
+  | "challenges"
+  | "decisions"
+  | "outcome"
+  | "metrics"
+  | "caseStudyDesktopImageAlt"
+  | "caseStudyMobileImageAlt";
+
+export type ProjectTranslation = Pick<ProjectType, TranslatedProjectFields>;

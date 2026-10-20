@@ -8,10 +8,9 @@ interface Props {
   total?: number;
   project: ProjectType;
   reverse?: boolean;
-  caseStudyId: string;
 }
 
-const { number, total, project, reverse = false, caseStudyId } = Astro.props;
+const { number, total, project, reverse = false } = Astro.props;
 
 const projectLabel = [project.company, project.kind]
   .filter(Boolean)

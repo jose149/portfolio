@@ -110,9 +110,12 @@ const projectData: ProjectData[] = [
 export function getProjects(locale: Locale): ProjectType[] {
   const projectTranslations = translations[locale].projects.items;
 
-  return projectData.map(({ translationKey, ...project }) => ({
-    ...project,
+  return projectData.map(({ translationKey, ...project }) => {
+    const translatedFields = projectTranslations[translationKey];
 
-    ...projectTranslations[translationKey],
-  }));
+    return {
+      ...project,
+      ...translatedFields,
+    } as ProjectType;
+  });
 }
