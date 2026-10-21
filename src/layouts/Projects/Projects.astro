@@ -6,15 +6,7 @@ import SectionHeading from "../../components/SectionHeading/SectionHeading.astro
 
 import { getProjects } from "./Projects.data";
 
-import {
-  getLocaleFromPath,
-  getLocalizedPath,
-  getTranslations,
-} from "../../i18n/i18n";
-
-interface Props {
-  archiveHref?: string;
-}
+import { getLocaleFromPath, getTranslations } from "../../i18n/i18n";
 
 const locale = getLocaleFromPath(Astro.url.pathname);
 
@@ -22,15 +14,16 @@ const t = getTranslations(locale);
 
 const projects = getProjects(locale);
 
-const { archiveHref = getLocalizedPath("/projects/", locale) } = Astro.props;
+const PROJECTS_REPOSITORY = "https://github.com/jose149?tab=repositories";
 ---
 
 <section id="projects" class="projects" aria-labelledby="projects-title">
   <SectionHeading
     id="projects-title"
     title={t.projects.title}
-    href={archiveHref}
+    href={PROJECTS_REPOSITORY}
     linkLabel={t.projects.allProjects}
+    external
   />
 
   <div class="projects__content">

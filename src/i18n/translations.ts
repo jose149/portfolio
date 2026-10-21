@@ -107,6 +107,101 @@ const en = {
     },
 
     items: {
+      eow: {
+        kind: "Professional",
+
+        tagline: "Event landing page for an exclusive eclipse experience",
+
+        role: "Frontend Engineer",
+
+        contribution:
+          "Designed and developed the landing page from scratch using React, Next.js, TypeScript, and Sass. Configured code quality tools (ESLint and Prettier) and managed version control and deployment through GitHub and Vercel.",
+
+        highlights: [
+          "1-day turnaround",
+          "Exclusive event landing page",
+          "Responsive design",
+          "Production deployment",
+          "Password: Eclipse2026",
+        ],
+
+        previewImageAlt: "Eclipse event landing page for a luxury restaurant",
+
+        context:
+          "Marketplace focused on the inspiration and discovery side of Sembo's customer journey. The platform needed to support continuously evolving editorial content and product features while remaining fast, discoverable by search engines and accessible to users.",
+
+        contributionDetail:
+          "I developed prioritized product features using React, Next.js and TypeScript, collaborating with Product and Design during refinement to align technical implementation with business goals. I integrated headless CMS workflows, worked on SEO indexing and accessibility, and partnered with the architect on a caching architecture using Redis and S3 with automated invalidation through Sanity webhooks. I also supported frontend requirements beyond the UI by implementing API endpoints with Express, TypeScript, Zod and MySQL and coordinating with backend and data teams.",
+
+        challenges: [
+          {
+            title: "Keeping editorial content synchronized",
+
+            description:
+              "Content managed through the headless CMS needed to remain aggressively cached for performance while still becoming visible to users immediately after editors published changes.",
+          },
+
+          {
+            title: "Performance versus content freshness",
+
+            description:
+              "The platform needed an effective caching strategy without creating stale content or requiring manual intervention whenever content changed.",
+          },
+
+          {
+            title: "SEO and accessibility at product scale",
+
+            description:
+              "The marketplace had to remain discoverable by search engines while meeting accessibility requirements across continuously evolving pages and features.",
+          },
+
+          {
+            title: "Cross-functional product delivery",
+
+            description:
+              "Features required coordination between Product, Design, Marketing, frontend, backend and data teams, with technical constraints considered during refinement rather than only during implementation.",
+          },
+        ],
+
+        decisions: [
+          {
+            title: "Combine Redis and S3 caching",
+
+            description:
+              "Together with the architect, I worked on a caching strategy that balanced fast content delivery with the requirements of a content-driven production platform.",
+          },
+
+          {
+            title: "Automate cache invalidation",
+
+            description:
+              "Sanity webhooks were used to invalidate affected cached content automatically when editors published changes, avoiding stale data while preserving caching benefits.",
+          },
+
+          {
+            title: "Treat accessibility and SEO as product requirements",
+
+            description:
+              "Accessibility compliance and search indexing were incorporated into feature development instead of being handled as separate post-development improvements.",
+          },
+
+          {
+            title: "Build supporting API functionality when needed",
+
+            description:
+              "Express endpoints with TypeScript, Zod and MySQL were implemented when frontend product requirements required functionality beyond the existing service interfaces.",
+          },
+        ],
+
+        outcome:
+          "The marketplace evolved with new customer-facing features while improving its accessibility, search visibility and content-delivery architecture. Automated invalidation allowed CMS changes to remain synchronized with heavily cached production content without requiring manual cache management.",
+
+        metrics: [],
+
+        caseStudyDesktopImageAlt: "End of The World desktop experience",
+
+        caseStudyMobileImageAlt: "End of The World mobile experience",
+      } satisfies ProjectTranslation,
       marketplace: {
         kind: "Professional",
 
@@ -464,16 +559,20 @@ const en = {
       },
 
       uib: {
-        company: "Universitat de les Illes Balears (UIB)",
+        company: "Balearic Islands University (UIB)",
 
-        role: "Electronics and Computer Engineering",
+        role: "Degree in Automation and Industrial Electronic Engineering",
 
         team: "",
 
         description:
-          "Engineering foundation across electronics, computing, systems and analytical problem solving.",
+          "Engineering degree focused on industrial automation, electronics, electrical systems, robotics, and the design and optimization of industrial processes.",
 
-        impact: [],
+        impact: [
+          "Graduated with an overall GPA above 7/10.",
+          "Contributed to MINOAS, an international European research project.",
+          "Completed a Bachelor's Thesis within the project, earning an Excellent grade (9.5/10).",
+        ],
       },
 
       portfolio: {
@@ -628,8 +727,6 @@ const es = {
 
     contact: "Contacto",
 
-    connect: "Contacta conmigo",
-
     language: {
       label: "Cambiar idioma",
     },
@@ -695,6 +792,106 @@ const es = {
     },
 
     items: {
+      eow: {
+        kind: "Professional",
+
+        tagline:
+          "Event landing page para una experiencia de eclipse exclusiva   an exclusive eclipse experience",
+
+        role: "Ingeniero de frontend",
+
+        contribution:
+          "Diseñé y desarrollé la landing page desde cero utilizando React, Next.js, TypeScript y Sass. Configuré las herramientas de calidad del código (ESLint y Prettier) y gestioné el control de versiones y el despliegue mediante GitHub y Vercel.",
+
+        highlights: [
+          "Entrega en un día",
+          "Landing page para un evento exclusivo",
+          "Diseño adaptable",
+          "Despliegue en producción",
+          "Contraseña: Eclipse2026",
+        ],
+
+        previewImageAlt:
+          "Landing page de un evento de eclipse para un restaurante de lujo",
+
+        context:
+          "Marketplace centrado en la inspiración y el descubrimiento dentro del recorrido del cliente de Sembo. La plataforma debía dar soporte a contenido editorial y funcionalidades de producto en constante evolución, manteniendo al mismo tiempo un buen rendimiento, visibilidad en buscadores y accesibilidad para los usuarios.",
+
+        contributionDetail:
+          "Desarrollé funcionalidades de producto prioritarias utilizando React, Next.js y TypeScript, colaborando con los equipos de Producto y Diseño durante la definición de requisitos para alinear la implementación técnica con los objetivos de negocio. Integré flujos de trabajo con un CMS headless, trabajé en la indexación SEO y la accesibilidad, y colaboré con el arquitecto en una arquitectura de caché basada en Redis y S3, con invalidación automática mediante webhooks de Sanity. También contribuí a los requisitos del frontend más allá de la interfaz, implementando endpoints de API con Express, TypeScript, Zod y MySQL, y coordinándome con los equipos de backend y datos.",
+
+        challenges: [
+          {
+            title: "Mantener sincronizado el contenido editorial",
+
+            description:
+              "El contenido gestionado mediante el CMS headless debía mantenerse en caché de forma intensiva para optimizar el rendimiento, pero también debía estar disponible para los usuarios inmediatamente después de que los editores publicaran cambios.",
+          },
+
+          {
+            title: "Equilibrar el rendimiento y la actualización del contenido",
+
+            description:
+              "La plataforma necesitaba una estrategia de caché eficaz que evitara mostrar contenido obsoleto y eliminara la necesidad de intervenir manualmente cada vez que cambiaba el contenido.",
+          },
+
+          {
+            title: "SEO y accesibilidad a escala de producto",
+
+            description:
+              "El marketplace debía mantener su visibilidad en los motores de búsqueda y cumplir los requisitos de accesibilidad en páginas y funcionalidades en constante evolución.",
+          },
+
+          {
+            title: "Entrega de funcionalidades con equipos multidisciplinares",
+
+            description:
+              "Las funcionalidades requerían coordinación entre los equipos de Producto, Diseño, Marketing, frontend, backend y datos, teniendo en cuenta las limitaciones técnicas durante la definición de requisitos y no únicamente durante la implementación.",
+          },
+        ],
+
+        decisions: [
+          {
+            title: "Combinar el almacenamiento en caché con Redis y S3",
+
+            description:
+              "Junto con el arquitecto, trabajé en una estrategia de caché que equilibraba la rapidez en la entrega del contenido con las necesidades de una plataforma de producción basada en contenido.",
+          },
+
+          {
+            title: "Automatizar la invalidación de la caché",
+
+            description:
+              "Se utilizaron webhooks de Sanity para invalidar automáticamente el contenido almacenado en caché cuando los editores publicaban cambios, evitando datos obsoletos sin perder las ventajas del almacenamiento en caché.",
+          },
+
+          {
+            title:
+              "Considerar la accesibilidad y el SEO requisitos del producto",
+
+            description:
+              "La accesibilidad y la indexación en buscadores se incorporaron al desarrollo de funcionalidades, en lugar de abordarse como mejoras independientes al finalizar la implementación.",
+          },
+
+          {
+            title:
+              "Desarrollar funcionalidades de API complementarias cuando era necesario",
+
+            description:
+              "Implementé endpoints con Express, TypeScript, Zod y MySQL cuando los requisitos del producto en el frontend necesitaban funcionalidades que iban más allá de las interfaces de los servicios existentes.",
+          },
+        ],
+
+        outcome:
+          "El marketplace evolucionó incorporando nuevas funcionalidades para los clientes, al tiempo que mejoraba su accesibilidad, visibilidad en buscadores y arquitectura de entrega de contenido. La invalidación automática permitió mantener sincronizados los cambios del CMS con el contenido de producción almacenado intensivamente en caché, sin necesidad de gestionar la caché manualmente.",
+
+        metrics: [],
+
+        caseStudyDesktopImageAlt:
+          "Experiencia de escritorio de End of The World",
+
+        caseStudyMobileImageAlt: "Experiencia móvil de End of The World",
+      } satisfies ProjectTranslation,
       marketplace: {
         kind: "Profesional",
 
@@ -1059,14 +1256,18 @@ const es = {
       uib: {
         company: "Universitat de les Illes Balears (UIB)",
 
-        role: "Ingeniería Electrónica e Informática",
+        role: "Grado en Ingeniería Electrónica Industrial y Automática",
 
         team: "",
 
         description:
-          "Base de ingeniería en electrónica, informática, sistemas y resolución analítica de problemas.",
+          "Grado en ingeniería centrado en automatización industrial, electrónica, sistemas eléctricos, robótica y diseño y optimización de procesos industriales.",
 
-        impact: [],
+        impact: [
+          "Graduado con una nota media superior a 7/10.",
+          "Participación en MINOAS, un proyecto europeo de investigación internacional.",
+          "Desarrollo del Trabajo de Fin de Grado en el marco del proyecto, obteniendo una calificación de Excelente (9,5/10).",
+        ],
       },
 
       portfolio: {

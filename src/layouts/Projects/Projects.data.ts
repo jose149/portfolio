@@ -29,6 +29,39 @@ type ProjectData = Omit<ProjectType, TranslatedProjectFields> & {
 };
 
 const projectData: ProjectData[] = [
+  {
+    id: "eow",
+
+    translationKey: "eow",
+
+    // ====================================================
+    // IDENTITY
+    // ====================================================
+
+    company: "Independent",
+
+    title: "End of The World",
+
+    // ====================================================
+    // HERO
+    // ====================================================
+
+    timeline: "2026",
+
+    stack: ["React", "Next.js", "TypeScript", "Sass", "Vercel"],
+
+    previewImageSrc: "/images/eow.png",
+
+    liveHref: "https://www.endoftheworld2026.com/",
+
+    // ====================================================
+    // CASE STUDY MEDIA
+    // ====================================================
+
+    caseStudyDesktopImageSrc: "/images/eow.png",
+
+    caseStudyMobileImageSrc: "/images/eow-m.png",
+  },
   // ======================================================
   // MARKETPLACE
   // ======================================================
@@ -94,8 +127,7 @@ const projectData: ProjectData[] = [
 
     previewImageSrc: "/images/tripPlanner.png",
 
-    liveHref:
-      "https://www.sembo.com/travel/plan/overview?pax=rpp&day=2026-09-30&i1=00ot&i2=polygon-id:517571+fltr:07000000000000000000000000sug:2ht&i3=00ot",
+    liveHref: "https://www.sembo.com/travel/plan/overview",
 
     // ====================================================
     // CASE STUDY MEDIA

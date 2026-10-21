@@ -69,7 +69,7 @@ const experienceData: ExperienceDataItem[] = [
     relatedProject: {
       translationKey: "marketplace",
 
-      href: "#sembo-marketplace",
+      href: "https://www.sembo.com",
     },
 
     defaultOpen: true,
@@ -97,7 +97,7 @@ const experienceData: ExperienceDataItem[] = [
     relatedProject: {
       translationKey: "tripPlanner",
 
-      href: "#sembo-tripplanner",
+      href: "https://www.sembo.com/travel/plan/overview",
     },
   },
 
@@ -137,39 +137,39 @@ const experienceData: ExperienceDataItem[] = [
     category: "education",
   },
 
-  {
-    id: "portfolio",
+  // {
+  //   id: "portfolio",
 
-    translationKey: "portfolio",
+  //   translationKey: "portfolio",
 
-    startDate: {
-      year: 2026,
-    },
+  //   startDate: {
+  //     year: 2026,
+  //   },
 
-    category: "independent",
+  //   category: "independent",
 
-    stack: ["Astro", "React", "TypeScript", "SCSS"],
+  //   stack: ["Astro", "React", "TypeScript", "SCSS"],
 
-    relatedProject: {
-      translationKey: "portfolio",
+  //   relatedProject: {
+  //     translationKey: "portfolio",
 
-      href: "#top",
-    },
-  },
+  //     href: "#top",
+  //   },
+  // },
 
-  {
-    id: "vscode-extension",
+  // {
+  //   id: "vscode-extension",
 
-    translationKey: "vscodeExtension",
+  //   translationKey: "vscodeExtension",
 
-    startDate: {
-      year: 2026,
-    },
+  //   startDate: {
+  //     year: 2026,
+  //   },
 
-    category: "independent",
+  //   category: "independent",
 
-    stack: ["TypeScript", "VS Code API"],
-  },
+  //   stack: ["TypeScript", "VS Code API"],
+  // },
 ];
 
 // ========================================================

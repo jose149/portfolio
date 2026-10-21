@@ -1,4 +1,5 @@
 ---
+import { getLocaleFromPath, getTranslations } from "../../../../i18n/i18n";
 import type { ProjectType } from "../../../../layouts/Projects/Projects.types";
 
 import "./ProjectHero.scss";
@@ -10,6 +11,8 @@ interface Props {
   reverse?: boolean;
   caseStudyId?: string;
 }
+const locale = getLocaleFromPath(Astro.url.pathname);
+const t = getTranslations(locale);
 
 const { number, total, project, reverse = false } = Astro.props;
 
@@ -89,7 +92,9 @@ const projectLabel = [project.company, project.kind]
     <!-- CONTRIBUTION -->
 
     <div class="project-meta__contribution">
-      <span class="project-meta__label"> Contribution </span>
+      <span class="project-meta__label">
+        {t.projects.labels.contribution}
+      </span>
 
       <p class="project-meta__contribution-text">
         {project.contribution}
@@ -145,7 +150,7 @@ const projectLabel = [project.company, project.kind]
             rel="noopener noreferrer"
             class="project-meta__live"
           >
-            <span>Live site</span>
+            <span>{t.projects.actions.viewLive}</span>
 
             <span class="project-meta__live-icon" aria-hidden="true">
               ↗
