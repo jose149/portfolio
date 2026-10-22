@@ -823,3 +823,29 @@
     }
   }
 }
+/* Añadir al final de Contact.scss */
+.contact-form__honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.contact-form__submit:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.contact-form__feedback {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.contact-form__feedback[data-state="success"] {
+  color: #16803c;
+}
+.contact-form__feedback[data-state="error"] {
+  color: #c0392b;
+}

@@ -2,8 +2,6 @@
 import Portfolio from "../layouts/Portfolio.astro";
 import { DEFAULT_LOCALE } from "../i18n/translations";
 
-return Astro.redirect(`/${DEFAULT_LOCALE}/`);
-
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
@@ -26,7 +24,7 @@ return Astro.redirect(`/${DEFAULT_LOCALE}/`);
     />
   </head>
   <body>
-    <Portfolio />
+    <Portfolio locale={DEFAULT_LOCALE} />
   </body>
 
   <style lang="scss" is:global>

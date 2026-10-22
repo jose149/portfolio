@@ -11,7 +11,16 @@ import mdx from "@astrojs/mdx";
 export default defineConfig({
   trailingSlash: "always",
 
-  site: "https://tudominio.com",
+  site: "https://jose-crespi-portfolio.vercel.app",
+
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "es"],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
+
   integrations: [react(), mdx()],
 
   vite: {

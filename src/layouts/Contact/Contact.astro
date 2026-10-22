@@ -233,9 +233,15 @@ const contactItems = [
     <form
       class="contact-form"
       data-contact-form
-      data-mail-name-label={t.contact.mail.name}
-      data-mail-email-label={t.contact.mail.email}
-      data-mail-company-label={t.contact.mail.company}
+      action="https://formspree.io/f/myekrpay"
+      method="POST"
+      data-loading-label={locale === "es" ? "Enviando..." : "Sending..."}
+      data-success-label={locale === "es"
+        ? "Mensaje enviado correctamente. ¡Gracias por contactar!"
+        : "Message sent successfully. Thanks for reaching out!"}
+      data-error-label={locale === "es"
+        ? "No se ha podido enviar el mensaje. Inténtalo de nuevo."
+        : "Couldn't send your message. Please try again."}
     >
       <div class="contact-form__row contact-form__row--split">
         <div class="contact-form__field">
@@ -311,12 +317,22 @@ const contactItems = [
       </div>
 
       <button type="submit" class="contact-form__submit">
-        <span>
+        <span data-submit-label>
           {t.contact.form.submit}
         </span>
 
         <span class="contact-form__submit-arrow" aria-hidden="true"> → </span>
       </button>
+
+      <p
+        class="contact-form__feedback"
+        data-form-feedback
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        hidden
+      >
+      </p>
 
       <p class="contact-form__privacy">
         {t.contact.form.privacy}
@@ -326,48 +342,74 @@ const contactItems = [
 </section>
 
 <script>
-  const contactForm = document.querySelector<HTMLFormElement>(
-    "[data-contact-form]",
-  );
+  function initializeContactForms() {
+    document
+      .querySelectorAll<HTMLFormElement>("[data-contact-form]")
+      .forEach((form) => {
+        if (form.dataset.initialized === "true") return;
+        form.dataset.initialized = "true";
 
-  contactForm?.addEventListener("submit", (event) => {
-    event.preventDefault();
+        const button = form.querySelector<HTMLButtonElement>(
+          'button[type="submit"]',
+        );
+        const buttonLabel = form.querySelector<HTMLElement>(
+          "[data-submit-label]",
+        );
+        const feedback = form.querySelector<HTMLElement>(
+          "[data-form-feedback]",
+        );
+        if (!button || !buttonLabel || !feedback) return;
 
-    const formData = new FormData(contactForm);
+        const initialLabel = buttonLabel.textContent?.trim() ?? "Send";
 
-    const name = String(formData.get("name") ?? "").trim();
+        form.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          if (!form.reportValidity() || button.disabled) return;
 
-    const email = String(formData.get("email") ?? "").trim();
+          const endpoint = form.action;
+          if (endpoint.includes("TU_FORM_ID")) {
+            feedback.hidden = false;
+            feedback.dataset.state = "error";
+            feedback.textContent =
+              "Configura tu identificador de Formspree antes de enviar.";
+            return;
+          }
 
-    const company = String(formData.get("company") ?? "").trim();
+          button.disabled = true;
+          button.setAttribute("aria-busy", "true");
+          buttonLabel.textContent = form.dataset.loadingLabel ?? "Sending...";
+          feedback.hidden = true;
+          feedback.textContent = "";
 
-    const subject = String(formData.get("subject") ?? "").trim();
+          try {
+            const response = await fetch(endpoint, {
+              method: "POST",
+              body: new FormData(form),
+              headers: { Accept: "application/json" },
+            });
 
-    const message = String(formData.get("message") ?? "").trim();
+            if (!response.ok)
+              throw new Error(`Formspree returned ${response.status}`);
 
-    const nameLabel = contactForm.dataset.mailNameLabel ?? "Name";
+            form.reset();
+            feedback.dataset.state = "success";
+            feedback.textContent =
+              form.dataset.successLabel ?? "Message sent successfully.";
+          } catch (error) {
+            console.error("Contact form submission failed:", error);
+            feedback.dataset.state = "error";
+            feedback.textContent =
+              form.dataset.errorLabel ?? "Message couldn't be sent.";
+          } finally {
+            feedback.hidden = false;
+            button.disabled = false;
+            button.removeAttribute("aria-busy");
+            buttonLabel.textContent = initialLabel;
+          }
+        });
+      });
+  }
 
-    const emailLabel = contactForm.dataset.mailEmailLabel ?? "Email";
-
-    const companyLabel = contactForm.dataset.mailCompanyLabel ?? "Company";
-
-    const body = [
-      `${nameLabel}: ${name}`,
-      `${emailLabel}: ${email}`,
-
-      company ? `${companyLabel}: ${company}` : "",
-
-      "",
-      message,
-    ]
-      .filter(Boolean)
-      .join("\n");
-
-    const mailto =
-      `mailto:hello@josecrespi.dev` +
-      `?subject=${encodeURIComponent(subject)}` +
-      `&body=${encodeURIComponent(body)}`;
-
-    window.location.href = mailto;
-  });
+  initializeContactForms();
+  document.addEventListener("astro:page-load", initializeContactForms);
 </script>
